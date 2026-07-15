@@ -8,7 +8,7 @@
    e mostrar a barra "Nova versão" nos dois celulares.
    ============================================================= */
 
-const VERSION = 'v6.2';
+const VERSION = 'v6.3';
 const CACHE   = 'eurotrip26-' + VERSION;
 
 const ASSETS = [

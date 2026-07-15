@@ -42,6 +42,7 @@
   }
   .serif{font-family:Georgia,"Times New Roman",serif}
 
+  #safetop{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); background:var(--azulejo-deep); z-index:30; pointer-events:none}
   header{background:var(--azulejo-deep); color:var(--on-nav); padding:calc(env(safe-area-inset-top) + 16px) 18px 15px}
   .kicker{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--saffron); font-weight:600}
   header h1{font-size:26px; line-height:1.08; margin:5px 0 3px; letter-spacing:-.4px; font-weight:600}
@@ -65,7 +66,7 @@
 
   /* ---------- CSS-ONLY TABS ---------- */
   .tabradio{position:absolute; opacity:0; width:1px; height:1px; pointer-events:none}
-  .tabs{position:sticky; top:0; z-index:20; display:flex; background:var(--azulejo-deep); padding:0 7px 9px; gap:2px; box-shadow:0 6px 14px rgba(14,44,70,.18)}
+  .tabs{position:sticky; top:env(safe-area-inset-top); z-index:20; display:flex; background:var(--azulejo-deep); padding:0 7px 9px; gap:2px; box-shadow:0 6px 14px rgba(14,44,70,.18)}
   .tab{flex:1 1 0; min-width:0; text-align:center; padding:8px 1px; border-radius:10px 10px 0 0; color:#9FB4C7; font-size:9.4px; font-weight:600; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; min-height:44px; white-space:nowrap; line-height:1.1; user-select:none; position:relative; overflow:hidden; text-overflow:ellipsis}
   .tab .ic{font-size:15px}
   .tab .dotn{position:absolute; top:5px; right:calc(50% - 17px); background:var(--terra); color:#fff; font-size:8.5px; font-weight:700; line-height:1; border-radius:8px; padding:2px 4px; min-width:13px}
@@ -341,6 +342,7 @@
 </style>
 </head>
 <body>
+<div id="safetop" aria-hidden="true"></div>
 
 <header>
   <div class="kicker">Roteiro · Espanha &amp; Portugal</div>
@@ -1856,7 +1858,7 @@ Un saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre Roteiro, Hotéis, Trajetos, Reservas e Alertas.<br>
-  v6.2 · instalável, offline e com atualização automática · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
+  v6.3 · corrige sobreposição da status bar e falso aviso de atualização · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
   <span style="opacity:.7">Funciona mesmo sem JavaScript — só a busca e a cópia de texto dependem dele.</span>
 </div>
 
@@ -2058,12 +2060,20 @@ Un saludo,
   /* ---------- offline + aviso de nova versão (só quando publicado numa URL) ---------- */
   if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
     window.addEventListener("load",function(){
+      var SEEN_KEY="eurotrip26_pwa_seen";
+      var jaAbriuAntes=false;
+      try{ jaAbriuAntes = localStorage.getItem(SEEN_KEY)==="1"; }catch(e){}
+      var esperandoReload=false, recarregando=false;
+
       navigator.serviceWorker.register("./sw.js").then(function(reg){
         function oferecer(w){
+          // nunca mostrar na primeiríssima instalação: só a partir da 2ª abertura
+          // real do app é que um "waiting worker" significa atualização de verdade
+          if(!jaAbriuAntes) return;
           var bar=document.getElementById("upd"); if(!bar) return;
           bar.classList.add("show");
           document.getElementById("updbtn").onclick=function(){
-            this.textContent="Atualizando…"; w.postMessage({type:"SKIP_WAITING"});
+            this.textContent="Atualizando…"; esperandoReload=true; w.postMessage({type:"SKIP_WAITING"});
           };
         }
         if(reg.waiting && navigator.serviceWorker.controller) oferecer(reg.waiting);
@@ -2075,11 +2085,14 @@ Un saludo,
         });
         // procura atualização ao abrir e sempre que o app volta ao primeiro plano
         document.addEventListener("visibilitychange",function(){ if(!document.hidden) reg.update(); });
+        try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e){}
       }).catch(function(){ /* sem SW: o app continua funcionando normalmente */ });
 
-      var recarregando=false;
       navigator.serviceWorker.addEventListener("controllerchange",function(){
-        if(recarregando) return; recarregando=true; location.reload();
+        // ignora trocas de controlador que não vieram do botão "Atualizar"
+        // (a 1ª instalação assume o controle sozinha e dispararia isto à toa)
+        if(!esperandoReload || recarregando) return;
+        recarregando=true; location.reload();
       });
     });
   }
