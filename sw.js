@@ -3,12 +3,13 @@
    Faz o app funcionar 100% offline e avisar quando há versão nova.
 
    ⚠️  REGRA ÚNICA DE MANUTENÇÃO:
-   sempre que o index.html mudar, altere a linha VERSION abaixo.
-   É a mudança nesses bytes que faz o navegador perceber a atualização
-   e mostrar a barra "Nova versão" nos dois celulares.
+   sempre que o index.html mudar, altere DUAS linhas em conjunto:
+   a VERSION abaixo E a APP_VERSION no topo do <script> do index.html.
+   As duas devem ser sempre idênticas — é a comparação entre elas que
+   sincroniza os aparelhos.
    ============================================================= */
 
-const VERSION = 'v6.5';
+const VERSION = 'v6.7';
 const CACHE   = 'eurotrip26-' + VERSION;
 
 const ASSETS = [
@@ -34,11 +35,14 @@ function precache() {
   });
 }
 
-/* ---- instalação: baixa e guarda tudo ---- */
+/* ---- instalação: baixa tudo e ASSUME imediatamente ----
+   O skipWaiting elimina o estado "em espera" (waiting), que no iOS
+   persiste entre aberturas do app e era o gatilho da barra recorrente.
+   A página detecta a troca de motor pelo handshake de versão e se
+   sincroniza sozinha. */
 self.addEventListener('install', function (e) {
   e.waitUntil(
-    precache()
-    // sem skipWaiting(): o SW novo espera o usuário tocar em "Atualizar"
+    precache().then(function () { return self.skipWaiting(); })
   );
 });
 

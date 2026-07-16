@@ -258,9 +258,10 @@
   .toast{position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom) + 22px); transform:translateX(-50%) translateY(20px); background:var(--azulejo-deep); color:#fff; padding:11px 20px; border-radius:30px; font-size:13.5px; font-weight:600; box-shadow:0 8px 24px rgba(14,44,70,.3); opacity:0; pointer-events:none; transition:.28s; z-index:60}
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 
-  .upd{position:fixed; left:12px; right:12px; bottom:calc(env(safe-area-inset-bottom) + 12px); background:var(--saffron); color:#3A2A05; border-radius:13px; padding:12px 14px; font-size:13.5px; font-weight:600; box-shadow:0 10px 30px rgba(0,0,0,.35); z-index:70; display:flex; align-items:center; justify-content:space-between; gap:10px; transform:translateY(160%); transition:transform .32s}
-  .upd.show{transform:translateY(0)}
-  .upd button{background:#3A2A05; color:var(--saffron); border:none; border-radius:8px; padding:9px 13px; font-size:12.5px; font-weight:700; font-family:inherit; cursor:pointer; white-space:nowrap; min-height:38px}
+  /* notificação no estilo do sistema (iOS): vidro fosco, texto discreto, ação azul */
+  .upd{position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom) + 14px); transform:translate(-50%,150%); width:min(340px, calc(100vw - 32px)); background:rgba(249,249,251,.88); -webkit-backdrop-filter:saturate(180%) blur(20px); backdrop-filter:saturate(180%) blur(20px); color:#1C1C1E; border:0.5px solid rgba(0,0,0,.08); border-radius:16px; padding:10px 10px 10px 16px; font-size:13px; font-weight:500; letter-spacing:-.1px; box-shadow:0 10px 34px rgba(0,0,0,.28); z-index:70; display:flex; align-items:center; justify-content:space-between; gap:10px; transition:transform .34s cubic-bezier(.2,.8,.25,1)}
+  .upd.show{transform:translate(-50%,0)}
+  .upd button{background:transparent; color:#007AFF; border:none; padding:8px 8px; font-size:14.5px; font-weight:600; font-family:inherit; cursor:pointer; white-space:nowrap; min-height:38px}
   .foot{text-align:center; font-size:11px; color:var(--mute-foot); padding:22px 30px 6px; line-height:1.6}
   .noscript-tip{background:#FBF8F0;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12px;color:#4A4636;margin:10px 2px 0;line-height:1.5}
 
@@ -308,6 +309,8 @@
     ul.mini li::before{color:var(--saffron)}
     .copybtn.ghost,.linkbtn.ghost{color:#9EC5E8}
     .alertbox.past{opacity:.5}
+    .upd{background:rgba(44,44,46,.9); color:#F2F2F7; border-color:rgba(255,255,255,.1)}
+    .upd button{color:#0A84FF}
   }
 
   /* ---------- impressão (backup de papel) ---------- */
@@ -1858,16 +1861,16 @@ Un saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre Roteiro, Hotéis, Trajetos, Reservas e Alertas.<br>
-  v6.5 · a instalação do cache passa a ignorar o cache HTTP — a causa-raiz da barra · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
+  v6.7 · atualização automática + aviso discreto no estilo do sistema · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
   <span style="opacity:.7">Funciona mesmo sem JavaScript — só a busca e a cópia de texto dependem dele.</span>
 </div>
 
-<div class="upd" id="upd" role="status" aria-live="polite"><span>Nova versão do roteiro disponível.</span><button id="updbtn" type="button">Atualizar</button></div>
+<div class="upd" id="upd" role="status" aria-live="polite"><span>Sincronizando o roteiro…</span><button id="updbtn" type="button">Reparar</button></div>
 
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v6.5";
+var APP_VERSION="v6.7";
 /* Camada de progressive enhancement — TODO o conteúdo acima já funciona sem isto. */
 (function(){
   var q=document.getElementById("q"), clearBtn=document.getElementById("clear");
@@ -2061,78 +2064,83 @@ var APP_VERSION="v6.5";
   /* ---------- offline + aviso de nova versão (só quando publicado numa URL) ---------- */
   if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
     window.addEventListener("load",function(){
-      var esperandoReload=false, recarregando=false;
-
       function pedirVersao(worker, cb){
         if(!worker) return;
         try{
           var mc=new MessageChannel();
-          mc.port1.onmessage=function(e){ cb((e.data||{}).version, worker); };
+          mc.port1.onmessage=function(e){ cb((e.data||{}).version); };
           worker.postMessage({type:"GET_VERSION"}, [mc.port2]);
         }catch(e){}
       }
 
-      function oferecer(w, versao){
-        try{
-          if(sessionStorage.getItem("et26_bar_"+versao)==="1") return;
-          sessionStorage.setItem("et26_bar_"+versao,"1");
-        }catch(e){}
-        var bar=document.getElementById("upd"); if(!bar) return;
-        bar.classList.add("show");
-        document.getElementById("updbtn").onclick=function(){
-          this.textContent="Atualizando…"; esperandoReload=true; w.postMessage({type:"SKIP_WAITING"});
-        };
-      }
+      var vinfo=document.getElementById("vinfo");
 
-      // só mostra a barra se a versão do worker em espera for REALMENTE
-      // diferente da versão desta página — não por causa de um evento
-      // do ciclo de vida do service worker, que pode disparar à toa
-      function avaliar(w){
-        pedirVersao(w, function(versaoWorker, worker){
-          if(versaoWorker && versaoWorker !== APP_VERSION) oferecer(worker, versaoWorker);
+      /* Única fonte de verdade: a versão do motor ATIVO × a desta página.
+         Nada de reagir a eventos de ciclo de vida (waiting/updatefound),
+         que no iOS disparam fora de hora e PERSISTEM entre aberturas. */
+      function sincronizar(){
+        var ctrl=navigator.serviceWorker.controller;
+        if(!ctrl){ if(vinfo) vinfo.textContent="página "+APP_VERSION+" · motor instalando…"; return; }
+        pedirVersao(ctrl, function(vAtivo){
+          var ok = vAtivo===APP_VERSION;
+          if(vinfo) vinfo.textContent="página "+APP_VERSION+" · motor "+(vAtivo||"?")+(ok?" ✓":" — sincronizando…");
+          if(!vAtivo || ok) return;
+
+          // Descasou: o motor novo já guarda a página nova (precache no-store).
+          // Um reload resolve. Guardado para jamais virar loop.
+          var k="et26_sync_"+vAtivo+"_"+APP_VERSION, jaTentou=false;
+          try{ jaTentou = sessionStorage.getItem(k)==="1"; }catch(e){}
+          if(!jaTentou){
+            try{ sessionStorage.setItem(k,"1"); }catch(e){}
+            try{ localStorage.setItem("et26_updated_to", vAtivo); }catch(e){}
+            location.reload();
+            return;
+          }
+
+          // Reload não resolveu = cache realmente quebrado. Só AGORA a barra
+          // aparece — como ferramenta de reparo, com as versões à mostra.
+          var bar=document.getElementById("upd"); if(!bar) return;
+          bar.querySelector("span").textContent="Sincronizando o roteiro ("+APP_VERSION+" → "+vAtivo+")";
+          bar.classList.add("show");
+          var btn=document.getElementById("updbtn");
+          btn.textContent="Reparar";
+          btn.onclick=function(){
+            btn.textContent="Reparando…";
+            var mc=new MessageChannel();
+            mc.port1.onmessage=function(){
+              try{ sessionStorage.removeItem(k); }catch(e){}
+              location.reload();
+            };
+            ctrl.postMessage({type:"RECACHE"},[mc.port2]);
+          };
         });
       }
 
       navigator.serviceWorker.register("./sw.js").then(function(reg){
-        if(reg.waiting) avaliar(reg.waiting);
-        reg.addEventListener("updatefound",function(){
-          var w=reg.installing; if(!w) return;
-          w.addEventListener("statechange",function(){
-            if(w.state==="installed") avaliar(w);
-          });
-        });
-        // procura atualização ao abrir e sempre que o app volta ao primeiro plano
+        // procura versão nova ao abrir e ao voltar ao primeiro plano;
+        // ela se instala E se ativa sozinha (skipWaiting no sw.js) —
+        // não existe mais estado "em espera", logo não existe prompt
         document.addEventListener("visibilitychange",function(){ if(!document.hidden) reg.update(); });
       }).catch(function(){ /* sem SW: o app continua funcionando normalmente */ });
 
-      // Aperto de mão com o motor ATIVO. Se a página em cache não bate com a
-      // versão dele, é o cache envenenado pelo cache HTTP do GitHub Pages
-      // (max-age=600): manda rebaixar tudo da rede e recarrega em silêncio.
-      var vinfo=document.getElementById("vinfo");
-      if(navigator.serviceWorker.controller){
-        pedirVersao(navigator.serviceWorker.controller, function(vAtivo){
-          if(vinfo) vinfo.textContent="página "+APP_VERSION+" · motor "+(vAtivo||"?")+(vAtivo===APP_VERSION?" ✓":" — sincronizando…");
-          if(vAtivo && vAtivo!==APP_VERSION){
-            try{
-              var k="et26_heal_"+vAtivo+"_"+APP_VERSION;
-              if(sessionStorage.getItem(k)==="1") return;   // nunca entra em loop
-              sessionStorage.setItem(k,"1");
-            }catch(e){}
-            var mc=new MessageChannel();
-            mc.port1.onmessage=function(){ location.reload(); };
-            navigator.serviceWorker.controller.postMessage({type:"RECACHE"},[mc.port2]);
-          }
-        });
-      } else if(vinfo){
-        vinfo.textContent="página "+APP_VERSION+" · motor instalando…";
-      }
+      // aviso discreto pós-atualização (estilo iOS): informa que a troca já
+      // ACONTECEU — não pede ação, some sozinho, não tem estado para travar
+      (function(){
+        var v=null;
+        try{ v=localStorage.getItem("et26_updated_to"); localStorage.removeItem("et26_updated_to"); }catch(e){}
+        if(v!==APP_VERSION) return;
+        var bar=document.getElementById("upd"); if(!bar) return;
+        bar.querySelector("span").textContent="Roteiro atualizado · "+APP_VERSION;
+        var btn=document.getElementById("updbtn");
+        btn.textContent="OK";
+        btn.onclick=function(){ bar.classList.remove("show"); };
+        setTimeout(function(){ bar.classList.add("show"); }, 500);
+        setTimeout(function(){ bar.classList.remove("show"); }, 7500);
+      })();
 
-      navigator.serviceWorker.addEventListener("controllerchange",function(){
-        // ignora trocas de controlador que não vieram do botão "Atualizar"
-        // (a 1ª instalação assume o controle sozinha e dispararia isto à toa)
-        if(!esperandoReload || recarregando) return;
-        recarregando=true; location.reload();
-      });
+      // quando um motor novo assume o controle, re-sincroniza na hora
+      navigator.serviceWorker.addEventListener("controllerchange", sincronizar);
+      sincronizar();
     });
   }
 
