@@ -1858,7 +1858,7 @@ Un saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre Roteiro, Hotéis, Trajetos, Reservas e Alertas.<br>
-  v6.4 · aviso de atualização agora compara versão real, não mais heurística · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
+  v6.5 · a instalação do cache passa a ignorar o cache HTTP — a causa-raiz da barra · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
   <span style="opacity:.7">Funciona mesmo sem JavaScript — só a busca e a cópia de texto dependem dele.</span>
 </div>
 
@@ -1867,7 +1867,7 @@ Un saludo,
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v6.4";
+var APP_VERSION="v6.5";
 /* Camada de progressive enhancement — TODO o conteúdo acima já funciona sem isto. */
 (function(){
   var q=document.getElementById("q"), clearBtn=document.getElementById("clear");
@@ -2072,7 +2072,11 @@ var APP_VERSION="v6.4";
         }catch(e){}
       }
 
-      function oferecer(w){
+      function oferecer(w, versao){
+        try{
+          if(sessionStorage.getItem("et26_bar_"+versao)==="1") return;
+          sessionStorage.setItem("et26_bar_"+versao,"1");
+        }catch(e){}
         var bar=document.getElementById("upd"); if(!bar) return;
         bar.classList.add("show");
         document.getElementById("updbtn").onclick=function(){
@@ -2085,7 +2089,7 @@ var APP_VERSION="v6.4";
       // do ciclo de vida do service worker, que pode disparar à toa
       function avaliar(w){
         pedirVersao(w, function(versaoWorker, worker){
-          if(versaoWorker && versaoWorker !== APP_VERSION) oferecer(worker);
+          if(versaoWorker && versaoWorker !== APP_VERSION) oferecer(worker, versaoWorker);
         });
       }
 
@@ -2100,6 +2104,28 @@ var APP_VERSION="v6.4";
         // procura atualização ao abrir e sempre que o app volta ao primeiro plano
         document.addEventListener("visibilitychange",function(){ if(!document.hidden) reg.update(); });
       }).catch(function(){ /* sem SW: o app continua funcionando normalmente */ });
+
+      // Aperto de mão com o motor ATIVO. Se a página em cache não bate com a
+      // versão dele, é o cache envenenado pelo cache HTTP do GitHub Pages
+      // (max-age=600): manda rebaixar tudo da rede e recarrega em silêncio.
+      var vinfo=document.getElementById("vinfo");
+      if(navigator.serviceWorker.controller){
+        pedirVersao(navigator.serviceWorker.controller, function(vAtivo){
+          if(vinfo) vinfo.textContent="página "+APP_VERSION+" · motor "+(vAtivo||"?")+(vAtivo===APP_VERSION?" ✓":" — sincronizando…");
+          if(vAtivo && vAtivo!==APP_VERSION){
+            try{
+              var k="et26_heal_"+vAtivo+"_"+APP_VERSION;
+              if(sessionStorage.getItem(k)==="1") return;   // nunca entra em loop
+              sessionStorage.setItem(k,"1");
+            }catch(e){}
+            var mc=new MessageChannel();
+            mc.port1.onmessage=function(){ location.reload(); };
+            navigator.serviceWorker.controller.postMessage({type:"RECACHE"},[mc.port2]);
+          }
+        });
+      } else if(vinfo){
+        vinfo.textContent="página "+APP_VERSION+" · motor instalando…";
+      }
 
       navigator.serviceWorker.addEventListener("controllerchange",function(){
         // ignora trocas de controlador que não vieram do botão "Atualizar"

@@ -8,7 +8,7 @@
    e mostrar a barra "Nova versão" nos dois celulares.
    ============================================================= */
 
-const VERSION = 'v6.4';
+const VERSION = 'v6.5';
 const CACHE   = 'eurotrip26-' + VERSION;
 
 const ASSETS = [
@@ -17,12 +17,27 @@ const ASSETS = [
   './manifest.webmanifest'
 ];
 
+/* ---- precache: baixa direto da rede, IGNORANDO o cache HTTP ----
+   O GitHub Pages serve tudo com Cache-Control: max-age=600. Com o
+   addAll() padrão, um service worker novo podia instalar guardando o
+   index.html VELHO (recém-baixado pelo navegador) — motor de uma
+   versão servindo página de outra, para sempre. Era a causa-raiz da
+   barra de atualização que não parava de aparecer. */
+function precache() {
+  return caches.open(CACHE).then(function (c) {
+    return Promise.all(ASSETS.map(function (u) {
+      return fetch(u, { cache: 'no-store' }).then(function (r) {
+        if (!r || r.status !== 200) throw new Error('precache falhou: ' + u);
+        return c.put(u, r);
+      });
+    }));
+  });
+}
+
 /* ---- instalação: baixa e guarda tudo ---- */
 self.addEventListener('install', function (e) {
   e.waitUntil(
-    caches.open(CACHE).then(function (c) {
-      return c.addAll(ASSETS);
-    })
+    precache()
     // sem skipWaiting(): o SW novo espera o usuário tocar em "Atualizar"
   );
 });
@@ -39,11 +54,17 @@ self.addEventListener('activate', function (e) {
   );
 });
 
-/* ---- a página pede para trocar de versão agora ---- */
+/* ---- a página pede para trocar de versão ou para re-baixar o cache ---- */
 self.addEventListener('message', function (e) {
   if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
   if (e.data && e.data.type === 'GET_VERSION' && e.ports && e.ports[0]) {
     e.ports[0].postMessage({ version: VERSION });
+  }
+  if (e.data && e.data.type === 'RECACHE') {
+    var done = precache().then(function () {
+      if (e.ports && e.ports[0]) e.ports[0].postMessage({ ok: true });
+    });
+    if (e.waitUntil) e.waitUntil(done);
   }
 });
 
