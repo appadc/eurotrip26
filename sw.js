@@ -8,7 +8,7 @@
    e mostrar a barra "Nova versão" nos dois celulares.
    ============================================================= */
 
-const VERSION = 'v6.3';
+const VERSION = 'v6.4';
 const CACHE   = 'eurotrip26-' + VERSION;
 
 const ASSETS = [
@@ -42,6 +42,9 @@ self.addEventListener('activate', function (e) {
 /* ---- a página pede para trocar de versão agora ---- */
 self.addEventListener('message', function (e) {
   if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
+  if (e.data && e.data.type === 'GET_VERSION' && e.ports && e.ports[0]) {
+    e.ports[0].postMessage({ version: VERSION });
+  }
 });
 
 /* ---- busca: cache primeiro (instantâneo e offline), rede como reserva ---- */

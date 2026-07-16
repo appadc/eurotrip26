@@ -1858,7 +1858,7 @@ Un saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre Roteiro, Hotéis, Trajetos, Reservas e Alertas.<br>
-  v6.3 · corrige sobreposição da status bar e falso aviso de atualização · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
+  v6.4 · aviso de atualização agora compara versão real, não mais heurística · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
   <span style="opacity:.7">Funciona mesmo sem JavaScript — só a busca e a cópia de texto dependem dele.</span>
 </div>
 
@@ -1867,6 +1867,7 @@ Un saludo,
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
+var APP_VERSION="v6.4";
 /* Camada de progressive enhancement — TODO o conteúdo acima já funciona sem isto. */
 (function(){
   var q=document.getElementById("q"), clearBtn=document.getElementById("clear");
@@ -2060,32 +2061,44 @@ Un saludo,
   /* ---------- offline + aviso de nova versão (só quando publicado numa URL) ---------- */
   if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
     window.addEventListener("load",function(){
-      var SEEN_KEY="eurotrip26_pwa_seen";
-      var jaAbriuAntes=false;
-      try{ jaAbriuAntes = localStorage.getItem(SEEN_KEY)==="1"; }catch(e){}
       var esperandoReload=false, recarregando=false;
 
+      function pedirVersao(worker, cb){
+        if(!worker) return;
+        try{
+          var mc=new MessageChannel();
+          mc.port1.onmessage=function(e){ cb((e.data||{}).version, worker); };
+          worker.postMessage({type:"GET_VERSION"}, [mc.port2]);
+        }catch(e){}
+      }
+
+      function oferecer(w){
+        var bar=document.getElementById("upd"); if(!bar) return;
+        bar.classList.add("show");
+        document.getElementById("updbtn").onclick=function(){
+          this.textContent="Atualizando…"; esperandoReload=true; w.postMessage({type:"SKIP_WAITING"});
+        };
+      }
+
+      // só mostra a barra se a versão do worker em espera for REALMENTE
+      // diferente da versão desta página — não por causa de um evento
+      // do ciclo de vida do service worker, que pode disparar à toa
+      function avaliar(w){
+        pedirVersao(w, function(versaoWorker, worker){
+          if(versaoWorker && versaoWorker !== APP_VERSION) oferecer(worker);
+        });
+      }
+
       navigator.serviceWorker.register("./sw.js").then(function(reg){
-        function oferecer(w){
-          // nunca mostrar na primeiríssima instalação: só a partir da 2ª abertura
-          // real do app é que um "waiting worker" significa atualização de verdade
-          if(!jaAbriuAntes) return;
-          var bar=document.getElementById("upd"); if(!bar) return;
-          bar.classList.add("show");
-          document.getElementById("updbtn").onclick=function(){
-            this.textContent="Atualizando…"; esperandoReload=true; w.postMessage({type:"SKIP_WAITING"});
-          };
-        }
-        if(reg.waiting && navigator.serviceWorker.controller) oferecer(reg.waiting);
+        if(reg.waiting) avaliar(reg.waiting);
         reg.addEventListener("updatefound",function(){
           var w=reg.installing; if(!w) return;
           w.addEventListener("statechange",function(){
-            if(w.state==="installed" && navigator.serviceWorker.controller) oferecer(w);
+            if(w.state==="installed") avaliar(w);
           });
         });
         // procura atualização ao abrir e sempre que o app volta ao primeiro plano
         document.addEventListener("visibilitychange",function(){ if(!document.hidden) reg.update(); });
-        try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e){}
       }).catch(function(){ /* sem SW: o app continua funcionando normalmente */ });
 
       navigator.serviceWorker.addEventListener("controllerchange",function(){
