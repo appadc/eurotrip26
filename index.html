@@ -161,6 +161,13 @@
   .dayalert.info{background:#E6EEF5; color:var(--azulejo-deep)}
   .dayalert.warn{background:var(--saffron-soft); color:#8A5A08}
   .dayalert.open{background:#F6E0DA; color:var(--terra)}
+  .drota{font-size:11.5px; color:var(--slate); background:#EFEAE0; border-radius:8px; padding:6px 10px; margin:2px 0 9px; line-height:1.5}
+  .drota b{color:var(--ink); font-weight:600}
+  .twalk{font-size:11px; color:var(--slate); padding:3px 0 3px 57px; position:relative; line-height:1.4}
+  .twalk::before{content:""; position:absolute; left:21px; top:-3px; bottom:-3px; border-left:2px dotted var(--line)}
+  .tbadge.fix{background:#E6EEF5; color:var(--azulejo)}
+  .tbadge.opt{background:#EDEAE2; color:var(--slate)}
+  .loadpill.l-rigid{background:#EDEAE2; color:var(--slate); text-transform:none; letter-spacing:.01em}
 
   .leg-card{background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:12px 14px; margin-bottom:11px; display:flex; gap:13px; align-items:flex-start}
   .leg-glyph{flex:0 0 42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:20px}
@@ -298,6 +305,10 @@
     .g-plane{background:#14293E}
     .dayalert.info{background:#14293E; color:#B9D4EC}
     .tbadge.ok,.st.ok,.loadpill.l-leve{background:#173226; color:#82D9A9}
+    .drota,.tbadge.opt,.loadpill.l-rigid{background:#233140; color:#A9BCCE}
+    .twalk{color:#8FA3B5}
+    .twalk::before{border-color:#233140}
+    .tbadge.fix{background:#14293E; color:#9EC5E8}
     .g-train{background:#16302A}
     .pri.hi,.mail-when.now,.st.dec,.loadpill.l-muito,.dayalert.open{background:#3C1F1B; color:#F2A28F}
     .g-car{background:#332119}
@@ -409,27 +420,27 @@
           <div class="tnote">Jantar a bordo — dormir o máximo possível, o dia 26 começa às 6h.</div>
         </div>
       </div><div class="dayalert info">O horário de verão europeu termina hoje (25/10) — vocês pousam em Madrid já no horário de inverno (Madrid = Fortaleza +4h).</div></div>
-    </details><details class="card" name="dia" id="day-d2610" data-search="madrid chegada suave retiro, letras e primeiros passos, sem museu pesado pouso em barajas imigração + malas: 45–60 min. metrô l8 (~40min) ou táxi (~€35). hostal abadía — deixar malas check-in oficial só à tarde; combinar early check-in se possível. café da manhã em las letras  parque del retiro lago + palacio de cristal. caminhada leve para vencer o fuso. almoço — menu del día  pausa real no hotel descanso após o voo noturno — o quarto pode já estar pronto. janela opcional, não obrigatória. plaza mayor → puerta del sol → gran vía uma única caminhada, não três atrações separadas. jantar cedo + dormir cedo san ginés (churros) de sobremesa, se sobrar energia.">
+    </details><details class="card" name="dia" id="day-d2610" data-search="madrid chegada suave cibeles puerta de alcala retiro barquinho estanque palacio de cristal centro historico plaza mayor sol gran via circulo de bellas artes azotea rooftop san gines churros las letras">
       <summary class="card-head">
         <span class="stub" style="background:var(--c-madrid)"><span class="leg">seg</span><span class="num">26</span></span>
         <span class="head-main">
           <span class="head-city" style="color:var(--ct-madrid)">Madrid</span>
           <span class="head-hotel">Chegada suave</span>
-          <span class="head-row"><span class="loadpill l-moderado">moderado</span><span class="head-sub">Retiro, Letras e primeiros passos, sem museu pesado</span></span>
+          <span class="head-row"><span class="loadpill l-leve">leve</span><span class="loadpill l-rigid">⏱ flexível</span><span class="head-sub">Cibeles, Retiro e o centro — sem museu pesado</span></span>
         </span>
         <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </summary>
-      <div class="detail-inner"><div class="tline">
+      <div class="detail-inner"><div class="drota"><b>Rota:</b> Hotel → Cibeles → Alcalá → Retiro → almoço → hotel → Centro → jantar</div><div class="tline">
         <div class="ttime">06:10</div>
         <div class="tbody">
           <div class="tttl">Pouso em Barajas</div>
-          <div class="tnote">Imigração + malas: 45–60 min. Metrô L8 (~40min) ou táxi (~€35).</div>
+          <div class="tnote">Imigração + malas: 45–75 min. Táxi com tarifa fixa até o centro (~€33–35), direto ao hotel — o metrô L8 exigiria conexão com malas. Conferir o ponto oficial de táxi do terminal.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">07:45</div>
         <div class="tbody">
           <div class="tttl">Hostal Abadía — deixar malas</div>
-          <div class="tnote">Check-in oficial só à tarde; combinar early check-in se possível.</div>
+          <div class="tnote">Mostrar a reserva e perguntar por early check-in — sem contar com ele. Parada de 10–20 min.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">09:00</div>
@@ -437,17 +448,35 @@
           <div class="tttl">Café da manhã em Las Letras</div>
           
         </div>
-      </div><div class="tline">
-        <div class="ttime">10:30</div>
+      </div><div class="twalk">🚶 10 min até o Paseo del Prado</div><div class="tline">
+        <div class="ttime">10:00</div>
+        <div class="tbody">
+          <div class="tttl">Cibeles — fonte e palácio</div>
+          <div class="tnote">Fuente de Cibeles, fachada do Palacio de Cibeles e o início do Paseo del Prado. 10–15 min · grátis · só o exterior — sem subir ao mirante hoje.</div>
+        </div>
+      </div><div class="twalk">🚶 8 min pela Calle de Alcalá</div><div class="tline">
+        <div class="ttime">10:20</div>
+        <div class="tbody">
+          <div class="tttl">Puerta de Alcalá</div>
+          <div class="tnote">Foto na Plaza de la Independencia — a entrada do Retiro fica em frente. 10 min · grátis.</div>
+        </div>
+      </div><div class="twalk">🚶 2 min — Puerta de la Independencia</div><div class="tline">
+        <div class="ttime">10:35</div>
         <div class="tbody">
           <div class="tttl">Parque del Retiro</div>
-          <div class="tnote">Lago + Palacio de Cristal. Caminhada leve para vencer o fuso.</div>
+          <div class="tnote">Percurso: Estanque Grande → Monumento a Alfonso XII → Palacio de Cristal. 1h30–2h · grátis. Caminhada leve para vencer o fuso.</div>
         </div>
       </div><div class="tline">
+        <div class="ttime">opc.</div>
+        <div class="tbody">
+          <div class="tttl">Barquinho no Estanque<span class="tbadge opt">opcional</span></div>
+          <div class="tnote">45 min · €6 por barca (seg–sex) · até 4 pessoas · sessão da manhã vai até 14h. Só se o tempo estiver bom, a fila curta e a energia sobrar — consome quase 1h real.</div>
+        </div>
+      </div><div class="twalk">🚶 10–15 min de volta a Las Letras</div><div class="tline">
         <div class="ttime">13:00</div>
         <div class="tbody">
           <div class="tttl">Almoço — menu del día</div>
-          
+          <div class="tnote">Las Letras / Paseo del Prado, no caminho do hotel.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">14:30</div>
@@ -458,27 +487,33 @@
       </div><div class="tline">
         <div class="ttime">16:30</div>
         <div class="tbody">
-          <div class="tttl">Plaza Mayor → Puerta del Sol → Gran Vía</div>
-          <div class="tnote">Uma única caminhada, não três atrações separadas.</div>
+          <div class="tttl">Centro histórico a pé</div>
+          <div class="tnote">Plaza Mayor → Calle Mayor → Puerta del Sol → Preciados/Callao → Gran Vía. 2–2,5 km · 1h30–2h com paradas. Ver: urso e medronheiro, Km 0, letreiro Schweppes, Edifício Telefónica.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">18:30</div>
+        <div class="tbody">
+          <div class="tttl">Azotea do Círculo de Bellas Artes<span class="tbadge opt">opcional</span></div>
+          <div class="tnote">Fim da caminhada, na Calle de Alcalá — elevador à azotea (entrada paga). O pôr do sol é ~18:15: a esta hora a vista já é das luzes da Gran Vía e do Metrópolis. Primeiro item a cortar se o cansaço bater.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">20:00</div>
         <div class="tbody">
-          <div class="tttl">Jantar cedo + dormir cedo</div>
-          <div class="tnote">San Ginés (churros) de sobremesa, se sobrar energia.</div>
+          <div class="tttl">Jantar perto do hotel + dormir cedo</div>
+          <div class="tnote">Las Letras ou Plaza Santa Ana — sem novo deslocamento. Meta: terminar até 21:30. San Ginés (churros) de sobremesa, se sobrar energia.</div>
         </div>
-      </div></div>
-    </details><details class="card" name="dia" id="day-d2710" data-search="madrid madrid monumental prado, palácio real e a alma histórica sair do hotel  museu do prado (~3h) abre 10:00 (seg–sáb até 20:00) — não 9h. reservar online. foco: velázquez, goya, el greco. almoço no paseo del prado  palácio real + plaza de oriente inverno 10:00–18:00, último acesso antes do fecho. interior ~€14; jardins gratuitos. madrid de los austrias + mercado de san miguel san miguel só como aperitivo/parada breve. jantar + um bairro à escolha chueca ou malasaña, conforme o tipo de noite — não os dois. botín (reservar) ou casa dani.">
+      </div><div class="dayalert warn">😴 Se o cansaço estiver alto, cortar na ordem: rooftop → barquinho. Nunca o Retiro nem a pausa no hotel.</div><div class="dayalert info">☔ <b>Chuva forte:</b> trocar Retiro por um museu coberto (o Reina Sofía abre às segundas — mas isso reorganiza o dia 28). <b>Garoa:</b> manter Retiro, cortar barquinho e rooftop.</div></div>
+    </details><details class="card" name="dia" id="day-d2710" data-search="madrid monumental prado las meninas velazquez goya el greco opera plaza de la villa tienda de los deseos palacio real almudena mirador de la cornisa templo de debod entardecer por do sol la latina cava baja tapas san miguel">
       <summary class="card-head">
         <span class="stub" style="background:var(--c-madrid)"><span class="leg">ter</span><span class="num">27</span></span>
         <span class="head-main">
           <span class="head-city" style="color:var(--ct-madrid)">Madrid</span>
           <span class="head-hotel">Madrid monumental</span>
-          <span class="head-row"><span class="loadpill l-moderado">moderado</span><span class="head-sub">Prado, Palácio Real e a alma histórica</span><span class="chip">1 pend.</span></span>
+          <span class="head-row"><span class="loadpill l-intenso">intenso</span><span class="loadpill l-rigid">⏱ rígido</span><span class="head-sub">Arte clássica → monarquia → pôr do sol → tapas</span><span class="chip">3 pend.</span></span>
         </span>
         <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </summary>
-      <div class="detail-inner"><div class="tline">
+      <div class="detail-inner"><div class="drota"><b>Rota:</b> Prado → Ópera (almoço) → Villa → Palácio → Almudena → Debod → 🚕 → La Latina</div><div class="tline">
         <div class="ttime">09:15</div>
         <div class="tbody">
           <div class="tttl">Sair do hotel</div>
@@ -487,45 +522,63 @@
       </div><div class="tline">
         <div class="ttime">10:00</div>
         <div class="tbody">
-          <div class="tttl">Museu do Prado (~3h)<span class="tbadge pend">reservar</span></div>
-          <div class="tnote">Abre 10:00 (seg–sáb até 20:00) — não 9h. Reservar online. Foco: Velázquez, Goya, El Greco.</div>
+          <div class="tttl">Museu do Prado — circuito essencial (~3h)<span class="tbadge pend">reservar</span></div>
+          <div class="tnote">Prioridades: Las Meninas (Velázquez), Goya, El Greco, Bosch, Rubens. Abre 10:00 (não 9h). Reservar online.</div>
         </div>
-      </div><div class="tline">
+      </div><div class="twalk">🚶 20 min ou 🚕 8 min até a zona da Ópera</div><div class="tline">
         <div class="ttime">13:15</div>
         <div class="tbody">
-          <div class="tttl">Almoço no Paseo del Prado</div>
-          
+          <div class="tttl">Almoço perto da Ópera/Plaza Mayor</div>
+          <div class="tnote">Refeição de ~50 min — o almoço já posiciona vocês no bloco da tarde. Se atrasar, a Tienda é o primeiro corte.</div>
         </div>
       </div><div class="tline">
+        <div class="ttime">14:20</div>
+        <div class="tbody">
+          <div class="tttl">Plaza de la Villa</div>
+          <div class="tnote">Casa de la Villa, Torre de los Lujanes e o conjunto medieval. 10–15 min · grátis. Comprar o ímã, se acharem.</div>
+        </div>
+      </div><div class="twalk">🚶 4 min — Calle de la Escalinata</div><div class="tline">
+        <div class="ttime">14:40</div>
+        <div class="tbody">
+          <div class="tttl">La Tienda de los Deseos<span class="tbadge opt">opcional</span></div>
+          <div class="tnote">Escrever e deixar um desejo do casal. 10–15 min. Conferir se está aberta no dia; primeiro corte se o relógio apertar.</div>
+        </div>
+      </div><div class="twalk">🚶 5 min até a Plaza de Oriente</div><div class="tline">
         <div class="ttime">15:00</div>
         <div class="tbody">
-          <div class="tttl">Palácio Real + Plaza de Oriente</div>
-          <div class="tnote">Inverno 10:00–18:00, último acesso antes do fecho. Interior ~€14; jardins gratuitos.</div>
+          <div class="tttl">Palácio Real<span class="tbadge fix">fixo</span><span class="tbadge pend">reservar</span></div>
+          <div class="tnote">Salas de Estado, Salão do Trono, Capela Real. 1h30–2h · ~€14 · inverno 10:00–18:00, último acesso 17:00. Levar documento + ingresso offline.</div>
         </div>
       </div><div class="tline">
-        <div class="ttime">17:30</div>
+        <div class="ttime">17:00</div>
         <div class="tbody">
-          <div class="tttl">Madrid de los Austrias + Mercado de San Miguel</div>
-          <div class="tnote">San Miguel só como aperitivo/parada breve.</div>
+          <div class="tttl">Catedral de la Almudena + Mirador de la Cornisa</div>
+          <div class="tnote">Nave principal (25–40 min · entrada por doação) diante do Palácio, e a vista para Campo del Moro e Casa de Campo. Sem subir à cúpula — o dia já tem o seu mirante.</div>
         </div>
-      </div><div class="tline">
+      </div><div class="twalk">🚶 15–20 min por Bailén → Ferraz</div><div class="tline">
+        <div class="ttime">17:45</div>
+        <div class="tbody">
+          <div class="tttl">Templo de Debod — entardecer<span class="tbadge pend">reservar</span></div>
+          <div class="tnote">Chegar ~30 min antes do pôr do sol (~18:15) e ver o templo refletido no espelho d'água. Grátis. Interior (30 min, opcional): ter–dom 10:00–20:00, reserva gratuita em madrid.es/debodreservas, pontualidade exigida. Fecha às segundas — não migrar este item para o dia 26.</div>
+        </div>
+      </div><div class="twalk">🚕 10–12 min recomendado — poupa ~20 min de caminhada e protege o jantar</div><div class="tline">
         <div class="ttime">20:30</div>
         <div class="tbody">
-          <div class="tttl">Jantar + um bairro à escolha</div>
-          <div class="tnote">Chueca OU Malasaña, conforme o tipo de noite — não os dois. Botín (reservar) ou Casa Dani.</div>
+          <div class="tttl">La Latina + Cava Baja — noite de tapas</div>
+          <div class="tnote">Entrar em 2–3 tabernas e pedir 1–2 pratos em cada. 2–3h, sem roteiro rígido — experiência tradicional, não jantar formal. Mercado de San Miguel só como passagem, se cruzar o caminho.</div>
         </div>
-      </div><div class="dayalert info">☔ Dia à prova de chuva: Prado e Palácio Real são internos. É a noite tradicional (Botín/Casa Dani).</div></div>
-    </details><details class="card" name="dia" id="day-d2810" data-search="madrid · dia 3 reina sofía + bernabéu arte moderna, o estádio e noite de coquetelaria — toledo saiu do roteiro café + sair  museu reina sofía (~2h30) guernica, dalí, miró. reservar online. fecha às terças — 28 é quarta, ok. almoço na zona de atocha/lavapiés  bernabéu — tour do estádio (~1h30–2h) conhecer é obrigatório; o tour é o jeito de entrar sem jogo. metro l10 santiago bernabéu. confirmar horário (varia por eventos). volta ao hotel — descanso/banho a preferência de voltar ao hotel 1×/dia cabe bem hoje. malasaña ou chueca bares de vinho, lojas de design, atmosfera jovem. noite de coquetelaria jantar informal + coquetéis (salmón guru, 1862 dry bar, angelita). a noite de bar de madrid.">
+      </div><div class="dayalert open">🔥 <b>Dia mais denso de Madrid</b> (físico alto, horários rígidos) e sem retorno ao hotel — exceção consciente à regra de 1×/dia. Cortes na ordem: interior do Debod → Tienda de los Deseos → San Miguel. Prado e Palácio são fixos.</div><div class="dayalert info">☔ <b>Chuva:</b> Prado e Palácio seguram o dia por dentro. Debod ao entardecer perde o sentido com céu fechado — nesse caso, seguir de Almudena direto para La Latina. <b>Vento forte:</b> evitar o mirante.</div></div>
+    </details><details class="card" name="dia" id="day-d2810" data-search="madrid reina sofia guernica dali miro bernabeu tour estadio chueca malasana mercado de san anton jardin de diana 1862 dry bar sala equis coquetelaria salmon guru angelita atocha lavapies">
       <summary class="card-head">
         <span class="stub" style="background:var(--c-madrid)"><span class="leg">qua</span><span class="num">28</span></span>
         <span class="head-main">
           <span class="head-city" style="color:var(--ct-madrid)">Madrid · dia 3</span>
           <span class="head-hotel">Reina Sofía + Bernabéu</span>
-          <span class="head-row"><span class="loadpill l-moderado">moderado</span><span class="head-sub">Arte moderna, o estádio e noite de coquetelaria — Toledo saiu do roteiro</span><span class="chip">2 pend.</span></span>
+          <span class="head-row"><span class="loadpill l-moderado">moderado</span><span class="loadpill l-rigid">⏱ semirrígido</span><span class="head-sub">Arte moderna, o estádio e a noite moderna</span><span class="chip">2 pend.</span></span>
         </span>
         <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </summary>
-      <div class="detail-inner"><div class="tline">
+      <div class="detail-inner"><div class="drota"><b>Rota:</b> Reina Sofía → almoço → hotel → Bernabéu → Chueca <i>ou</i> Malasaña → coquetelaria</div><div class="tline">
         <div class="ttime">09:30</div>
         <div class="tbody">
           <div class="tttl">Café + sair</div>
@@ -534,40 +587,40 @@
       </div><div class="tline">
         <div class="ttime">10:00</div>
         <div class="tbody">
-          <div class="tttl">Museu Reina Sofía (~2h30)<span class="tbadge pend">reservar</span></div>
-          <div class="tnote">Guernica, Dalí, Miró. Reservar online. Fecha às terças — 28 é quarta, ok.</div>
+          <div class="tttl">Museu Reina Sofía — circuito essencial (~2h30)<span class="tbadge pend">reservar</span></div>
+          <div class="tnote">Prioridades: Guernica (confirmar a sala no dia), Picasso, Dalí, Miró. Fecha às terças — 28 é quarta, ok. Reservar online.</div>
         </div>
       </div><div class="tline">
-        <div class="ttime">12:45</div>
+        <div class="ttime">13:00</div>
         <div class="tbody">
-          <div class="tttl">Almoço na zona de Atocha/Lavapiés</div>
-          
+          <div class="tttl">Almoço em Atocha/Lavapiés</div>
+          <div class="tnote">Restaurante próximo à rota de volta ao hotel · 1h–1h15. Não descer muito ao sul antes do descanso.</div>
         </div>
-      </div><div class="tline">
-        <div class="ttime">14:30</div>
+      </div><div class="twalk">🚶 10–15 min de volta ao hotel</div><div class="tline">
+        <div class="ttime">14:15</div>
+        <div class="tbody">
+          <div class="tttl">Hotel — descanso e troca</div>
+          <div class="tnote">Banho, carregar celular e separar o ingresso do Bernabéu. 45–60 min.</div>
+        </div>
+      </div><div class="twalk">🚇 L1 (Antón Martín/Sol) → Tribunal → L10 → Santiago Bernabéu · ~25 min · ou 🚕 15–20 min</div><div class="tline">
+        <div class="ttime">16:00</div>
         <div class="tbody">
           <div class="tttl">Bernabéu — tour do estádio (~1h30–2h)<span class="tbadge pend">reservar</span></div>
-          <div class="tnote">Conhecer é obrigatório; o tour é o jeito de entrar sem jogo. Metro L10 Santiago Bernabéu. Confirmar horário (varia por eventos).</div>
+          <div class="tnote">Museu do Real Madrid, troféus e vista panorâmica; o circuito varia por jogos, eventos e obras. Comprar em realmadrid.com ~1 mês antes — não travar as 16:00 até ver a disponibilidade real.</div>
         </div>
-      </div><div class="tline">
-        <div class="ttime">17:00</div>
+      </div><div class="twalk">🚇 L10 de volta até Tribunal — desce na porta dos dois bairros</div><div class="tline">
+        <div class="ttime">18:30</div>
         <div class="tbody">
-          <div class="tttl">Volta ao hotel — descanso/banho</div>
-          <div class="tnote">A preferência de voltar ao hotel 1×/dia cabe bem hoje.</div>
-        </div>
-      </div><div class="tline">
-        <div class="ttime">19:30</div>
-        <div class="tbody">
-          <div class="tttl">Malasaña ou Chueca</div>
-          <div class="tnote">Bares de vinho, lojas de design, atmosfera jovem.</div>
+          <div class="tttl">Chueca <i>ou</i> Malasaña — direto do estádio</div>
+          <div class="tnote"><b>Rota Chueca:</b> Mercado de San Antón (petisco, não refeição) → ruas do bairro → drink no Jardín de Diana. <b>Rota Malasaña:</b> Plaza del Dos de Mayo → lojas independentes → 1862 Dry Bar. <b>Alternativa que substitui as duas:</b> Sala Equis (abre 17:30) + jantar em Las Letras.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">21:00</div>
         <div class="tbody">
-          <div class="tttl">Noite de coquetelaria</div>
-          <div class="tnote">Jantar informal + coquetéis (Salmón Guru, 1862 Dry Bar, Angelita). A noite de bar de Madrid.</div>
+          <div class="tttl">Jantar informal + coquetelaria</div>
+          <div class="tnote">Salmón Guru, 1862 Dry Bar, Angelita — a noite de bar de Madrid. Voltar de táxi.</div>
         </div>
-      </div><div class="dayalert info">☔ Dia bem resiliente à chuva: Reina Sofía e o tour do Bernabéu são majoritariamente cobertos. Se chover forte, é o dia ideal para puxar para cá as atividades internas de outro dia.</div></div>
+      </div><div class="dayalert info">✅ <b>Ordem corrigida:</b> o descanso no hotel vem <b>antes</b> do Bernabéu. Estádio, Chueca e Malasaña ficam todos ao norte — voltar ao hotel depois do tour criava um zigue-zague.</div><div class="dayalert info">☔ Dia bem resiliente à chuva: Reina Sofía e o tour do Bernabéu são majoritariamente cobertos. Se chover forte, é o dia ideal para puxar para cá as atividades internas de outro dia.</div></div>
     </details><details class="card" name="dia" id="day-d2910" data-search="ave → barcelona trem 08:57 chegada + tarde completa no eixample e born atocha — embarque ave 08:57 → sants 12:06. metro sants → hotel check-in + almoço. passeig de gràcia casa batlló e la pedrera por fora — interiores ficam para amanhã. el born santa maria del mar + mercat santa caterina. jantar no eixample berbena / la sosenga.">
       <summary class="card-head">
         <span class="stub" style="background:var(--c-barcelona)"><span class="leg">qui</span><span class="num">29</span></span>
@@ -593,14 +646,14 @@
       </div><div class="tline">
         <div class="ttime">15:00</div>
         <div class="tbody">
-          <div class="tttl">Passeig de Gràcia — fachadas modernistas</div>
-          <div class="tnote">Manzana de la Discordia: Batlló, Amatller, Lleó Morera — e La Pedrera adiante.</div>
+          <div class="tttl">Passeig de Gràcia — as duas casas por fora</div>
+          <div class="tnote">Manzana de la Discordia (nº 43): <b>Casa Batlló</b>, Amatller e Lleó Morera lado a lado. Subindo ~600 m (8 min), <b>La Pedrera</b> no nº 92. O passeio cobre as duas fachadas — a que não entrarem, vocês veem por fora de qualquer jeito.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">16:30</div>
         <div class="tbody">
-          <div class="tttl">Casa Batlló OU La Pedrera — por dentro<span class="tbadge pend">reservar</span></div>
-          <div class="tnote">Único ingresso do dia. Veio do dia 30 para cá: assim o dia Gaudí fica com dois horários rígidos em vez de três. Batlló é mais imersiva; La Pedrera tem o terraço icônico.</div>
+          <div class="tttl">Casa Batlló OU La Pedrera — por dentro<span class="tbadge pend">decidir</span></div>
+          <div class="tnote">Único ingresso do dia. Veio do dia 30 para cá: assim o dia Gaudí fica com dois horários rígidos em vez de três. <b>Batlló</b> é mais imersiva e cenográfica (mais cara); <b>La Pedrera</b> tem o terraço das chaminés e o sótão em arcos. Comprar a escolhida — a outra fica na caminhada das 15:00.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">20:30</div>
@@ -904,7 +957,7 @@
           <div class="tttl">Jantar em Triana</div>
           <div class="tnote">Já &quot;em casa&quot; — sem trajeto de volta.</div>
         </div>
-      </div><div class="dayalert open">🥵 <b>Dia mais frágil do roteiro</b> (estrada + 3 monumentos com hora + Plaza de España). Sair de Granada cedo (~7h) é o que torna isto possível. Las Setas fica OPCIONAL — se quiserem o mirante ao anoitecer, encaixar após a Plaza de España (~15 min ao norte). O Archivo de Indias, só se sobrar tempo.</div><div class="dayalert warn">🩹 <b>Válvula de escape:</b> se a estrada atrasar ou o Alcázar esticar, Catedral/Giralda é a primeira a sair — pode migrar para a manhã de 04/11 (abre 11:00), trocando parte de Triana por ela. Decidir antes de comprar o ingresso. Plaza de España e Alcázar são inegociáveis.</div></div>
+      </div><div class="dayalert open">🥵 <b>Dia mais frágil do roteiro</b> (estrada + 3 monumentos com hora + Plaza de España). Sair de Granada cedo (~7h) é o que torna isto possível. Las Setas fica OPCIONAL — se quiserem o mirante ao anoitecer, encaixar após a Plaza de España (~15 min ao norte). O Archivo de Indias, só se sobrar tempo.</div><div class="dayalert info">✅ <b>Decidido: Catedral/Giralda fica hoje.</b> A manhã de 04/11 continua inteira em Triana. O dia tem ~1h de folga real entre a devolução do carro (~09:45) e o Alcázar (12:30) — é o colchão que sustenta a escolha.</div><div class="dayalert warn">🩹 <b>Válvula de emergência:</b> se a estrada atrasar de verdade, Catedral/Giralda é a primeira a sair — e aí vai para a manhã de 04/11 (abre 11:00), custando metade de Triana e o almoço. Plano B, não plano A. Plaza de España e Alcázar são inegociáveis.</div></div>
     </details><details class="card" name="dia" id="day-d0411" data-search="sevilha → lisboa triana de manhã · voo 16:00 despedida sem pressa café da manhã em triana no próprio bairro, sem ir ao centro. (o bar el comercio, dos churros, fica no centro histórico, não em triana.) triana a pé mercado de triana, cerâmicas, calle betis e a margem do guadalquivir. almoço cedo + retirar malas  táxi → svq antecipado por causa de bagagem despachada. ~15 min desde triana. voo svq → lis chega 16:05 hora local — portugal é −1h. metrô/táxi → my story hotel augusta baixa. chiado + bairro alto manteigaria — sem fila e excelente. jantar: taberna da rua das flores ou zé da mouraria ">
       <summary class="card-head">
         <span class="stub" style="background:var(--c-sevilha)"><span class="leg">qua</span><span class="num">04</span></span>
@@ -937,7 +990,7 @@
         <div class="ttime">13:15</div>
         <div class="tbody">
           <div class="tttl">Táxi → SVQ</div>
-          <div class="tnote">~15 min desde Triana. Check-in TAP encerra 15:15. <span class="warn">Bilhete emitido com 0 bagagem despachada</span> — se comprarem franquia, chegar mais cedo para o balcão.</div>
+          <div class="tnote">~15 min desde Triana. Check-in TAP encerra 15:15. Há <b>1 mala despachada</b> comprada (ref. ZPBOQL) — contar com o balcão, não só o autoatendimento.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">16:00</div>
@@ -964,13 +1017,72 @@
           
         </div>
       </div></div>
-    </details><details class="card" name="dia" id="day-d0511" data-search="lisboa belém + alfama descobrimentos de manhã, bairro antigo à tarde, fado à noite tram 15e → belém cedo, antes das filas. mosteiro dos jerónimos  pastéis de belém a receita original desde 1837. padrão dos descobrimentos + torre de belém (por fora) torre por dentro é opcional — a fila consome tempo. almoço em belém  pausa no hotel (baixa/chiado) reduz o desgaste antes de alfama. alfama no fim da tarde sé, portas do sol. castelo de são jorge é decisão (checklist) — entra aqui ou fica de fora. miradouro da graça / senhora do monte  fado em alfama (só espetáculo/bebida) sem jantar — comer antes ou depois em outro lugar dá mais liberdade. reservar direto com a casa.">
+    </details><details class="card" name="dia" id="day-d0511" data-search="lisboa castelo de são jorge alfama sem pressa sé de lisboa miradouro santa luzia portas do sol graça senhora do monte elevador de santa justa chiado baixa fado sem jantar cenário lisboa completa">
       <summary class="card-head">
         <span class="stub" style="background:var(--c-lisboa)"><span class="leg">qui</span><span class="num">05</span></span>
         <span class="head-main">
           <span class="head-city" style="color:var(--ct-lisboa)">Lisboa</span>
-          <span class="head-hotel">Belém + Alfama</span>
-          <span class="head-row"><span class="loadpill l-intenso">intenso</span><span class="head-sub">Descobrimentos de manhã, bairro antigo à tarde, fado à noite</span><span class="chip">2 pend.</span></span>
+          <span class="head-hotel">Castelo, Alfama e fado</span>
+          <span class="head-row"><span class="loadpill l-moderado">moderado</span><span class="head-sub">A Lisboa antiga sem pressa — o dia que a decisão liberou</span><span class="chip">2 pend.</span></span>
+        </span>
+        <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </summary>
+      <div class="detail-inner"><div class="tline">
+        <div class="ttime">09:00</div>
+        <div class="tbody">
+          <div class="tttl">Subida a Alfama</div>
+          <div class="tnote">Do hotel na Baixa: tram 28E ou a pé pela Sé. Ir cedo evita fila e calor no castelo.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">09:30</div>
+        <div class="tbody">
+          <div class="tttl">Castelo de São Jorge<span class="tbadge pend">reservar</span></div>
+          <div class="tnote">Agora é âncora do dia, não mais item cortável: ~2h com as muralhas, o miradouro e a vista sobre o Tejo.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">11:30</div>
+        <div class="tbody">
+          <div class="tttl">Alfama sem pressa</div>
+          <div class="tnote">Sé de Lisboa, Miradouro de Santa Luzia, Portas do Sol, becos e escadinhas. É o bloco que a fonte pede e que só existe no Cenário A.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">13:30</div>
+        <div class="tbody">
+          <div class="tttl">Almoço em Alfama</div>
+          <div class="tnote">Sem correr — a tarde tem folga de verdade.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">15:00</div>
+        <div class="tbody">
+          <div class="tttl">Miradouro da Graça / Senhora do Monte</div>
+          <div class="tnote">A vista mais alta da cidade. Subida curta desde Alfama.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">16:30</div>
+        <div class="tbody">
+          <div class="tttl">Descida à Baixa e Chiado com calma</div>
+          <div class="tnote">Elevador de Santa Justa, Rua Garrett, Bertrand (a livraria mais antiga do mundo), cafés. O que na versão antiga era "passagem" vira programa.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">18:30</div>
+        <div class="tbody">
+          <div class="tttl">Pausa no hotel</div>
+          <div class="tnote">O hotel é aqui na Baixa — aproveitar antes da noite.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">21:00</div>
+        <div class="tbody">
+          <div class="tttl">Fado em Alfama — só espetáculo<span class="tbadge pend">reservar</span></div>
+          <div class="tnote">Sem jantar: comer antes ou depois em outro lugar dá mais liberdade. Reservar direto com a casa.</div>
+        </div>
+      </div><div class="dayalert info">✅ <b>Cenário A confirmado</b> (Lisboa completa). Belém saiu daqui e ganhou o dia 06 inteiro — este dia deixou de ser "quase dois dias comprimidos" e caiu de <i>intenso</i> para <i>moderado</i>. O Castelo virou obrigatório em vez de item de corte.</div><div class="dayalert warn">☔ <b>Chuva:</b> inverter a ordem — Sé e igrejas primeiro, castelo na primeira janela seca. As muralhas sem vista não valem a subida.</div></div>
+    </details><details class="card" name="dia" id="day-d0611" data-search="lisboa belém dia inteiro mosteiro dos jerónimos pastéis de belém padrão dos descobrimentos torre de belém por dentro museu dos coches maat lx factory última noite chiado cais do sodré time out market parque das nações oceanário plano de chuva cenário a">
+      <summary class="card-head">
+        <span class="stub" style="background:var(--c-lisboa)"><span class="leg">sex</span><span class="num">06</span></span>
+        <span class="head-main">
+          <span class="head-city" style="color:var(--ct-lisboa)">Lisboa</span>
+          <span class="head-hotel">Belém — dia inteiro</span>
+          <span class="head-row"><span class="loadpill l-moderado">moderado</span><span class="head-sub">Descobrimentos sem pressa, Torre por dentro e LX Factory</span><span class="chip">1 pend.</span></span>
         </span>
         <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </summary>
@@ -978,97 +1090,57 @@
         <div class="ttime">08:30</div>
         <div class="tbody">
           <div class="tttl">Tram 15E → Belém</div>
-          <div class="tnote">Cedo, antes das filas.</div>
+          <div class="tnote">Cedo, antes das filas. ~25 min desde a Baixa.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">09:30</div>
         <div class="tbody">
           <div class="tttl">Mosteiro dos Jerónimos<span class="tbadge pend">reservar</span></div>
-          
+          <div class="tnote">Claustro manuelino — o ponto alto. ~1h15 sem correr.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">11:00</div>
         <div class="tbody">
           <div class="tttl">Pastéis de Belém</div>
-          <div class="tnote">A receita original desde 1837.</div>
+          <div class="tnote">A receita original desde 1837. Sentar no salão dos fundos é mais rápido que a fila do balcão.</div>
         </div>
       </div><div class="tline">
-        <div class="ttime">11:30</div>
+        <div class="ttime">11:45</div>
         <div class="tbody">
-          <div class="tttl">Padrão dos Descobrimentos + Torre de Belém (por fora)</div>
-          <div class="tnote">Torre por dentro é opcional — a fila consome tempo.</div>
+          <div class="tttl">Padrão dos Descobrimentos</div>
+          <div class="tnote">Subir ao miradouro: a rosa dos ventos no chão só se entende de cima.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">12:30</div>
+        <div class="tbody">
+          <div class="tttl">Torre de Belém — POR DENTRO</div>
+          <div class="tnote">Deixou de ser "só por fora": no Cenário A há tempo para a fila e a subida. Era uma das perdas do bate-volta.</div>
+        </div>
+      </div><div class="tline">
+        <div class="ttime">13:30</div>
         <div class="tbody">
           <div class="tttl">Almoço em Belém</div>
           
         </div>
       </div><div class="tline">
-        <div class="ttime">14:00</div>
+        <div class="ttime">15:00</div>
         <div class="tbody">
-          <div class="tttl">Pausa no hotel (Baixa/Chiado)</div>
-          <div class="tnote">Reduz o desgaste antes de Alfama.</div>
+          <div class="tttl">Museu dos Coches OU MAAT</div>
+          <div class="tnote">Coches: coleção real única no mundo. MAAT: arte e arquitetura à beira-rio. Um dos dois, conforme o gosto do dia.</div>
         </div>
       </div><div class="tline">
-        <div class="ttime">15:30</div>
+        <div class="ttime">16:30</div>
         <div class="tbody">
-          <div class="tttl">Alfama no fim da tarde</div>
-          <div class="tnote">Sé, Portas do Sol. Castelo de São Jorge é decisão (Checklist) — entra aqui OU fica de fora.</div>
-        </div>
-      </div><div class="tline">
-        <div class="ttime">17:30</div>
-        <div class="tbody">
-          <div class="tttl">Miradouro da Graça / Senhora do Monte</div>
-          
+          <div class="tttl">LX Factory</div>
+          <div class="tnote">Fábrica reconvertida sob a ponte: lojas, livraria Ler Devagar, cafés. É programa de dia — as lojas fecham cedo. Fica no caminho de volta.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">21:00</div>
         <div class="tbody">
-          <div class="tttl">Fado em Alfama (só espetáculo/bebida)<span class="tbadge pend">reservar</span></div>
-          <div class="tnote">Sem jantar — comer antes ou depois em outro lugar dá mais liberdade. Reservar direto com a casa.</div>
+          <div class="tttl">Última noite lisboeta</div>
+          <div class="tnote">Jantar no Chiado, Cais do Sodré ou Time Out Market. Não virar a noite: amanhã o voo é às 09:00 e a saída do hotel, ~06:20.</div>
         </div>
-      </div><div class="dayalert open">🔀 <b>Este dia depende da decisão do dia 06.</b> O que está acima é o <b>Cenário B (bate-volta)</b>: Belém comprimido na manhã para liberar o dia 06 inteiro para Sintra/Cascais.<br><br>No <b>Cenário A (Lisboa completa)</b>, este dia respira e vira: <b>09:30</b> Castelo de São Jorge → <b>11:30</b> Alfama sem pressa (Sé, Santa Luzia, Portas do Sol) → <b>13:30</b> almoço em Alfama → <b>15:30</b> Graça e Senhora do Monte → <b>17:00</b> Baixa/Chiado com calma, elevador de Santa Justa, livrarias → <b>21:00</b> fado. Belém então ganha o dia 06 inteiro.</div><div class="dayalert warn">🥵 No Cenário B, Belém + Alfama no mesmo dia é quase dois dias. Torre de Belém por dentro e Castelo de São Jorge são os primeiros a cortar se o ritmo apertar.</div></div>
-    </details><details class="card" name="dia" id="day-d0611" data-search="lisboa decisão em aberto belém ou sintra ou cascais bate-volta lisboa completa jerónimos torre de belém padrão dos descobrimentos coches maat lx factory palácio da pena castelo dos mouros quinta da regaleira parque das nações oceanário plano de chuva time out market bairro alto cais do sodré">
-      <summary class="card-head">
-        <span class="stub" style="background:var(--c-lisboa)"><span class="leg">sex</span><span class="num">06</span></span>
-        <span class="head-main">
-          <span class="head-city" style="color:var(--terra)">Decisão em aberto</span>
-          <span class="head-hotel">Lisboa completa × bate-volta</span>
-          <span class="head-row"><span class="loadpill l-intenso">a definir</span><span class="head-sub">Belém · Sintra · Cascais · Parque das Nações</span><span class="chip">1 pend.</span></span>
-        </span>
-        <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </summary>
-      <div class="detail-inner">
-      <div class="dayalert open">🔑 <b>A decisão-chave da viagem.</b> Vocês têm dois dias completos em Lisboa (05 e 06). A fonte usa três — e trata Sintra como bate-volta <i>adicional</i>, não como substituto. Aqui, o bate-volta ocupa exatamente o espaço que seria de Belém. Portanto a pergunta não é "Sintra ou Cascais": é <b>Lisboa mais completa OU um bate-volta</b>. Cascais só entra depois, como versão leve do bate-volta.</div>
-      <div class="tline">
-        <div class="ttime">A</div>
-        <div class="tbody">
-          <div class="tttl">LISBOA COMPLETA — Belém com o dia inteiro</div>
-          <div class="tnote">08:30 tram 15E → <b>Mosteiro dos Jerónimos</b> → pastéis de Belém → Padrão dos Descobrimentos → <b>Torre de Belém por dentro</b> (dá tempo) → almoço → Museu dos Coches ou MAAT → LX Factory no fim da tarde → noite lisboeta.<br><br><b>Ganha:</b> nenhum dia comprimido, Castelo e Alfama respiram no dia 05, zero ingresso que esgota, zero risco de trem/clima, nenhuma madrugada. <b>Perde:</b> a Pena — que é imagem-síntese de Portugal e não tem equivalente em Lisboa.</div>
-        </div>
-      </div><div class="tline">
-        <div class="ttime">B</div>
-        <div class="tbody">
-          <div class="tttl">SINTRA — dia inteiro<span class="tbadge pend">reservar</span></div>
-          <div class="tnote">07:30 trem Rossio → <b>Palácio da Pena</b> 09:30 (o horário é para <i>entrar no palácio</i>; contar ~30 min do portão) → <b>Castelo dos Mouros</b> → almoço na vila, queijadas e travesseiros → 3º monumento opcional (Palácio Nacional ou Quinta da Regaleira) → trem de volta → Time Out Market → Bairro Alto ou Cais do Sodré.<br><br><b>Ganha:</b> patrimônio único, o cartão-postal. <b>Perde:</b> Belém vira manhã corrida no dia 05, e o dia 06 é o mais cansativo de Lisboa — na véspera do voo das 09:00 para Madrid.</div>
-        </div>
-      </div><div class="tline">
-        <div class="ttime">B2</div>
-        <div class="tbody">
-          <div class="tttl">CASCAIS — bate-volta leve</div>
-          <div class="tnote">Trem do Cais do Sodré (~40 min, sem ingresso, sem horário). Costa, Boca do Inferno, Guincho, almoço de peixe. Volta quando quiser.<br><br>Só faz sentido se a escolha for "bate-volta", mas Sintra estiver com previsão ruim, ingressos esgotados ou o cansaço acumulado pesar. É a versão sem estresse do Cenário B — e mantém Belém comprimido no dia 05 do mesmo jeito.</div>
-        </div>
-      </div><div class="tline">
-        <div class="ttime">C</div>
-        <div class="tbody">
-          <div class="tttl">PARQUE DAS NAÇÕES + OCEANÁRIO — plano de chuva</div>
-          <div class="tnote">Só se chover de forma persistente. É interno, não supera Castelo/Alfama/Belém nas prioridades de primeira viagem e substitui bem uma programação externa inviabilizada.</div>
-        </div>
-      </div>
-      <div class="dayalert warn">⏳ <b>Prazo:</b> a Pena esgota. Se a resposta for B, comprar até meados de setembro. Se for A ou B2, não há ingresso a comprar — a decisão pode esperar. Ou seja: <b>o custo de decidir "Sintra" tarde é alto; o de decidir "Lisboa completa" tarde é zero.</b></div>
-      <div class="dayalert info">🌙 Em qualquer cenário: última noite em Lisboa e voo às 09:00 no dia 07 (saída do hotel ~06:20). Não virar a noite.</div>
-      </div>
+      </div><div class="dayalert info">✅ <b>Decisão tomada: Lisboa completa.</b> Belém com o dia inteiro em vez de comprimido numa manhã. Ganhos concretos: Torre por dentro, um museu, LX Factory e zero ingresso que esgota. A Pena fica para uma próxima — é a única perda real, e não tem equivalente em Lisboa.</div><div class="dayalert warn">☔ <b>Plano C (chuva persistente):</b> Parque das Nações + Oceanário, que é interno. Belém também tem plano interno próprio: Jerónimos, Coches e MAAT seguram boa parte do dia.</div></div>
     </details><details class="card" name="dia" id="day-d0711" data-search="lisboa → madrid última noite voo 09:00 · tarde livre e jantar de despedida check-out  táxi/bolt → aeroporto de lisboa a baixa não fica na linha vermelha direta; táxi é mais seguro para o voo das 9h com bagagem. aeroporto humberto delgado  voo lis → mad chegada 11:20 (+1h de fuso). deixar malas no petit palace arenal quarto pode não estar pronto — só guardar bagagem. almoço especial: sobrino de botín reservar — o restaurante mais antigo do mundo. tarde de compras + centro dia reservado para compras: gran vía, preciados, el corte inglés, salamanca. bernabéu e reina sofía já ficaram nos 3 dias de madrid. jantar de encerramento noite romântica ou coquetelaria: salmón guru ou angelita.">
       <summary class="card-head">
         <span class="stub" style="background:var(--c-madrid)"><span class="leg">sáb</span><span class="num">07</span></span>
@@ -1101,7 +1173,7 @@
         <div class="ttime">09:00</div>
         <div class="tbody">
           <div class="tttl">Voo LIS → MAD<span class="tbadge ok">comprado</span></div>
-          <div class="tnote">TP1012 · chegada 11:20 (+1h de fuso). Check-in encerra 08:00. <span class="warn">0 bagagem despachada no bilhete.</span></div>
+          <div class="tnote">TP1012 · chegada 11:20 (+1h de fuso). Check-in encerra 08:00 — com mala a despachar (ref. YZ88SG), sair do hotel às 06:20 é o certo, não o exagerado.</div>
         </div>
       </div><div class="tline">
         <div class="ttime">12:15</div>
@@ -1263,7 +1335,7 @@
         </span>
         <span class="chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </summary>
-      <div class="detail-inner"><div class="drow copyrow"><div><div class="dlabel">Endereço</div><div class="dval">Rua de São Nicolau, 78 — Baixa, 1100-549 Lisboa</div></div><button class="copybtn" data-copy="Rua de São Nicolau, 78 — Baixa, 1100-549 Lisboa">📋 Copiar</button></div><div class="drow copyrow"><div><div class="dlabel">Telefone</div><div class="dval">+351 21 114 7899</div></div><a class="linkbtn" href="tel:+351211147899">📞 Ligar</a></div><div class="drow copyrow"><div><div class="dlabel">Coordenadas</div><div class="dval">38.710292, -9.137795</div></div><a class="linkbtn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=38.710292,-9.137795" target="_blank" rel="noopener">🗺 Mapa</a><a class="linkbtn ghost" href="geo:38.710292,-9.137795" aria-label="Abrir no app de mapas do celular">📍</a></div><div class="drow copyrow"><div><div class="dlabel">Reserva</div><div class="dval">Hotéis.com nº 72076566454910</div></div><button class="copybtn ghost" data-copy="Hotéis.com nº 72076566454910">📋 Copiar</button></div><div class="drow"><div class="dlabel">Lembretes</div><ul class="mini"><li>Baixa plana; Rossio a 5 min (trem de Sintra sai de lá).</li><li>Isolamento acústico elogiado, guarda-volumes, elevador.</li><li>Day-trip a Sintra (ou Cascais — trem no Cais do Sodré).</li><li>Web Summit só começa 09/11: vocês saem antes, sem inflação.</li></ul></div></div>
+      <div class="detail-inner"><div class="drow copyrow"><div><div class="dlabel">Endereço</div><div class="dval">Rua de São Nicolau, 78 — Baixa, 1100-549 Lisboa</div></div><button class="copybtn" data-copy="Rua de São Nicolau, 78 — Baixa, 1100-549 Lisboa">📋 Copiar</button></div><div class="drow copyrow"><div><div class="dlabel">Telefone</div><div class="dval">+351 21 114 7899</div></div><a class="linkbtn" href="tel:+351211147899">📞 Ligar</a></div><div class="drow copyrow"><div><div class="dlabel">Coordenadas</div><div class="dval">38.710292, -9.137795</div></div><a class="linkbtn ghost" href="https://www.google.com/maps/search/?api=1&amp;query=38.710292,-9.137795" target="_blank" rel="noopener">🗺 Mapa</a><a class="linkbtn ghost" href="geo:38.710292,-9.137795" aria-label="Abrir no app de mapas do celular">📍</a></div><div class="drow copyrow"><div><div class="dlabel">Reserva</div><div class="dval">Hotéis.com nº 72076566454910</div></div><button class="copybtn ghost" data-copy="Hotéis.com nº 72076566454910">📋 Copiar</button></div><div class="drow"><div class="dlabel">Lembretes</div><ul class="mini"><li>Baixa plana; o hotel é a base de Belém (tram 15E) e de Alfama, ambos a pé ou a 1 tram.</li><li>Isolamento acústico elogiado, guarda-volumes, elevador.</li><li>Cais do Sodré e Chiado a 5–10 min — as noites de 05 e 06.</li><li>Web Summit só começa 09/11: vocês saem antes, sem inflação.</li></ul></div></div>
     </details><details class="card" name="parada" id="card-madri2" data-search="petit palace arenal madri · fim">
       <summary class="card-head">
         <span class="stub"><span class="leg">Parada</span><span class="num">7</span></span>
@@ -1345,8 +1417,8 @@
       <div class="leg-date">04 nov</div>
       <div class="leg-title">Sevilha → Lisboa</div>
       <div class="leg-time">16:00 → 16:05</div>
-      <div class="leg-sub">1h05 de voo real · Lisboa = Espanha −1h</div>
-      <span class="leg-flag">⚠️ 0 bagagem despachada — comprar franquia</span>
+      <div class="leg-sub">TP1105 · 1h05 de voo real · Lisboa = Espanha −1h</div>
+      <span class="leg-flag">✅ 1 mala despachada · ref. ZPBOQL</span>
       <span class="leg-flag">Manhã + almoço livres em Triana</span>
     <a class="jump leg-jump" href="#day-d0411">ver o dia no roteiro →</a></div>
   </div><div class="leg-card" data-search="voo lisboa madrid lis mad tap bagagem">
@@ -1355,8 +1427,8 @@
       <div class="leg-date">07 nov</div>
       <div class="leg-title">Lisboa → Madri</div>
       <div class="leg-time">09:00 → 11:20</div>
-      <div class="leg-sub">Tarde de compras em Madri</div>
-      <span class="leg-flag">⚠️ 0 bagagem despachada — comprar franquia</span>
+      <div class="leg-sub">TP1012 · tarde de compras em Madri</div>
+      <span class="leg-flag">✅ 1 mala despachada · ref. YZ88SG</span>
     <a class="jump leg-jump" href="#day-d0711">ver o dia no roteiro →</a></div>
   </div><div class="leg-card" data-search="voo madrid fortaleza mad for retorno tax-free">
     <div class="leg-glyph g-plane">✈</div>
@@ -1381,34 +1453,33 @@
   <div class="tick" data-search="park güell ingresso área monumental barcelona"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Park Güell — área monumental</span><span class="tick-s"><span class="tick-when">30/10 · 14:00</span> — horário marcado, tolerância curta. Janela de inverno fecha ~17h30.</span></span></div>
   <div class="tick" data-search="flamenco sevilha tablao casa del flamenco los gallos reservar feriado"><span class="st pend">reservar</span><span class="tick-b"><span class="tick-t">Flamenco em Santa Cruz</span><span class="tick-s"><span class="tick-when">01/11 · ~21:30</span> — Casa del Flamenco ou Los Gallos. Feriado: lota. É a única noite de flamenco da viagem.</span></span></div>
   <div class="tick" data-search="barceloneta almoço restaurante orla paella sábado reservar"><span class="st pend">reservar</span><span class="tick-b"><span class="tick-t">Almoço na Barceloneta</span><span class="tick-s"><span class="tick-when">31/10 · 13:00</span> — sábado na orla. Casa de arroz/frutos do mar no Passeig Joan de Borbó ou na praia.</span></span></div>
-  <div class="tick" data-search="bernabéu tour estádio ingresso real madrid"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Tour do Santiago Bernabéu</span><span class="tick-s"><span class="tick-when">28/10 · 14:30</span> — realmadrid.com. Horário varia conforme eventos: confirmar antes.</span></span></div>
+  <div class="tick" data-search="bernabéu tour estádio ingresso real madrid"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Tour do Santiago Bernabéu</span><span class="tick-s"><span class="tick-when">28/10 · ~16:00</span> — realmadrid.com, ~1 mês antes. Horário varia conforme eventos; hotel antes do tour, bairros depois.</span></span></div>
 
   <h2 class="section-label">🟡 Comprar — sem urgência, mas não esquecer</h2>
   <div class="tick" data-search="museu do prado madrid ingresso"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Museu do Prado</span><span class="tick-s"><span class="tick-when">27/10 · 10:00</span> — museodelprado.es. Abre às 10h, não às 9h.</span></span></div>
   <div class="tick" data-search="palácio real madrid ingresso patrimonio nacional"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Palácio Real de Madrid</span><span class="tick-s"><span class="tick-when">27/10 · 15:00</span> — patrimonionacional.es · ~€14. Inverno 10:00–18:00.</span></span></div>
+  <div class="tick" data-search="templo de debod reserva gratuita madrid entardecer"><span class="st pend">reservar</span><span class="tick-b"><span class="tick-t">Templo de Debod — interior (grátis)</span><span class="tick-s"><span class="tick-when">27/10 · ~18:00</span> — madrid.es/debodreservas. Reserva gratuita, capacidade limitada, pontualidade exigida. Fecha às segundas.</span></span></div>
   <div class="tick" data-search="reina sofia guernica ingresso madrid"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Reina Sofía (Guernica)</span><span class="tick-s"><span class="tick-when">28/10 · 10:00</span> — reservasmuseoreinasofia.es. Fecha às terças; 28 é quarta, ok.</span></span></div>
-  <div class="tick" data-search="catedral de sevilha giralda ingresso"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Catedral de Sevilha + Giralda</span><span class="tick-s"><span class="tick-when">03/11 · 15:00</span> — catedraldesevilla.es. Inverno seg–sáb 11:00–18:00, último acesso 17:00. <b>Ver decisão ⓪ antes de comprar.</b></span></span></div>
-  <div class="tick" data-search="mosteiro dos jerónimos belém lisboa ingresso"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Mosteiro dos Jerónimos</span><span class="tick-s"><span class="tick-when">05 ou 06/11</span> — depende da decisão de Lisboa (cenário A ou B).</span></span></div>
+  <div class="tick" data-search="catedral de sevilha giralda ingresso"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Catedral de Sevilha + Giralda</span><span class="tick-s"><span class="tick-when">03/11 · 15:00</span> — catedraldesevilla.es. Inverno seg–sáb 11:00–18:00, último acesso 17:00. ✅ Data decidida: pode comprar.</span></span></div>
+  <div class="tick" data-search="mosteiro dos jerónimos belém lisboa ingresso"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Mosteiro dos Jerónimos</span><span class="tick-s"><span class="tick-when">06/11 · 09:30</span> — decisão tomada: Belém tem o dia inteiro.</span></span></div>
+  <div class="tick" data-search="castelo de são jorge lisboa ingresso âncora"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Castelo de São Jorge</span><span class="tick-s"><span class="tick-when">05/11 · 09:30</span> — promovido a obrigatório pelo Cenário A. Comprar antecipado e ir cedo.</span></span></div>
+  <div class="tick" data-search="torre de belém por dentro ingresso"><span class="st pend">comprar</span><span class="tick-b"><span class="tick-t">Torre de Belém — por dentro</span><span class="tick-s"><span class="tick-when">06/11 · 12:30</span> — agora cabe. Ingresso antecipado poupa a fila.</span></span></div>
   <div class="tick" data-search="fado alfama casa de fado espetáculo sem jantar lisboa"><span class="st pend">reservar</span><span class="tick-b"><span class="tick-t">Fado em Alfama — só espetáculo</span><span class="tick-s"><span class="tick-when">05/11 · ~21:00</span> — sem jantar. Reservar direto com a casa.</span></span></div>
   <div class="tick" data-search="sobrino de botín madrid restaurante reservar"><span class="st pend">reservar</span><span class="tick-b"><span class="tick-t">Sobrino de Botín</span><span class="tick-s"><span class="tick-when">07/11 · 13:30</span> — almoço de despedida. O restaurante mais antigo do mundo: reservar.</span></span></div>
 
   <h2 class="section-label">🔴 Travado por decisão</h2>
   <div class="tick" data-search="casa batlló la pedrera decisão ingresso barcelona"><span class="st dec">decidir</span><span class="tick-b"><span class="tick-t">Casa Batlló <i>ou</i> La Pedrera</span><span class="tick-s"><span class="tick-when">29/10 · 16:30</span> — só uma. Batlló mais imersiva; La Pedrera com o terraço icônico. Ver decisão ① no Checklist.</span></span></div>
-  <div class="tick" data-search="palácio da pena sintra ingresso esgota decisão"><span class="st dec">decidir</span><span class="tick-b"><span class="tick-t">Palácio da Pena</span><span class="tick-s"><span class="tick-when">06/11 · 09:30</span> — parquesdesintra.pt. <b>Só existe no Cenário B.</b> Esgota: se a resposta for Sintra, comprar até meados de setembro.</span></span></div>
 
   <h2 class="section-label">⚪ Opcionais — nunca compromisso fixo</h2>
-  <div class="tick" data-search="castelo de são jorge lisboa opcional"><span class="st opt">opcional</span><span class="tick-b"><span class="tick-t">Castelo de São Jorge</span><span class="tick-s"><span class="tick-when">05/11</span> — vira obrigatório no Cenário A; é o primeiro a cair no Cenário B.</span></span></div>
-  <div class="tick" data-search="torre de belém por dentro opcional"><span class="st opt">opcional</span><span class="tick-b"><span class="tick-t">Torre de Belém por dentro</span><span class="tick-s">A fila consome tempo. Só cabe no Cenário A.</span></span></div>
-  <div class="tick" data-search="quinta da regaleira palácio nacional de sintra terceiro monumento opcional"><span class="st opt">opcional</span><span class="tick-b"><span class="tick-t">3º monumento de Sintra</span><span class="tick-s">Palácio Nacional ou Quinta da Regaleira — decidir no dia, por clima e energia.</span></span></div>
   <div class="tick" data-search="las setas archivo de indias torre del oro maestranza dueñas opcional sevilha"><span class="st opt">opcional</span><span class="tick-b"><span class="tick-t">Las Setas · Archivo de Indias · Torre del Oro</span><span class="tick-s">Sevilha — só se abrir janela inesperada. Maestranza por dentro e Casa de las Dueñas: cortados.</span></span></div>
-  <div class="tick" data-search="parque das nações oceanário plano de chuva lisboa"><span class="st opt">plano C</span><span class="tick-b"><span class="tick-t">Parque das Nações + Oceanário</span><span class="tick-s">Lisboa — reserva para chuva persistente no dia 06.</span></span></div>
+  <div class="tick" data-search="parque das nações oceanário plano de chuva lisboa"><span class="st opt">plano C</span><span class="tick-b"><span class="tick-t">Parque das Nações + Oceanário</span><span class="tick-s">Lisboa — reserva para chuva persistente. Belém também tem plano interno próprio (Jerónimos, Coches, MAAT).</span></span></div>
   <div class="apurado" data-search="apurado ingressos status quantos faltam comprar">
     <div class="apt">Apurado — ingressos e reservas</div>
     <div class="aprow"><span class="apk">🟢 Comprado</span><span class="apv">1</span></div>
-    <div class="aprow"><span class="apk">🟡 A comprar ou reservar</span><span class="apv">13</span></div>
-    <div class="aprow"><span class="apk">🔴 Travado por decisão</span><span class="apv">2</span></div>
-    <div class="aprow"><span class="apk">⚪ Opcional</span><span class="apv">5</span></div>
-    <div class="aprow tot"><span class="apk">Catalogados</span><span class="apv">21</span></div>
+    <div class="aprow"><span class="apk">🟡 A comprar ou reservar</span><span class="apv">16</span></div>
+    <div class="aprow"><span class="apk">🔴 Travado por decisão</span><span class="apv">1</span></div>
+    <div class="aprow"><span class="apk">⚪ Opcional</span><span class="apv">2</span></div>
+    <div class="aprow tot"><span class="apk">Catalogados</span><span class="apv">20</span></div>
     <div class="apnote">Sem valores: fora a Alhambra, nada foi comprado ainda, e não vou estimar preços de 2026 por conta própria. Conforme forem comprando, me passem os valores que eu preencho — aí este apurado fecha com o de hospedagem e dá o custo real da viagem.</div>
   </div>
   <div role="status" class="noresult" id="noresult-ingressos">Nada encontrado. Tente outro termo.</div>
@@ -1416,12 +1487,12 @@
 
 <section class="panel" id="alertas" data-print-title="Alertas">
   <h2 class="section-label">🔴 Resolver antes de embarcar</h2>
-  <div class="alertbox" data-d="2026-11-04" data-search="bagagem despachada tap 0pc mala de mão franquia svq lis mad"><span class="ah">Voos TAP sem bagagem despachada<span class="aw">04 e 07/11</span></span>Os bilhetes de <b>04/11 (SVQ→LIS)</b> e <b>07/11 (LIS→MAD)</b> foram emitidos com <b>0PC</b> — só mala de mão de 10 kg (55×40×25). Para 14 dias, quase certamente é preciso comprar franquia. Antecipado pelo site da TAP sai muito mais barato que no balcão. <i>Os voos BCN→SVQ (Iberia/Vueling) e os intercontinentais têm mala incluída — a lacuna é só nos dois trechos TAP.</i></div>
   <div class="alertbox" data-d="2026-10-29" data-search="hotel center gran via barcelona recepção 9h 13h self check-in códigos e-mail"><span class="ah">Barcelona: recepção só das 09h às 13h<span class="aw">29/10</span></span>O Center Gran Via não tem recepção 24h. O AVE chega 12:06 — dá tempo, mas não dependam disso. Enviar e-mail antes informando o horário previsto e <b>salvar os códigos de self check-in offline</b>. Se o trem atrasar 1h, sem os códigos vocês ficam na rua com as malas.</div>
   <div class="alertbox" data-d="2026-11-02" data-search="cartão de crédito internacional caução budget banco tradicional cnh"><span class="ah">Caução do carro: cartão de banco tradicional<span class="aw">02/11</span></span>A Budget exige <b>CNH física + passaporte + cartão de crédito internacional no nome do Augusto, de banco tradicional</b>. Cartões pré-pagos ou de banco digital não são aceitos para o bloqueio da caução — sem isso, não há carro, e sem carro não há Alhambra.</div>
   <div class="alertbox" data-d="2026-10-31" data-search="flamenco barceloneta reservas antecipadas feriado sábado"><span class="ah">Duas reservas que não podem esperar<span class="aw">01 e 31/10</span></span><b>Flamenco em 01/11:</b> é feriado nacional, os tablaos lotam, e é a única noite de flamenco da viagem. <b>Almoço na Barceloneta em 31/10:</b> sábado na orla, sem reserva a fila é longa.</div>
 
   <h2 class="section-label">🟠 Atenção no dia</h2>
+  <div class="alertbox mid" data-d="2026-11-04" data-search="bagagem despachada tap comprada franquia svq lis mad zpboql yz88sg uma mala"><span class="ah">Bagagem TAP: resolvida — 1 mala por voo<span class="aw">04 e 07/11</span></span>✅ Franquia comprada nos dois trechos: <b>04/11 SVQ→LIS</b> (ref. ZPBOQL) e <b>07/11 LIS→MAD</b> (ref. YZ88SG) — R$ 238,41 cada. <b>É 1 mala despachada por voo, no nome do Augusto</b>, mais as duas malas de mão. Arrumar contando com isso: uma mala grande para os dois.</div>
   <div class="alertbox mid" data-d="2026-11-02" data-search="alhambra 13:30 palácios nazaríes horário fixo pontualidade"><span class="ah">Alhambra: 13:30 é 13:30<span class="aw">02/11</span></span>O horário dos Palácios Nazaríes não tem tolerância — atraso é entrada negada, sem reembolso. Chegar ao complexo com <b>45 min de folga</b>. É o único ingresso já pago e insubstituível da viagem.</div>
   <div class="alertbox mid" data-d="2026-11-02" data-search="granada zbe zona de baixas emissões placa multa câmeras matrícula"><span class="ah">Granada tem ZBE com câmeras<span class="aw">02/11</span></span>O centro histórico é zona de tráfego restrito. Enviar a placa ao Monjas del Carmen assim que retirar o carro — o e-mail já está pronto na aba E-mails. Sem o registro, é multa automática que chega meses depois.</div>
   <div class="alertbox mid" data-d="2026-11-03" data-search="devolução carro budget santa justa 12:30 margem estrada"><span class="ah">Devolução do carro: até 12:30<span class="aw">03/11</span></span>Prazo do voucher, em Santa Justa. Sair de Granada até ~07:00 e devolver por volta das 09:45 protege o dia monumental de Sevilha e dá margem para fila e inspeção.</div>
@@ -1488,6 +1559,12 @@
       <span class="ck-body">
         <span class="ck-title">✈️ Madrid → Fortaleza</span>
         <span class="ck-sub">08/11 12:05 → 16:55</span>
+      </span>
+    </div><div class="ck done static">
+      <span class="box">✓</span>
+      <span class="ck-body">
+        <span class="ck-title">🧳 Bagagem despachada nos voos TAP</span>
+        <span class="ck-sub">1 mala em cada trecho · 04/11 ref. ZPBOQL · 07/11 ref. YZ88SG · R$ 238,41 cada</span>
       </span>
     </div><div class="ck done static">
       <span class="box">✓</span>
@@ -1563,8 +1640,8 @@
       <input type="checkbox" class="ck-input" id="ckin-tik-4" data-i="tik-4">
       <span class="box">✓</span>
       <span class="ck-body">
-        <span class="ck-title"><span class="pri md">IMPORTANTE</span>Palácio da Pena</span>
-        <span class="ck-sub">06/11 ~9h30 · parquesdesintra.pt — esgota com frequência</span>
+        <span class="ck-title"><span class="pri md">IMPORTANTE</span>Castelo de São Jorge</span>
+        <span class="ck-sub">05/11 ~9h30 · virou âncora do dia com o Cenário A — comprar antecipado e ir cedo</span>
       </span>
     </label><label class="ck" for="ckin-tik-5">
       <input type="checkbox" class="ck-input" id="ckin-tik-5" data-i="tik-5">
@@ -1601,26 +1678,19 @@
         <span class="ck-title"><span class="pri md">IMPORTANTE</span>Fado em Alfama (só espetáculo/bebida)</span>
         <span class="ck-sub">Noite de 05/11 · sem jantar — comer antes/depois em outro lugar · reservar direto com a casa</span>
       </span>
-    </label><h2 class="section-label">🤔 Decisões em aberto</h2><label class="ck" for="ckin-dec-20">
-      <input type="checkbox" class="ck-input" id="ckin-dec-20" data-i="dec-20">
+    </label><label class="ck" for="ckin-tik-10">
+      <input type="checkbox" class="ck-input" id="ckin-tik-10" data-i="tik-10">
       <span class="box">✓</span>
       <span class="ck-body">
-        <span class="ck-title"><span class="pri hi">A MAIOR</span>⓪ Lisboa completa OU bate-volta? (05–06/11)</span>
-        <span class="ck-sub">O bate-volta ocupa o espaço que seria de Belém — não é adicional. Cenário A: Castelo/Alfama com calma no 05 + Belém o dia 06 inteiro. Cenário B: Belém comprimido no 05 + Sintra (ou Cascais) no 06. Prazo: se for Sintra, a Pena esgota — comprar até meados de setembro. Ver o card do dia 06.</span>
+        <span class="ck-title"><span class="pri md">IMPORTANTE</span>Templo de Debod — reserva gratuita do interior</span>
+        <span class="ck-sub">27/10 ~18:00 · madrid.es/debodreservas · grátis, capacidade limitada · fecha às segundas</span>
       </span>
-    </label><label class="ck" for="ckin-dec-21">
-      <input type="checkbox" class="ck-input" id="ckin-dec-21" data-i="dec-21">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri dec">DECIDIR</span>⓪b Catedral/Giralda: 03/11 à tarde ou 04/11 de manhã?</span>
-        <span class="ck-sub">Manter no 03 = dia com estrada + 3 horários rígidos. Mover para 04 (abre 11:00) = dia aliviado, mas custa metade da manhã de Triana. Decidir antes de comprar o ingresso.</span>
-      </span>
-    </label><label class="ck" for="ckin-dec-0">
+    </label><h2 class="section-label">🤔 Decisões em aberto</h2><label class="ck" for="ckin-dec-0">
       <input type="checkbox" class="ck-input" id="ckin-dec-0" data-i="dec-0">
       <span class="box">✓</span>
       <span class="ck-body">
-        <span class="ck-title"><span class="pri dec">DECIDIR</span>① Casa Batlló ou La Pedrera? (30/10)</span>
-        <span class="ck-sub">Só uma das duas por dentro. Batlló é mais imersiva/colorida; La Pedrera tem o terraço icônico e visita noturna.</span>
+        <span class="ck-title"><span class="pri dec">DECIDIR</span>① Casa Batlló ou La Pedrera? (29/10)</span>
+        <span class="ck-sub">Só uma por dentro — comparar preço e ver um vídeo de cada antes. A que não entrarem fica na caminhada do Passeig de Gràcia, por fora. Batlló: mais imersiva e cenográfica, mais cara. La Pedrera: terraço das chaminés e sótão em arcos.</span>
       </span>
     </label><label class="ck" for="ckin-dec-1">
       <input type="checkbox" class="ck-input" id="ckin-dec-1" data-i="dec-1">
@@ -1629,27 +1699,6 @@
         <span class="ck-title"><span class="pri dec">DECIDIR</span>② Sagrada Família com ou sem torres? (30/10)</span>
         <span class="ck-sub">Torre da Natividade ou da Paixão — vista vs. relevo. Sem torres poupa tempo e é mais barato.</span>
       </span>
-    </label><label class="ck" for="ckin-dec-2">
-      <input type="checkbox" class="ck-input" id="ckin-dec-2" data-i="dec-2">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri dec">DECIDIR</span>③ Se for bate-volta: Sintra ou Cascais? (06/11)</span>
-        <span class="ck-sub">Subordinada à decisão ⓪ — só existe se a resposta lá for "bate-volta". Sintra: patrimônio único, intenso, ingresso marcado que esgota. Cascais: costa, relaxante, sem ingresso, decidível na véspera pelo clima.</span>
-      </span>
-    </label><label class="ck" for="ckin-dec-3">
-      <input type="checkbox" class="ck-input" id="ckin-dec-3" data-i="dec-3">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri dec">DECIDIR</span>④ Castelo de São Jorge — encaixar em 05/11?</span>
-        <span class="ck-sub">Subordinada à decisão ⓪. No Cenário A ele é o âncora da manhã do dia 05. No Cenário B, Belém + Alfama já é dia cheio: entra à tarde, ou cai.</span>
-      </span>
-    </label><label class="ck" for="ckin-dec-4">
-      <input type="checkbox" class="ck-input" id="ckin-dec-4" data-i="dec-4">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri dec">DECIDIR</span>⑤ Sintra: qual 3º monumento? (se der e se for Sintra)</span>
-        <span class="ck-sub">Palácio Nacional de Sintra ou Quinta da Regaleira — decidir só no dia, conforme energia/clima.</span>
-      </span>
     </label><label class="ck" for="ckin-dec-5">
       <input type="checkbox" class="ck-input" id="ckin-dec-5" data-i="dec-5">
       <span class="box">✓</span>
@@ -1657,14 +1706,7 @@
         <span class="ck-title"><span class="pri dec">DECIDIR</span>⑥ Archivo General de Indias — encaixar? (opcional)</span>
         <span class="ck-sub">Entrada livre, ~1h30, entre Alcázar e Catedral. Só como opcional no dia 03, nunca compromisso fixo.</span>
       </span>
-    </label><h2 class="section-label">🧳 Logística</h2><label class="ck" for="ckin-log-20">
-      <input type="checkbox" class="ck-input" id="ckin-log-20" data-i="log-20">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Comprar franquia de bagagem nos voos TAP</span>
-        <span class="ck-sub">04/11 SVQ→LIS e 07/11 LIS→MAD estão com 0PC — só mala de mão de 10 kg. Comprar antecipado pelo site da TAP sai bem mais barato que no balcão.</span>
-      </span>
-    </label><label class="ck" for="ckin-log-21">
+    </label><h2 class="section-label">🧳 Logística</h2><label class="ck" for="ckin-log-21">
       <input type="checkbox" class="ck-input" id="ckin-log-21" data-i="log-21">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -1861,7 +1903,7 @@ Un saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre Roteiro, Hotéis, Trajetos, Reservas e Alertas.<br>
-  v6.8 · eliminada a faixa-fantasma: o estado oculto do aviso vazava ~20px na tela · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
+  v7.0 · bagagens compradas e Catedral fixada no dia 3 — sem bloqueadores · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
   <span style="opacity:.7">Funciona mesmo sem JavaScript — só a busca e a cópia de texto dependem dele.</span>
 </div>
 
@@ -1870,7 +1912,7 @@ Un saludo,
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v6.8";
+var APP_VERSION="v7.1";
 /* Camada de progressive enhancement — TODO o conteúdo acima já funciona sem isto. */
 (function(){
   var q=document.getElementById("q"), clearBtn=document.getElementById("clear");
