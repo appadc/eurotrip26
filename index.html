@@ -40,13 +40,13 @@
     background:var(--paper); color:var(--ink);
     font-size:15px; line-height:1.45;
     /* espaço para a barra fixa da base, mais a safe-area do indicador de home */
-    padding-bottom:calc(env(safe-area-inset-bottom) + 68px);
+    padding-bottom:calc(env(safe-area-inset-bottom) + 78px);
     -webkit-font-smoothing:antialiased;
   }
   .serif{font-family:Georgia,"Times New Roman",serif}
 
   #safetop{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); background:var(--azulejo-deep); z-index:30; pointer-events:none; box-shadow:0 2px 8px rgba(14,44,70,.16)}
-  header{background:var(--azulejo-deep); color:var(--on-nav); padding:calc(env(safe-area-inset-top) + 16px) 18px 15px}
+  header{background:var(--azulejo-deep); color:var(--on-nav); padding:calc(env(safe-area-inset-top) + 34px) 18px 15px}
   .kicker{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--saffron); font-weight:600}
   header h1{font-size:26px; line-height:1.08; margin:5px 0 3px; letter-spacing:-.4px; font-weight:600}
   .trip-meta{font-size:12.5px; color:#A9BCCE}
@@ -69,13 +69,16 @@
 
   /* ---------- CSS-ONLY TABS ---------- */
   .tabradio{position:absolute; opacity:0; width:1px; height:1px; pointer-events:none}
-  .tabs{position:fixed; left:0; right:0; bottom:0; z-index:40; display:flex; background:var(--azulejo-deep);
-        padding:5px 6px calc(env(safe-area-inset-bottom) + 5px); gap:2px;
-        box-shadow:0 -6px 18px rgba(14,44,70,.22);
+  .tabs{position:fixed; left:14px; right:14px; bottom:calc(env(safe-area-inset-bottom) + 9px); z-index:40;
+        display:flex; gap:3px; padding:5px;
+        background:rgba(255,255,255,.78);
+        -webkit-backdrop-filter:blur(24px) saturate(180%); backdrop-filter:blur(24px) saturate(180%);
+        border:1px solid rgba(14,44,70,.09); border-radius:25px;
+        box-shadow:0 8px 28px rgba(14,44,70,.20);
         transition:transform .18s ease}
   /* teclado aberto: a barra sai do caminho para não cobrir o campo de busca */
-  body.kbd .tabs{transform:translateY(calc(100% + env(safe-area-inset-bottom)))}
-  .tab{flex:1 1 0; min-width:0; text-align:center; padding:6px 1px; border-radius:10px; color:#9FB4C7; font-size:9.4px; font-weight:600; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; min-height:44px; white-space:nowrap; line-height:1.1; user-select:none; position:relative; overflow:hidden; text-overflow:ellipsis}
+  body.kbd .tabs{transform:translateY(calc(100% + env(safe-area-inset-bottom) + 20px))}
+  .tab{flex:1 1 0; min-width:0; text-align:center; padding:7px 1px; border-radius:20px; color:#5C6B7A; font-size:9.4px; font-weight:600; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; min-height:44px; white-space:nowrap; line-height:1.1; user-select:none; position:relative; overflow:hidden; text-overflow:ellipsis}
   .tab .ic{font-size:15px}
   .tab .dotn{position:absolute; top:2px; right:calc(50% - 17px); background:var(--terra); color:#fff; font-size:8.5px; font-weight:700; line-height:1; border-radius:8px; padding:2px 4px; min-width:13px}
   @media(max-width:359px){ .tab{font-size:8.4px; padding:6px 0} .tab .ic{font-size:14px} }
@@ -85,8 +88,7 @@
   #tabsel-trajetos:checked ~ .tabs label[for="tabsel-trajetos"],
   #tabsel-ingressos:checked ~ .tabs label[for="tabsel-ingressos"],
   #tabsel-alertas:checked ~ .tabs label[for="tabsel-alertas"],
-  #tabsel-check:checked ~ .tabs label[for="tabsel-check"],
-  #tabsel-emails:checked ~ .tabs label[for="tabsel-emails"]{background:var(--paper); color:var(--azulejo-deep)}
+  #tabsel-alertas:checked ~ .tabs label[for="tabsel-alertas"]{background:var(--azulejo-deep); color:#fff}
 
   .searchwrap{padding:14px 16px 4px}
   /* v7.2: a busca agora cobre e aparece também em Checklist e E-mails */
@@ -102,8 +104,6 @@
   #tabsel-trajetos:checked ~ #trajetos{display:block}
   #tabsel-ingressos:checked ~ #ingressos{display:block}
   #tabsel-alertas:checked ~ #alertas{display:block}
-  #tabsel-check:checked ~ #check{display:block}
-  #tabsel-emails:checked ~ #emails{display:block}
   .noresult{text-align:center; color:var(--slate); padding:40px 20px; font-size:14px; display:none}
 
   .dayribbon{display:flex; gap:6px; overflow-x:auto; padding:2px 2px 6px; scrollbar-width:none; -webkit-overflow-scrolling:touch}
@@ -293,8 +293,14 @@
   .apurado .apt{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--saffron); font-weight:700; margin-bottom:10px}
   .aprow{display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-size:13px; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.1)}
   .aprow:last-child{border-bottom:none}
-  .aprow .apk{color:#B9CBDA}
-  .aprow .apv{font-family:Georgia,serif; font-weight:700; white-space:nowrap}
+  .aprow .apk{color:#B9CBDA; min-width:0}
+  /* .apurado nasceu para números curtos (o apurado de ingressos). Com texto longo,
+     o valor com white-space:nowrap invadia a coluna da esquerda. A variante .kv
+     empilha chave e valor, que é o que cabe num celular. */
+  .apurado.kv .aprow{display:block; padding:8px 0}
+  .apurado.kv .apk{display:block; font-size:12px; line-height:1.35}
+  .apurado.kv .apv{display:block; white-space:normal; margin-top:3px; font-size:13.5px; line-height:1.4; overflow-wrap:anywhere}
+  .aprow .apv{font-family:Georgia,serif; font-weight:700; white-space:nowrap; min-width:0; overflow-wrap:anywhere}
   .aprow.tot{font-size:15px; padding-top:10px; margin-top:4px; border-top:1.5px solid var(--saffron); border-bottom:none}
   .aprow.tot .apk{color:#fff; font-weight:600}
   .aprow.tot .apv{color:var(--saffron)}
@@ -391,8 +397,9 @@
     #tabsel-trajetos:checked ~ .tabs label[for="tabsel-trajetos"],
     #tabsel-ingressos:checked ~ .tabs label[for="tabsel-ingressos"],
     #tabsel-alertas:checked ~ .tabs label[for="tabsel-alertas"],
-    #tabsel-check:checked ~ .tabs label[for="tabsel-check"],
-    #tabsel-emails:checked ~ .tabs label[for="tabsel-emails"]{background:#E7EDF3; color:#0E2C46}
+    #tabsel-alertas:checked ~ .tabs label[for="tabsel-alertas"]{background:#E7EDF3; color:#0E2C46}
+    .tabs{background:rgba(24,34,46,.82); border-color:rgba(255,255,255,.10)}
+    .tab{color:#9FB4C7}
     /* V8 — hierarquia de execução no modo escuro */
     .seq{background:#233140; color:#A9BCCE}
     .startat{background:#14293E; color:#9EC5E8}
@@ -452,8 +459,6 @@
 <input type="radio" name="tabsel" id="tabsel-trajetos" class="tabradio" aria-label="Aba Trajetos">
 <input type="radio" name="tabsel" id="tabsel-ingressos" class="tabradio" aria-label="Aba Ingressos">
 <input type="radio" name="tabsel" id="tabsel-alertas" class="tabradio" aria-label="Aba Alertas">
-<input type="radio" name="tabsel" id="tabsel-check" class="tabradio" aria-label="Aba Checklist">
-<input type="radio" name="tabsel" id="tabsel-emails" class="tabradio" aria-label="Aba E-mails">
 
 
 <div class="searchwrap">
@@ -1032,7 +1037,7 @@
           <div class="tttl">Saída da Alhambra</div>
           <div class="tnote">Depois de 3h+ de visita, não subir mais nada a pé.</div>
         </div>
-      </div><div class="twalk">🔴 <b>ATENÇÃO — este é o trecho mais frágil da mobilidade da viagem.</b> A C32 é a linha oficial Alhambra ↔ Albaicín, mas em 2026 <b>o corte da Carrera del Darro suprimiu o trecho do Albaicín</b>, e C31, C32 e C34 chegaram a ficar <b>sem serviço até a reabertura da rua</b>. As obras da calle Santiago também desviaram a C32 desde 27/04/2026.<br>✅ <b>Se a C32 estiver operando o Albaicín em novembro:</b> é ela, e continua sendo a melhor solução — sobe o outro morro por vocês.<br>🚕 <b>Se ainda estiver suprimida:</b> <b>táxi, e sem hesitar</b> — ~10 min da Alhambra ao Albaicín alto. Não é plano B de luxo: é o que mantém o pôr do sol das 18:16 em San Nicolás.<br>⚠️ <b>Conferir na Movilidad Granada na véspera</b> — está no Checklist. <b>Não subir a pé em nenhuma hipótese:</b> depois de 3h+ de Alhambra, San Nicolás fica no alto do OUTRO morro.</div><div class="tline">
+      </div><div class="twalk">🔴 <b>ATENÇÃO — este é o trecho mais frágil da mobilidade da viagem.</b> A C32 é a linha oficial Alhambra ↔ Albaicín, mas em 2026 <b>o corte da Carrera del Darro suprimiu o trecho do Albaicín</b>, e C31, C32 e C34 chegaram a ficar <b>sem serviço até a reabertura da rua</b>. As obras da calle Santiago também desviaram a C32 desde 27/04/2026.<br>✅ <b>Se a C32 estiver operando o Albaicín em novembro:</b> é ela, e continua sendo a melhor solução — sobe o outro morro por vocês.<br>🚕 <b>Se ainda estiver suprimida:</b> <b>táxi, e sem hesitar</b> — ~10 min da Alhambra ao Albaicín alto. Não é plano B de luxo: é o que mantém o pôr do sol das 18:16 em San Nicolás.<br>⚠️ <b>Conferir na Movilidad Granada na véspera</b> — está no checklist, dentro da aba Alertas. <b>Não subir a pé em nenhuma hipótese:</b> depois de 3h+ de Alhambra, San Nicolás fica no alto do OUTRO morro.</div><div class="tline">
         <div class="ttime">17:00</div>
         <div class="tbody">
           <div class="tttl">Albaicín alto — ruelas mouras</div>
@@ -1612,6 +1617,48 @@
     <div class="aprow tot"><span class="apk">7 hospedagens · 13 noites</span><span class="apv">≈ R$ 9.179 + € 23</span></div>
     <div class="apnote">Valores conferidos recibo a recibo. Os números antigos dos cards misturavam preço com e sem impostos — foram corrigidos. A conversão de Barcelona (€ 410,70 ≈ R$ 2.421) é a estimativa do próprio voucher; o débito real sai pelo câmbio do dia. Garagem de Granada paga no balcão.</div>
   </div>
+  <h2 class="section-label">✉️ E-mail pronto para enviar</h2>
+  <div class="mail">
+    <div class="mail-top">
+      <span class="mail-when now">Enviar agora</span>
+      <div class="mail-subj">Confirmar reabertura — Ribera de Triana</div>
+      <div class="mail-to">Para: <b>reservas@hotelriberadetriana.com (confirme no comprovante)</b></div>
+    </div>
+    <div class="mail-body">Estimado equipo del Hotel Ribera de Triana,
+
+Tenemos una reserva para 1 noche, del 3 al 4 de noviembre de 2026 (2 adultos), y hemos visto que el hotel aparecía como reapertura tras reforma.
+
+¿Podrían confirmarnos que el hotel estará plenamente operativo en esa fecha, con recepción, desayuno y consigna de equipaje?
+
+Detalles de nuestra estancia:
+· Llegada el 03/11 sobre el mediodía, desde Granada en coche.
+· Salida el 04/11: nuestro vuelo a Lisboa es a las 16:00, por lo que agradeceríamos dejar el equipaje en consigna tras el check-out para aprovechar la mañana en Triana.
+· Si es posible, preferiríamos habitación con vistas al canal (más tranquila).
+
+Quedamos a la espera de su confirmación. Muchas gracias.
+
+Un cordial saludo,
+<span class="fill">[su nombre]</span></div>
+    <div class="mail-actions">
+      <button class="copybtn" data-copy="Estimado equipo del Hotel Ribera de Triana,
+
+Tenemos una reserva para 1 noche, del 3 al 4 de noviembre de 2026 (2 adultos), y hemos visto que el hotel aparecía como reapertura tras reforma.
+
+¿Podrían confirmarnos que el hotel estará plenamente operativo en esa fecha, con recepción, desayuno y consigna de equipaje?
+
+Detalles de nuestra estancia:
+· Llegada el 03/11 sobre el mediodía, desde Granada en coche.
+· Salida el 04/11: nuestro vuelo a Lisboa es a las 16:00, por lo que agradeceríamos dejar el equipaje en consigna tras el check-out para aprovechar la mañana en Triana.
+· Si es posible, preferiríamos habitación con vistas al canal (más tranquila).
+
+Quedamos a la espera de su confirmación. Muchas gracias.
+
+Un cordial saludo,
+[su nombre]">📋 Copiar texto</button>
+      <button class="copybtn" data-copy="Confirmar reabertura — Ribera de Triana" class="copybtn btn-subj">Assunto</button>
+    </div>
+    <div class="mail-note"><b>Nota:</b> Se reservou pelo Hotéis.com, enviar pela mensagem da plataforma é mais garantido (fica registrado).</div>
+  </div>
   <div role="status" class="noresult" id="noresult-hoteis">Nada encontrado. Tente outro termo.</div>
 </section>
 
@@ -1774,7 +1821,7 @@
   🇵🇹 <b>Português de Portugal</b><br><i>Ela é intolerante à lactose. Este prato leva leite, natas, manteiga ou queijo?</i> <button class="copybtn" data-copy="Ela é intolerante à lactose. Este prato leva leite, natas, manteiga ou queijo? É uma intolerância, não uma preferência. Podem confirmar na cozinha, por favor?">📋 Copiar</button><br>
   Em Portugal, atenção ao <i>leite-creme</i>, à <i>manteiga</i> do pão de entrada (que vem sem pedir e é cobrada) e ao queijo ralado dos pratos de bacalhau.</div>
   <h2 class="section-label">🏨 A pausa diária</h2>
-  <div class="apurado" data-search="pausa hotel descanso banho troca de roupa regra diária segundo início do dia">
+  <div class="apurado kv" data-search="pausa hotel descanso banho troca de roupa regra diária segundo início do dia">
     <div class="apt">Regra fixa, não preferência</div>
     <div class="aprow"><span class="apk">🏨 <b>Todo dia turístico</b></span><span class="apv">45–90 min de pausa real no hotel</span></div>
     <div class="aprow"><span class="apk">🧳 <b>Não conta como pausa</b></span><span class="apv">deixar ou buscar malas, check-in corrido</span></div>
@@ -1784,7 +1831,7 @@
     <div class="apnote">O padrão é <b>manhã → atrações → HOTEL → noite</b>. A pausa entra sempre no ponto de <b>menor custo logístico</b> do dia — nunca destruindo uma rota boa, um pôr do sol ou uma entrada cronometrada. Não é só descanso físico: é <b>um segundo começo de dia</b>. Banho, roupa limpa, celular carregado e sair de novo com energia muda a qualidade das noites — que é onde estão o flamenco, o fado, as tapas e os jantares. Em <b>cinco dos seis dias corrigidos, a pausa preencheu tempo que já estava vazio</b>; só em 30/10 ela custou algo (tempo de rua em Gràcia), e a troca vale.</div>
   </div>
   <h2 class="section-label">🚶 Como nos deslocamos</h2>
-  <div class="apurado" data-search="mobilidade transporte a pé metrô ônibus táxi bolt regra deslocamento t-mobilitat t-familiar navegante zapping bilhete">
+  <div class="apurado kv" data-search="mobilidade transporte a pé metrô ônibus táxi bolt regra deslocamento t-mobilitat t-familiar navegante zapping bilhete">
     <div class="apt">A regra que decide todo trajeto do roteiro</div>
     <div class="aprow"><span class="apk">🚶 <b>A pé</b></span><span class="apv">quando o caminho é parte do passeio</span></div>
     <div class="aprow"><span class="apk">🚇 <b>Transporte público</b></span><span class="apv">quando poupa tempo, subida ou dinheiro</span></div>
@@ -1798,7 +1845,7 @@
     🎫 <b>Bilhetes.</b> <b>Barcelona:</b> T-mobilitat (cartão de papelão €1 ou o app) carregada com <b>T-familiar</b> — 8 viagens compartilháveis pelos dois, a partir de €11,05, recarregável. Não vale nas estações Aeroport T1/T2 da L9, e o Aerobús se paga à parte. A diferença para a T-casual é de €3–4 na viagem inteira: não vale otimizar, vale a flexibilidade de o saldo não ficar preso no cartão de uma pessoa. O <b>Funicular de Montjuïc está incluído</b> na mesma tarifa. <b>Não comprar o Hola Barcelona 72h por recomendação de internet:</b> ele dá viagens ilimitadas e cobre o metrô do aeroporto, mas vocês vão de Aerobús e caminham muito — fazer a conta em outubro (viagens reais × tarifa 2026) antes de decidir. <b>Lisboa:</b> 2 cartões Navegante Occasional + zapping (o cartão é individual, cada um precisa do seu); passe de 24h só num dia com 5+ deslocamentos. <b>Madri:</b> conferir se as estações que vamos usar aceitam cartão por aproximação; se não, Tarjeta Multi. Confirmar todas as tarifas perto da viagem.<br><br>🚧 <b>Há obras ativas nas três redes.</b> Madri: a estação Santiago Bernabéu está fechada e a L10 cortada entre Nuevos Ministerios e Cuzco até o fim de 2026 (ônibus S10 gratuito no lugar). Barcelona: La Rambla em obras até 2027; funicular de Montjuïc com parada anual de manutenção. Granada: C30 com itinerário alterado em agosto de 2026 e C32 com desvios pela Carrera del Darro. Lisboa: 15E com supressões frequentes. <b>Revalidar todas essas rotas na semana anterior à viagem</b> — número de linha é a informação que mais envelhece neste app.</div>
   </div>
   <h2 class="section-label">💶 Gratuidades — verificadas e deliberadamente não usadas</h2>
-  <div class="apurado" data-search="gratis gratuidade museu prado reina sofia palacio real catedral sevilha domingo feriado entrada livre latinoamericanos">
+  <div class="apurado kv" data-search="gratis gratuidade museu prado reina sofia palacio real catedral sevilha domingo feriado entrada livre latinoamericanos">
     <div class="apt">Duas foram incorporadas; duas continuam descartadas com motivo</div>
     <div class="aprow"><span class="apk">✅ 🏰 Palácio Real</span><span class="apv"><b>usada</b> — 27/10, 16:00, na bilheteria</span></div>
     <div class="aprow"><span class="apk">✅ 🖼️ Reina Sofía</span><span class="apv"><b>usada</b> — 28/10, 19:00</span></div>
@@ -1807,7 +1854,7 @@
     <div class="apnote"><b>Esta seção existe para não rediscutirmos o mesmo assunto três vezes.</b> As quatro gratuidades são reais e foram conferidas em fonte oficial; o que muda é se usá-las melhora ou piora o dia.<br><br>✅ <b>Palácio Real — incorporada.</b> Grátis para ibero-americanos seg–qui, 16:00–18:00 no inverno (out–mar); a janela correta é essa, não 17:00–19:00 como circula por aí. Só na bilheteria, por ordem de chegada, com passaporte original. O dia 27 foi reorganizado em volta disso: Almudena antes, fila às 15:30, e <b>hard stop às 17:20</b> para não comer o pôr do sol de Debod.<br>✅ <b>Reina Sofía — incorporada.</b> Grátis seg e qua–sáb 19:00–21:00, e 28/10 é quarta. O museu saiu da manhã e virou a noite, o que abriu a manhã livre do dia 28 e tirou pressão do dia inteiro. Último acesso 20:30, salas esvaziadas 20:45.<br>❌ <b>Prado — descartada.</b> As últimas duas horas são grátis, mas ele é a âncora da manhã de 27/10, quando está vazio. Trocar para o fim do dia desmontaria Palácio, Debod e a noite inteira.<br>❌ <b>Catedral de Sevilha — não se aplica a nós.</b> O site oficial diz "domingos, <b>exceto feriados</b>", e 01/11 é domingo <b>e</b> Todos os Santos. A visita monumental está em 03/11, paga, e assim fica.</div>
   </div>
   <h2 class="section-label">💡 Costumes locais — o que é verdade e o que não é</h2>
-  <div class="apurado" data-search="costumes horários refeições siesta paella arroz almoço jantar espanha portugal supermercado mercadona pingo doce">
+  <div class="apurado kv" data-search="costumes horários refeições siesta paella arroz almoço jantar espanha portugal supermercado mercadona pingo doce">
     <div class="apt">Três regras que circulam por aí e precisam de ajuste</div>
     <div class="aprow"><span class="apk">🕑 Refeições na Espanha</span><span class="apv">almoço ~14h · jantar 20h30+</span></div>
     <div class="aprow"><span class="apk">🕑 Refeições em Portugal</span><span class="apv">almoço 12h30–14h30 · jantar 19h30–21h30</span></div>
@@ -1826,10 +1873,7 @@
     <div class="aprow"><span class="apk">🇧🇷 Consulados — Madri, Barcelona, Lisboa</span><span class="apv">preencher</span></div>
     <div class="apnote">O 112 funciona sem chip, sem saldo e sem desbloquear o telefone, nos dois países. As três últimas linhas ficam em branco de propósito: são números que mudam e que eu não vou escrever de memória — anotem a partir do voucher da Budget, da apólice do seguro e do site do Itamaraty antes de embarcar, e salvem nos contatos do celular, não só aqui.</div>
   </div>
-  <div role="status" class="noresult" id="noresult-alertas">Nada encontrado. Tente outro termo.</div>
-</section>
-
-<section class="panel" id="check" data-print-title="Checklist">
+  <h2 class="section-label">✓ Checklist — o que falta fazer</h2>
   <h2 class="section-label">✅ Já garantido</h2><div class="ck done static">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -1932,26 +1976,30 @@
         <span class="ck-title">🏨 Petit Palace Arenal</span>
         <span class="ck-sub">07 → 08/11 · Madrid</span>
       </span>
-    </div><h2 class="section-label">🎟 Ingressos e reservas</h2><label class="ck" for="ckin-tik-0">
-      <input type="checkbox" class="ck-input" id="ckin-tik-0" data-i="tik-0">
+    </div><div class="ck done static">
       <span class="box">✓</span>
       <span class="ck-body">
-        <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Real Alcázar</span>
-        <span class="ck-sub">03/11 · 12:30 · alcazarsevilla.org — comprar já, os horários esgotam</span>
+        <span class="ck-title">⛪ Sagrada Família + Torre da Natividade</span>
+        <span class="ck-sub">30/10 · acesso 09:15 · torre 10:00 · loc. 105381469</span>
       </span>
-    </label><label class="ck" for="ckin-tik-1">
-      <input type="checkbox" class="ck-input" id="ckin-tik-1" data-i="tik-1">
+    </div><div class="ck done static">
       <span class="box">✓</span>
       <span class="ck-body">
-        <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Sagrada Família</span>
-        <span class="ck-sub">30/10 ~9h, com torres · sagradafamilia.org</span>
+        <span class="ck-title">🏰 Real Alcázar de Sevilha</span>
+        <span class="ck-sub">03/11 · 13:00 · Entrada General</span>
       </span>
-    </label><label class="ck" for="ckin-tik-2">
+    </div><div class="ck done static">
+      <span class="box">✓</span>
+      <span class="ck-body">
+        <span class="ck-title">🚗 Vaga e rota autorizada — Monjas del Carmen</span>
+        <span class="ck-sub">Granada · garagem reservada e itinerário de entrada na ZBE confirmado com o hotel</span>
+      </span>
+    </div><h2 class="section-label">🎟 Ingressos e reservas</h2><label class="ck" for="ckin-tik-2">
       <input type="checkbox" class="ck-input" id="ckin-tik-2" data-i="tik-2">
       <span class="box">✓</span>
       <span class="ck-body">
         <span class="ck-title"><span class="pri md">IMPORTANTE</span>Catedral de Sevilha + Giralda</span>
-        <span class="ck-sub">03/11 ~15h15 · inverno seg–sáb 11:00–18:00, último acesso 17:00 · catedraldesevilla.es</span>
+        <span class="ck-sub">03/11 · <b>comprar para 15:30</b> (o Alcázar comprado às 13:00 deixou 15:15 sem folga) · inverno seg–sáb 11:00–18:00, último acesso 17:00 · catedraldesevilla.es</span>
       </span>
     </label><label class="ck" for="ckin-tik-3">
       <input type="checkbox" class="ck-input" id="ckin-tik-3" data-i="tik-3">
@@ -1965,7 +2013,7 @@
       <span class="box">✓</span>
       <span class="ck-body">
         <span class="ck-title"><span class="pri md">IMPORTANTE</span>Castelo de São Jorge</span>
-        <span class="ck-sub">05/11 ~9h30 · virou âncora do dia com o Cenário A — comprar antecipado e ir cedo</span>
+        <span class="ck-sub">05/11 · <b>09:10</b> — o Castelo abre 09:00 no inverno, não 09:30. Comprar antecipado e entrar na abertura, antes dos grupos.</span>
       </span>
     </label><label class="ck" for="ckin-tik-5">
       <input type="checkbox" class="ck-input" id="ckin-tik-5" data-i="tik-5">
@@ -1979,7 +2027,7 @@
       <span class="box">✓</span>
       <span class="ck-body">
         <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Reina Sofía (Guernica)</span>
-        <span class="ck-sub">28/10 ~10h · prioridade confirmada · reservasmuseoreinasofia.es · fecha às terças (28 é qua, ok)</span>
+        <span class="ck-sub">28/10 · <b>19:00, entrada gratuita</b> (seg e qua–sáb) — dá para reservar a entrada grátis online em reservasmuseoreinasofia.es. Último acesso 20:30, salas esvaziadas 20:45.</span>
       </span>
     </label><label class="ck" for="ckin-tik-7">
       <input type="checkbox" class="ck-input" id="ckin-tik-7" data-i="tik-7">
@@ -2001,13 +2049,6 @@
       <span class="ck-body">
         <span class="ck-title"><span class="pri md">IMPORTANTE</span>Fado em Alfama (só espetáculo/bebida)</span>
         <span class="ck-sub">Noite de 05/11 · sem jantar — comer antes/depois em outro lugar · reservar direto com a casa</span>
-      </span>
-    </label><label class="ck" for="ckin-tik-10">
-      <input type="checkbox" class="ck-input" id="ckin-tik-10" data-i="tik-10">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri md">IMPORTANTE</span>Templo de Debod — reserva gratuita do interior</span>
-        <span class="ck-sub">27/10 ~18:00 · madrid.es/debodreservas · grátis, capacidade limitada · fecha às segundas</span>
       </span>
     </label><h2 class="section-label">🤔 Decisões em aberto</h2><label class="ck" for="ckin-dec-6">
       <input type="checkbox" class="ck-input" id="ckin-dec-6" data-i="dec-6">
@@ -2050,13 +2091,6 @@
       <span class="ck-body">
         <span class="ck-title"><span class="pri md">IMPORTANTE</span>Enviar pedido ao One Shot Aragó</span>
         <span class="ck-sub">Barcelona · cama de casal (a reserva veio com 2 solteiros) + guarda-volumes na chegada · texto pronto na aba Hotéis</span>
-      </span>
-    </label><label class="ck" for="ckin-log-3">
-      <input type="checkbox" class="ck-input" id="ckin-log-3" data-i="log-3">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri md">IMPORTANTE</span>Reservar vaga na garagem do Monjas</span>
-        <span class="ck-sub">Granada · BMW Série 3 ou similar — perguntar se a vaga e o acesso comportam (texto atualizado na aba Hotéis)</span>
       </span>
     </label><label class="ck" for="ckin-log-4">
       <input type="checkbox" class="ck-input" id="ckin-log-4" data-i="log-4">
@@ -2106,13 +2140,6 @@
       <span class="ck-body">
         <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Passaportes na mochila em 27/10</span>
         <span class="ck-sub">A gratuidade do Palácio Real exige documento original que comprove nacionalidade ibero-americana, e o Malaba exige documento físico na porta. Sem passaporte, não há isenção nem entrada. Decidido: <b>sem interior do Debod</b> — a tarde é do pôr do sol.</span>
-      </span>
-    </label><label class="ck" for="ckin-log-31">
-      <input type="checkbox" class="ck-input" id="ckin-log-31" data-i="log-31">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Rota autorizada de carro até o Monjas (ZBE de Granada)</span>
-        <span class="ck-sub">Ao retirar o carro em Sevilha: mandar a matrícula ao hotel, pedir o itinerário autorizado de entrada no centro e seguir essa rota — não o Google Maps. O centro tem câmeras e a multa chega meses depois no Brasil.</span>
       </span>
     </label><label class="ck" for="ckin-log-29">
       <input type="checkbox" class="ck-input" id="ckin-log-29" data-i="log-29">
@@ -2191,100 +2218,16 @@
         <span class="ck-title">Salvar todos os comprovantes offline</span>
         <span class="ck-sub">Reservas, voos, AVE, ingressos, este roteiro</span>
       </span>
-    </label><div class="ckcount" id="ckcount">0 de 37 pendências concluídas</div>
+    </label><div class="ckcount" id="ckcount">0 de 32 pendências concluídas</div>
   <div class="ckio"><button id="ckexp" type="button">⬇️ Exportar estado (copia JSON)</button><button id="ckimp" type="button">⬆️ Importar estado</button></div>
-  <div role="status" class="noresult" id="noresult-check">Nada encontrado. Tente outro termo.</div>
+  
+
+  <div role="status" class="noresult" id="noresult-alertas">Nada encontrado. Tente outro termo.</div>
 </section>
 
-<section class="panel" id="emails" data-print-title="E-mails prontos">
-  <h2 class="section-label">2 e-mails prontos — toque em copiar</h2><div role="status" class="noresult" id="noresult-emails" style="display:none">Nada encontrado. Tente outro termo.</div><div class="mail">
-    <div class="mail-top">
-      <span class="mail-when now">Enviar agora</span>
-      <div class="mail-subj">Confirmar reabertura — Ribera de Triana</div>
-      <div class="mail-to">Para: <b>reservas@hotelriberadetriana.com (confirme no comprovante)</b></div>
-    </div>
-    <div class="mail-body">Estimado equipo del Hotel Ribera de Triana,
 
-Tenemos una reserva para 1 noche, del 3 al 4 de noviembre de 2026 (2 adultos), y hemos visto que el hotel aparecía como reapertura tras reforma.
 
-¿Podrían confirmarnos que el hotel estará plenamente operativo en esa fecha, con recepción, desayuno y consigna de equipaje?
 
-Detalles de nuestra estancia:
-· Llegada el 03/11 sobre el mediodía, desde Granada en coche.
-· Salida el 04/11: nuestro vuelo a Lisboa es a las 16:00, por lo que agradeceríamos dejar el equipaje en consigna tras el check-out para aprovechar la mañana en Triana.
-· Si es posible, preferiríamos habitación con vistas al canal (más tranquila).
-
-Quedamos a la espera de su confirmación. Muchas gracias.
-
-Un cordial saludo,
-<span class="fill">[su nombre]</span></div>
-    <div class="mail-actions">
-      <button class="copybtn" data-copy="Estimado equipo del Hotel Ribera de Triana,
-
-Tenemos una reserva para 1 noche, del 3 al 4 de noviembre de 2026 (2 adultos), y hemos visto que el hotel aparecía como reapertura tras reforma.
-
-¿Podrían confirmarnos que el hotel estará plenamente operativo en esa fecha, con recepción, desayuno y consigna de equipaje?
-
-Detalles de nuestra estancia:
-· Llegada el 03/11 sobre el mediodía, desde Granada en coche.
-· Salida el 04/11: nuestro vuelo a Lisboa es a las 16:00, por lo que agradeceríamos dejar el equipaje en consigna tras el check-out para aprovechar la mañana en Triana.
-· Si es posible, preferiríamos habitación con vistas al canal (más tranquila).
-
-Quedamos a la espera de su confirmación. Muchas gracias.
-
-Un cordial saludo,
-[su nombre]">📋 Copiar texto</button>
-      <button class="copybtn" data-copy="Confirmar reabertura — Ribera de Triana" class="copybtn btn-subj">Assunto</button>
-    </div>
-    <div class="mail-note"><b>Nota:</b> Se reservou pelo Hotéis.com, enviar pela mensagem da plataforma é mais garantido (fica registrado).</div>
-  </div><div class="mail">
-    <div class="mail-top">
-      <span class="mail-when day">Enviar dia 02/11, após retirar o carro</span>
-      <div class="mail-subj">Matrícula para ZBE — Monjas del Carmen</div>
-      <div class="mail-to">Para: <b>reservas@hotelmonjasdelcarmen.com (confirme no comprovante)</b></div>
-    </div>
-    <div class="mail-body">Hola de nuevo,
-
-Acabamos de recoger el coche de alquiler y les enviamos la matrícula para el registro en la Zona de Bajas Emisiones (ZBE):
-
-Matrícula: <span class="fill">[DIGITE A PLACA]</span>
-Modelo/color: <span class="fill">[ex.: SEAT Ibiza blanco]</span>
-
-Recordatorio de la llegada de hoy:
-· Llegamos sobre las 11:00, desde Sevilla.
-· Tenemos plaza de parking reservada en el hotel.
-· Entrada a los Palacios Nazaríes a las 13:30 — agradeceríamos guardar el equipaje a la llegada y, si posible, early check-in.
-
-¿Podrían confirmarnos la ruta autorizada para llegar al hotel dentro de la ZBE sin multa?
-
-Muchas gracias.
-
-Un saludo,
-<span class="fill">[su nombre]</span></div>
-    <div class="mail-actions">
-      <button class="copybtn" data-copy="Hola de nuevo,
-
-Acabamos de recoger el coche de alquiler y les enviamos la matrícula para el registro en la Zona de Bajas Emisiones (ZBE):
-
-Matrícula: [DIGITE A PLACA]
-Modelo/color: [ex.: SEAT Ibiza blanco]
-
-Recordatorio de la llegada de hoy:
-· Llegamos sobre las 11:00, desde Sevilla.
-· Tenemos plaza de parking reservada en el hotel.
-· Entrada a los Palacios Nazaríes a las 13:30 — agradeceríamos guardar el equipaje a la llegada y, si posible, early check-in.
-
-¿Podrían confirmarnos la ruta autorizada para llegar al hotel dentro de la ZBE sin multa?
-
-Muchas gracias.
-
-Un saludo,
-[su nombre]">📋 Copiar texto</button>
-      <button class="copybtn" data-copy="Matrícula para ZBE — Monjas del Carmen" class="copybtn btn-subj">Assunto</button>
-    </div>
-    <div class="mail-note"><b>Nota:</b> A placa só existe após a retirada na Budget — preencha os campos destacados no balcão da locadora.</div>
-  </div>
-</section>
 
 <div class="foot">
   Documento de apoio · confirme horários de monumentos, voos e trens na véspera.<br>
@@ -2292,7 +2235,7 @@ Un saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre todas as abas — Roteiro, Hotéis, Trajetos, Reservas, Alertas, Checklist e E-mails.<br>
-  <span id="appver">v7.8</span> · barra de abas na base · protótipo V8 no dia 31 · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
+  <span id="appver">v7.9</span> · barra flutuante · 5 abas · protótipo V8 no dia 31 · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
   <span style="opacity:.7">Funciona mesmo sem JavaScript — só a busca e a cópia de texto dependem dele.</span>
 </div>
 
@@ -2301,14 +2244,14 @@ Un saludo,
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v7.8";
+var APP_VERSION="v7.9";
 /* Camada de progressive enhancement — TODO o conteúdo acima já funciona sem isto. */
 (function(){
   var q=document.getElementById("q"), clearBtn=document.getElementById("clear");
-  var SCOPES=["roteiro","hoteis","trajetos","ingressos","alertas","check","emails"];
+  var SCOPES=["roteiro","hoteis","trajetos","ingressos","alertas"];
   var COUNTS={};
   var av=document.getElementById("appver"); if(av) av.textContent=APP_VERSION;
-  document.querySelectorAll("#check .ck, #emails .mail").forEach(function(el){ if(!el.dataset.search) el.dataset.search=""; });
+  document.querySelectorAll("#alertas .ck, #hoteis .mail").forEach(function(el){ if(!el.dataset.search) el.dataset.search=""; });
   function norm(t){return (t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ");}
   /* Índice gerado do conteúdo real: o data-search escrito à mão vira apenas semente.
      Isso garante que qualquer edição futura nos cards entra na busca automaticamente. */
@@ -2363,7 +2306,7 @@ var APP_VERSION="v7.8";
       else{
         var cur=null;
         SCOPES.forEach(function(s){ var r=document.getElementById("tabsel-"+s); if(r&&r.checked) cur=s; });
-        var NOMES={roteiro:"Roteiro",hoteis:"Hotéis",trajetos:"Trajetos",ingressos:"Ingressos",alertas:"Alertas",check:"Checklist",emails:"E-mails"};
+        var NOMES={roteiro:"Roteiro",hoteis:"Hotéis",trajetos:"Trajetos",ingressos:"Ingressos",alertas:"Alertas"};
         var partes=[];
         SCOPES.forEach(function(s){ if(s!==cur && COUNTS[s]>0) partes.push(NOMES[s]+" ("+COUNTS[s]+")"); });
         xh.textContent=partes.length?("Resultados também em: "+partes.join(" · ")):"";
@@ -2657,8 +2600,6 @@ var APP_VERSION="v7.8";
   <label class="tab" for="tabsel-trajetos"><span class="ic" aria-hidden="true">✈️</span>Trajetos</label>
   <label class="tab" for="tabsel-ingressos"><span class="ic" aria-hidden="true">🎟️</span>Ingressos</label>
   <label class="tab" for="tabsel-alertas"><span class="ic" aria-hidden="true">⚠️</span>Alertas<span class="dotn" id="alertcount" aria-hidden="true">12</span></label>
-  <label class="tab" for="tabsel-check"><span class="ic" aria-hidden="true">✓</span>Checklist</label>
-  <label class="tab" for="tabsel-emails"><span class="ic" aria-hidden="true">✉️</span>E-mails</label>
 </div>
 </body>
 </html>
