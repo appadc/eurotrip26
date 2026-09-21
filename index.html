@@ -190,7 +190,9 @@
   .offpill.wait{background:#EDEAE2; color:#4A5663}
   /* v8.0.3: atalho fixo do cofre — círculo claro + ícone de traço */
   .cofrefab{position:fixed; z-index:45; right:12px;
-            top:calc(env(safe-area-inset-top) + 8px);
+            /* v8.1.1: desce para fora da faixa de esmaecimento do iOS sob a barra
+               de status; fica alinhado ao bloco do título */
+            top:calc(env(safe-area-inset-top) + 26px);
             width:44px; height:44px; border-radius:50%;
             display:flex; align-items:center; justify-content:center;
             background:rgba(255,255,255,.94); color:#14212E;
@@ -1499,7 +1501,7 @@ Un cordial saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre todas as abas — Roteiro, Reservas, Pendências e Mais.<br>
-  <span id="appver">v8.1</span> · gerado a partir de dados · 5 abas · hierarquia de execução · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
+  <span id="appver">v8.1.1</span> · gerado a partir de dados · 5 abas · hierarquia de execução · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02</b> no fim do endereço.<br>
   <span style="opacity:.7">Em <b>Mais</b>: <b>Explorar</b> reúne o que ficou fora do roteiro de propósito, cada lugar com o gatilho que o torna útil. O <b>cofre</b>, em Mais, guarda vouchers e bilhetes <b>só neste aparelho</b> — exporte de vez em quando, ele nunca deve ser a cópia única. O botão <b>📚 Detalhes / 📍 Viagem</b> no cabeçalho alterna entre ver tudo e ver só o essencial — nada é apagado, só recolhido, e a impressão sai sempre completa. Funciona mesmo sem JavaScript — só a busca, o painel Hoje, o modo e a cópia de texto dependem dele.</span>
 </div>
 
@@ -1508,7 +1510,7 @@ Un cordial saludo,
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v8.1";
+var APP_VERSION="v8.1.1";
 /* Camada de progressive enhancement — TODO o conteúdo acima já funciona sem isto. */
 (function(){
   var q=document.getElementById("q"), clearBtn=document.getElementById("clear");
