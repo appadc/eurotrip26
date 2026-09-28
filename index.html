@@ -61,6 +61,11 @@
     --on-nav:var(--paper);      /* texto sobre superfície navy fixa */
     --accent-t:var(--azulejo);  /* azulejo usado como texto */
     --terra-t:#9C3524;     /* v8.18 · vermelho de atenção, não mais terracota */
+    /* v9.3 · âmbar de atenção, papel GENÉRICO — chips, selos, avisos.
+       Estava escrito #8A5A08 em 14 regras, que é o valor de --ct-sevilha:
+       69 elementos usavam a cor de texto de Sevilha para não ser Sevilha.
+       Os dois tokens têm o mesmo valor hoje e podem divergir amanhã. */
+    --ocre-t:#8A5A08;
     --hit-bg:#FBF2DC;   /* v8.14 · fundo do trecho que casou com a busca */
 
     /* ── v8.16 · FASE 0 ──────────────────────────────────────────────
@@ -98,7 +103,7 @@
   }
   .serif{font-family:var(--ff-ed)}
 
-  #safetop{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); background:var(--azulejo-deep); z-index:30; pointer-events:none; box-shadow:0 2px 8px rgba(14,44,70,.16)}
+  #safetop{position:fixed; top:0; left:0; right:0; height:env(safe-area-inset-top); background:var(--azulejo-deep); z-index:30; pointer-events:none}
   header{background:var(--azulejo-deep); color:var(--on-nav); padding:calc(env(safe-area-inset-top) + 34px) 18px 15px}
   .kicker{font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--saffron); font-weight:600}
   header h1{font-size:26px; line-height:1.08; margin:5px 0 3px; letter-spacing:-.4px; font-weight:600}
@@ -187,7 +192,8 @@
     -webkit-mask-size:contain; mask-size:contain}
   .stub{padding-top:12px}
   .stub[style*="c-madrid"]::before{background-color:var(--c2-madrid); opacity:1;
-    -webkit-mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2028%2012%22%20fill%3D%22%23000%22%3E%3Cpolygon%20points%3D%224.00%2C2.30%204.42%2C3.42%205.62%2C3.47%204.68%2C4.22%205.00%2C5.38%204.00%2C4.71%203.00%2C5.38%203.32%2C4.22%202.38%2C3.47%203.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%228.00%2C2.30%208.42%2C3.42%209.62%2C3.47%208.68%2C4.22%209.00%2C5.38%208.00%2C4.71%207.00%2C5.38%207.32%2C4.22%206.38%2C3.47%207.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%2212.00%2C2.30%2012.42%2C3.42%2013.62%2C3.47%2012.68%2C4.22%2013.00%2C5.38%2012.00%2C4.71%2011.00%2C5.38%2011.32%2C4.22%2010.38%2C3.47%2011.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%2216.00%2C2.30%2016.42%2C3.42%2017.62%2C3.47%2016.68%2C4.22%2017.00%2C5.38%2016.00%2C4.71%2015.00%2C5.38%2015.32%2C4.22%2014.38%2C3.47%2015.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%226.00%2C7.30%206.42%2C8.42%207.62%2C8.47%206.68%2C9.22%207.00%2C10.38%206.00%2C9.71%205.00%2C10.38%205.32%2C9.22%204.38%2C8.47%205.58%2C8.42%22%2F%3E%3Cpolygon%20points%3D%2210.00%2C7.30%2010.42%2C8.42%2011.62%2C8.47%2010.68%2C9.22%2011.00%2C10.38%2010.00%2C9.71%209.00%2C10.38%209.32%2C9.22%208.38%2C8.47%209.58%2C8.42%22%2F%3E%3Cpolygon%20points%3D%2214.00%2C7.30%2014.42%2C8.42%2015.62%2C8.47%2014.68%2C9.22%2015.00%2C10.38%2014.00%2C9.71%2013.00%2C10.38%2013.32%2C9.22%2012.38%2C8.47%2013.58%2C8.42%22%2F%3E%3C%2Fsvg%3E'); mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2028%2012%22%20fill%3D%22%23000%22%3E%3Cpolygon%20points%3D%224.00%2C2.30%204.42%2C3.42%205.62%2C3.47%204.68%2C4.22%205.00%2C5.38%204.00%2C4.71%203.00%2C5.38%203.32%2C4.22%202.38%2C3.47%203.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%228.00%2C2.30%208.42%2C3.42%209.62%2C3.47%208.68%2C4.22%209.00%2C5.38%208.00%2C4.71%207.00%2C5.38%207.32%2C4.22%206.38%2C3.47%207.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%2212.00%2C2.30%2012.42%2C3.42%2013.62%2C3.47%2012.68%2C4.22%2013.00%2C5.38%2012.00%2C4.71%2011.00%2C5.38%2011.32%2C4.22%2010.38%2C3.47%2011.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%2216.00%2C2.30%2016.42%2C3.42%2017.62%2C3.47%2016.68%2C4.22%2017.00%2C5.38%2016.00%2C4.71%2015.00%2C5.38%2015.32%2C4.22%2014.38%2C3.47%2015.58%2C3.42%22%2F%3E%3Cpolygon%20points%3D%226.00%2C7.30%206.42%2C8.42%207.62%2C8.47%206.68%2C9.22%207.00%2C10.38%206.00%2C9.71%205.00%2C10.38%205.32%2C9.22%204.38%2C8.47%205.58%2C8.42%22%2F%3E%3Cpolygon%20points%3D%2210.00%2C7.30%2010.42%2C8.42%2011.62%2C8.47%2010.68%2C9.22%2011.00%2C10.38%2010.00%2C9.71%209.00%2C10.38%209.32%2C9.22%208.38%2C8.47%209.58%2C8.42%22%2F%3E%3Cpolygon%20points%3D%2214.00%2C7.30%2014.42%2C8.42%2015.62%2C8.47%2014.68%2C9.22%2015.00%2C10.38%2014.00%2C9.71%2013.00%2C10.38%2013.32%2C9.22%2012.38%2C8.47%2013.58%2C8.42%22%2F%3E%3C%2Fsvg%3E')}
+    width:32px; height:13px;
+    -webkit-mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2034%2014%22%20fill%3D%22%23000%22%3E%3Cpolygon%20points%3D%225.50%2C1.90%206.16%2C3.49%207.88%2C3.63%206.57%2C4.75%206.97%2C6.42%205.50%2C5.53%204.03%2C6.42%204.43%2C4.75%203.12%2C3.63%204.84%2C3.49%22%2F%3E%3Cpolygon%20points%3D%2213.20%2C1.90%2013.86%2C3.49%2015.58%2C3.63%2014.27%2C4.75%2014.67%2C6.42%2013.20%2C5.53%2011.73%2C6.42%2012.13%2C4.75%2010.82%2C3.63%2012.54%2C3.49%22%2F%3E%3Cpolygon%20points%3D%2220.90%2C1.90%2021.56%2C3.49%2023.28%2C3.63%2021.97%2C4.75%2022.37%2C6.42%2020.90%2C5.53%2019.43%2C6.42%2019.83%2C4.75%2018.52%2C3.63%2020.24%2C3.49%22%2F%3E%3Cpolygon%20points%3D%2228.60%2C1.90%2029.26%2C3.49%2030.98%2C3.63%2029.67%2C4.75%2030.07%2C6.42%2028.60%2C5.53%2027.13%2C6.42%2027.53%2C4.75%2026.22%2C3.63%2027.94%2C3.49%22%2F%3E%3Cpolygon%20points%3D%229.30%2C7.70%209.96%2C9.29%2011.68%2C9.43%2010.37%2C10.55%2010.77%2C12.22%209.30%2C11.32%207.83%2C12.22%208.23%2C10.55%206.92%2C9.43%208.64%2C9.29%22%2F%3E%3Cpolygon%20points%3D%2217.00%2C7.70%2017.66%2C9.29%2019.38%2C9.43%2018.07%2C10.55%2018.47%2C12.22%2017.00%2C11.32%2015.53%2C12.22%2015.93%2C10.55%2014.62%2C9.43%2016.34%2C9.29%22%2F%3E%3Cpolygon%20points%3D%2224.70%2C7.70%2025.36%2C9.29%2027.08%2C9.43%2025.77%2C10.55%2026.17%2C12.22%2024.70%2C11.32%2023.23%2C12.22%2023.63%2C10.55%2022.32%2C9.43%2024.04%2C9.29%22%2F%3E%3C%2Fsvg%3E'); mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2034%2014%22%20fill%3D%22%23000%22%3E%3Cpolygon%20points%3D%225.50%2C1.90%206.16%2C3.49%207.88%2C3.63%206.57%2C4.75%206.97%2C6.42%205.50%2C5.53%204.03%2C6.42%204.43%2C4.75%203.12%2C3.63%204.84%2C3.49%22%2F%3E%3Cpolygon%20points%3D%2213.20%2C1.90%2013.86%2C3.49%2015.58%2C3.63%2014.27%2C4.75%2014.67%2C6.42%2013.20%2C5.53%2011.73%2C6.42%2012.13%2C4.75%2010.82%2C3.63%2012.54%2C3.49%22%2F%3E%3Cpolygon%20points%3D%2220.90%2C1.90%2021.56%2C3.49%2023.28%2C3.63%2021.97%2C4.75%2022.37%2C6.42%2020.90%2C5.53%2019.43%2C6.42%2019.83%2C4.75%2018.52%2C3.63%2020.24%2C3.49%22%2F%3E%3Cpolygon%20points%3D%2228.60%2C1.90%2029.26%2C3.49%2030.98%2C3.63%2029.67%2C4.75%2030.07%2C6.42%2028.60%2C5.53%2027.13%2C6.42%2027.53%2C4.75%2026.22%2C3.63%2027.94%2C3.49%22%2F%3E%3Cpolygon%20points%3D%229.30%2C7.70%209.96%2C9.29%2011.68%2C9.43%2010.37%2C10.55%2010.77%2C12.22%209.30%2C11.32%207.83%2C12.22%208.23%2C10.55%206.92%2C9.43%208.64%2C9.29%22%2F%3E%3Cpolygon%20points%3D%2217.00%2C7.70%2017.66%2C9.29%2019.38%2C9.43%2018.07%2C10.55%2018.47%2C12.22%2017.00%2C11.32%2015.53%2C12.22%2015.93%2C10.55%2014.62%2C9.43%2016.34%2C9.29%22%2F%3E%3Cpolygon%20points%3D%2224.70%2C7.70%2025.36%2C9.29%2027.08%2C9.43%2025.77%2C10.55%2026.17%2C12.22%2024.70%2C11.32%2023.23%2C12.22%2023.63%2C10.55%2022.32%2C9.43%2024.04%2C9.29%22%2F%3E%3C%2Fsvg%3E')}
   .stub[style*="c-barcelona"]::before{background-color:var(--c2-barcelona); opacity:1;
     -webkit-mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2028%2012%22%20fill%3D%22%23000%22%3E%3Crect%20x%3D%224%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2216%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2222%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3C%2Fsvg%3E'); mask-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2028%2012%22%20fill%3D%22%23000%22%3E%3Crect%20x%3D%224%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2216%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2222%22%20y%3D%221%22%20width%3D%222.6%22%20height%3D%2210%22%20rx%3D%221%22%2F%3E%3C%2Fsvg%3E')}
   .stub[style*="c-sevilha"]::before{background-color:var(--c2-sevilha); opacity:1;
@@ -208,7 +214,7 @@
   .head-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:12px; color:var(--slate)}
   /* v8.19 · rigidez do dia é informação, não estado: sai da cápsula.
      Cápsula fica para COMPRADO / FIXO / RESERVAR, que são status reais. */
-  .chip{display:inline-flex; align-items:center; gap:4px; background:var(--saffron-soft); color:#8A5A08; border-radius:var(--r-s); padding:2px 9px; font-size:12px; font-weight:600; white-space:nowrap}
+  .chip{display:inline-flex; align-items:center; gap:4px; background:var(--saffron-soft); color:var(--ocre-t); border-radius:var(--r-s); padding:2px 9px; font-size:12px; font-weight:600; white-space:nowrap}
   .chip.nights{background:#E6EEF5; color:var(--azulejo)}
   .head-price{font-weight:700; color:var(--ink); font-size:13px}
   .head-sub{color:var(--slate); font-size:12px}
@@ -249,10 +255,10 @@
   .tnote{font-size:12.5px; color:var(--slate); margin-top:2px; line-height:1.42}
   .tbadge{display:inline-block; font-size:11px; font-weight:700; padding:2px 7px; border-radius:var(--r-s); margin-left:6px; vertical-align:1px; white-space:nowrap}
   .tbadge.ok{background:#DCEFE4; color:var(--ok)}
-  .tbadge.pend{background:var(--saffron-soft); color:#8A5A08}
+  .tbadge.pend{background:var(--saffron-soft); color:var(--ocre-t)}
   .dayalert{border-radius:var(--r-m); padding:10px 11px; font-size:12.5px; line-height:1.5; margin-top:10px}
   .dayalert.info{background:#E6EEF5; color:var(--azulejo-deep)}
-  .dayalert.warn{background:var(--saffron-soft); color:#8A5A08}
+  .dayalert.warn{background:var(--saffron-soft); color:var(--ocre-t)}
   .dayalert.open{background:#F6E0DA; color:var(--terra-t)}
   .drota{font-size:12.5px; color:var(--slate); background:#EFEAE0; border-radius:var(--r-s); padding:6px 10px; margin:2px 0 9px; line-height:1.5}
   .drota b{color:var(--ink); font-weight:600}
@@ -322,7 +328,7 @@
   .connwarn{font-size:12px; color:var(--terra-t); line-height:1.45; margin-top:3px}
   .bsel{display:inline-block; font-size:10.5px; font-weight:700; padding:1px 6px; border-radius:var(--r-s); margin-left:6px; vertical-align:1px; white-space:nowrap}
   .bsel.volta{background:#E4F0EA; color:var(--ok)}
-  .bsel.saida{background:#F6E4BC; color:#8A5A08}
+  .bsel.saida{background:#F6E4BC; color:var(--ocre-t)}
   .extra{margin-top:7px; border:1px solid var(--line); border-radius:var(--r-s); background:#FAF7F0}
   .extra>summary{list-style:none; cursor:pointer; font-size:12.5px; font-weight:600; color:var(--accent-t); padding:6px 9px; display:block; min-height:0}
   .extra>summary::-webkit-details-marker{display:none}
@@ -330,7 +336,7 @@
   .extra[open]>summary::after{content:" ▴"}
   .extrabody{font-size:12px; color:var(--slate); line-height:1.5; padding:0 9px 9px}
   .decbox{border:1.5px solid var(--saffron); border-radius:var(--r-m); padding:9px 11px; margin:9px 0 9px 57px; background:#FFFCF5}
-  .dectitle{font-size:12.5px; font-weight:700; color:#8A5A08}
+  .dectitle{font-size:12.5px; font-weight:700; color:var(--ocre-t)}
   .decintro{font-size:12.5px; color:var(--slate); line-height:1.45; margin:3px 0 6px}
   .decopt{border-top:1px solid var(--line); padding:6px 0 2px}
   .decopth{font-size:12px; font-weight:700; color:var(--ink)}
@@ -464,7 +470,7 @@
   .leg-title{font-size:15.5px; font-weight:600; margin:1px 0 3px; letter-spacing:-.2px}
   .leg-time{font-family:var(--ff-ed); font-size:15px; color:var(--accent-t); font-weight:700; letter-spacing:.02em}
   .leg-sub{font-size:12.5px; color:var(--slate); margin-top:3px}
-  .leg-flag{display:inline-block; margin-top:6px; background:var(--saffron-soft); color:#8A5A08; font-size:12px; font-weight:700; border-radius:var(--r-s); padding:3px 8px}
+  .leg-flag{display:inline-block; margin-top:6px; background:var(--saffron-soft); color:var(--ocre-t); font-size:12px; font-weight:700; border-radius:var(--r-s); padding:3px 8px}
 
   /* ---------- CHECKLIST (checkbox real — funciona sem JS) ---------- */
   .ck{position:relative; display:flex; gap:12px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:var(--r-m); box-shadow:var(--shadow); padding:13px 14px; margin-bottom:10px; cursor:pointer}
@@ -481,19 +487,19 @@
   .ck.static .ck-sub{color:var(--slate)}
   .pri{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.05em; border-radius:var(--r-s); padding:2px 7px; margin-right:6px; vertical-align:middle}
   .pri.hi{background:#F6E0DA; color:var(--terra-t)}
-  .pri.md{background:var(--saffron-soft); color:#8A5A08}
+  .pri.md{background:var(--saffron-soft); color:var(--ocre-t)}
   .pri.dec{background:#E6EEF5; color:var(--azulejo-deep)}
 
-  .loadpill{border-radius:var(--r-s)!important; display:inline-block; font-size:11px; font-weight:700; padding:2px 7px; border-radius:var(--r-s); text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; margin-right:2px}
+  .loadpill{display:inline-block; font-size:11px; font-weight:700; padding:2px 7px; border-radius:var(--r-s); text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; margin-right:2px}
   .l-leve{background:#E5EFE8; color:#256B4D}
   .l-moderado{background:#E6EEF5; color:var(--azulejo)}
-  .l-intenso{background:#F6E4BC; color:#8A5A08}
+  .l-intenso{background:#F6E4BC; color:var(--ocre-t)}
   .l-muito{background:#F6E0DA; color:var(--terra-t)}
 
   .tick{display:flex; gap:11px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:var(--r-m); box-shadow:var(--shadow); padding:11px 13px; margin-bottom:9px}
   .tick .st{flex:0 0 auto; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; border-radius:var(--r-s); padding:3px 7px; margin-top:2px; white-space:nowrap}
   .st.ok{background:#DCEFE4; color:var(--ok)}
-  .st.pend{background:var(--saffron-soft); color:#8A5A08}
+  .st.pend{background:var(--saffron-soft); color:var(--ocre-t)}
   .st.opt{background:#ECEAF2; color:#5F5A78}
   .tick-b{flex:1; min-width:0}
   .tick-t{font-size:14px; font-weight:600; line-height:1.3; letter-spacing:-.1px}
@@ -509,7 +515,7 @@
   .alertbox .ah{display:block; font-size:14px; font-weight:700; color:var(--ink); margin-bottom:3px; letter-spacing:-.15px}
   .alertbox .aw{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; background:#F1EEE4; color:var(--slate); border-radius:var(--r-s); padding:2px 6px; margin-left:6px; vertical-align:1px}
   .alertbox.mid{border-left-color:var(--saffron)}
-  .alertbox.mid b{color:#8A5A08}
+  .alertbox.mid b{color:var(--ocre-t)}
   .hoje{background:var(--azulejo); color:#fff; border-radius:var(--r-m); padding:13px 15px; margin:2px 0 6px; box-shadow:var(--shadow)}
   .hoje .hj-k{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--saffron); font-weight:700}
   .hoje .hj-t{font-size:16.5px; font-weight:600; margin:2px 0 7px; letter-spacing:-.25px; line-height:1.2}
@@ -540,7 +546,7 @@
 
   .alertbox.past{opacity:.45; border-left-color:#B7C0CA}
   .aw.now{background:#9E4427; color:#fff}
-  .aw.soon{background:var(--saffron-soft); color:#8A5A08}
+  .aw.soon{background:var(--saffron-soft); color:var(--ocre-t)}
 
   .section-label{font-family:var(--ff-ed);
     font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); font-weight:700; margin:14px 2px 9px}
@@ -553,7 +559,7 @@
   .mail-to{font-size:12px; color:var(--slate); margin-top:4px}
   .mail-to b{color:var(--ink); font-weight:600}
   .mail-body{padding:13px 15px; font-size:13.5px; line-height:1.55; color:#3C4551; white-space:pre-wrap; font-family:var(--ff-ui)}
-  .mail-body .fill{background:var(--saffron-soft); color:#8A5A08; font-weight:700; padding:0 4px; border-radius:var(--r-s)}
+  .mail-body .fill{background:var(--saffron-soft); color:var(--ocre-t); font-weight:700; padding:0 4px; border-radius:var(--r-s)}
   .mail-actions{padding:0 15px 14px; display:flex; gap:8px}
   .mail-actions .copybtn{flex:1; justify-content:center; padding:11px; font-size:13px}
   .mail-note{font-size:12px; color:var(--slate); background:#FBF8F0; border-top:1px solid var(--line); padding:10px 15px; line-height:1.5}
@@ -581,6 +587,7 @@
              4,5:1 sobre o card escuro, mantendo a matiz da cor clara */
           --ct-madrid:#D4899A; --ct-barcelona:#4FC2B4; --ct-sevilha:#E0A93A;
           --ct-granada:#D4879E; --ct-lisboa:#79B4DA; --ct-transit:#AAB6C2;
+          --ocre-t:#F0C878;
           --hit-bg:#23313F;
           --mute:#97A4AF; --mute-foot:#8A929C}
     .dtile{background:var(--card)}
@@ -855,7 +862,7 @@
   .explorar #exp-barcelona:checked ~ .expchips label[for="exp-barcelona"]{background:var(--c-barcelona); border-color:var(--c-barcelona); color:#fff}
   .explorar #exp-barcelona:checked ~ .expchips label[for="exp-barcelona"]::before{background:#fff}
   .explorar label[for="exp-sevilha"]::before{background:var(--c-sevilha)}
-  .explorar #exp-sevilha:checked ~ .expchips label[for="exp-sevilha"]{background:#8A5A08; border-color:#8A5A08; color:#fff}
+  .explorar #exp-sevilha:checked ~ .expchips label[for="exp-sevilha"]{background:var(--ct-sevilha); border-color:var(--ct-sevilha); color:#fff}
   .explorar #exp-sevilha:checked ~ .expchips label[for="exp-sevilha"]::before{background:#fff}
   .explorar label[for="exp-granada"]::before{background:var(--c-granada)}
   .explorar #exp-granada:checked ~ .expchips label[for="exp-granada"]{background:var(--c-granada); border-color:var(--c-granada); color:#fff}
@@ -1858,7 +1865,7 @@ Un cordial saludo,
   O checklist é de cada aparelho — o seu e o dela são independentes, de propósito.<br>
   Imprimir gera um backup de papel completo: todos os cards saem abertos, sem botões.<br>
   Toque numa cidade/dia acima para pular · toque num card para abrir detalhes · a busca cobre todas as abas — Roteiro, Reservas, Pendências e Mais.<br>
-  <span id="appver">v9.2</span> · gerado a partir de dados · 5 abas · hierarquia de execução · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02&amp;agora=14:15</b> no fim do endereço — sem a hora, ele assume 00:00 e não exercita o AGORA.<br>
+  <span id="appver">v9.3</span> · gerado a partir de dados · 5 abas · hierarquia de execução · <span id="vinfo">verificando versões…</span> · para testar o bloco "Hoje", abra com <b>?hoje=2026-11-02&amp;agora=14:15</b> no fim do endereço — sem a hora, ele assume 00:00 e não exercita o AGORA.<br>
   <span style="opacity:.7">Em <b>Mais</b>: <b>Explorar</b> reúne o que ficou fora do roteiro de propósito, cada lugar com o gatilho que o torna útil. O <b>cofre</b>, em Mais, guarda vouchers e bilhetes <b>só neste aparelho</b> — exporte de vez em quando, ele nunca deve ser a cópia única. O botão <b>📚 Detalhes / 📍 Viagem</b> no cabeçalho alterna entre ver tudo e ver só o essencial — nada é apagado, só recolhido, e a impressão sai sempre completa. Funciona mesmo sem JavaScript — só a busca, o painel Hoje, o modo e a cópia de texto dependem dele.</span>
 </div>
 
@@ -1867,7 +1874,7 @@ Un cordial saludo,
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v9.2";
+var APP_VERSION="v9.3";
 /* Camada de progressive enhancement — TODO o conteúdo acima já funciona sem isto. */
 (function(){
   var q=document.getElementById("q"), clearBtn=document.getElementById("clear");
