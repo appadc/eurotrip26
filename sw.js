@@ -9,7 +9,7 @@
    sincroniza os aparelhos.
    ============================================================= */
 
-const VERSION = 'v10.9';
+const VERSION = 'v10.12';
 const CACHE   = 'eurotrip26-' + VERSION;
 
 const ASSETS = [
@@ -51,7 +51,10 @@ self.addEventListener('activate', function (e) {
   e.waitUntil(
     caches.keys().then(function (ks) {
       return Promise.all(
-        ks.filter(function (k) { return k !== CACHE; })
+        // v10.10 · apagava TODO cache da origem que não fosse o atual.
+        // Em appadc.github.io isso alcança os outros apps publicados no
+        // mesmo domínio. A limpeza é só do que pertence a este app.
+        ks.filter(function (k) { return k.indexOf('eurotrip26-') === 0 && k !== CACHE; })
           .map(function (k) { return caches.delete(k); })
       );
     }).then(function () { return self.clients.claim(); })
