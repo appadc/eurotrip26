@@ -9,7 +9,7 @@
    sincroniza os aparelhos.
    ============================================================= */
 
-const VERSION = 'v10.21';
+const VERSION = 'v10.25';
 const CACHE   = 'eurotrip26-' + VERSION;
 
 const ASSETS = [
@@ -24,14 +24,27 @@ const ASSETS = [
    index.html VELHO (recém-baixado pelo navegador) — motor de uma
    versão servindo página de outra, para sempre. Era a causa-raiz da
    barra de atualização que não parava de aparecer. */
+/* v10.24 · 11③ · ANTES ERA fetch+put ARQUIVO A ARQUIVO, em paralelo: se um
+   fetch falhasse no meio, os que já tinham gravado FICAVAM — num cache com o
+   nome da versão nova. O app se declarava v10.24 servindo página de v10.23, e
+   a versão que o worker informa não denuncia isso, porque ela é constante do
+   código e não leitura do cache.
+   Agora baixa TUDO primeiro e só grava se tudo chegou; se algo falhar, nada é
+   gravado e o cache parcial é apagado, para a próxima tentativa começar limpa.
+   Um app que diz "não consegui" é melhor que um que mente a versão. */
 function precache() {
-  return caches.open(CACHE).then(function (c) {
-    return Promise.all(ASSETS.map(function (u) {
-      return fetch(u, { cache: 'no-store' }).then(function (r) {
-        if (!r || r.status !== 200) throw new Error('precache falhou: ' + u);
-        return c.put(u, r);
-      });
-    }));
+  return Promise.all(ASSETS.map(function (u) {
+    return fetch(u, { cache: 'no-store' }).then(function (r) {
+      if (!r || r.status !== 200) throw new Error('precache falhou: ' + u);
+      return { url: u, res: r };
+    });
+  })).then(function (baixados) {
+    return caches.open(CACHE).then(function (c) {
+      return Promise.all(baixados.map(function (b) { return c.put(b.url, b.res); }));
+    });
+  }).catch(function (err) {
+    // nada meio-gravado sobrevive: o cache desta versão é descartado inteiro
+    return caches.delete(CACHE).then(function () { throw err; });
   });
 }
 
@@ -68,8 +81,12 @@ self.addEventListener('message', function (e) {
     e.ports[0].postMessage({ version: VERSION });
   }
   if (e.data && e.data.type === 'RECACHE') {
+    // v10.24 · 11② · o caminho de ERRO não respondia nada, e a página ficava
+    // em "Reparando…" para sempre. Agora toda tentativa responde.
     var done = precache().then(function () {
       if (e.ports && e.ports[0]) e.ports[0].postMessage({ ok: true });
+    }).catch(function (err) {
+      if (e.ports && e.ports[0]) e.ports[0].postMessage({ ok: false, erro: String(err && err.message || err) });
     });
     if (e.waitUntil) e.waitUntil(done);
   }
