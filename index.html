@@ -727,23 +727,39 @@
   body:not(.buscando) #exp-madrid:checked ~ .explist .expsec,body:not(.buscando) #exp-barcelona:checked ~ .explist .expsec,body:not(.buscando) #exp-sevilha:checked ~ .explist .expsec,body:not(.buscando) #exp-granada:checked ~ .explist .expsec,body:not(.buscando) #exp-lisboa:checked ~ .explist .expsec{display:block}
   .expsec[hidden]{display:none!important}
 
-  /* ══ v11.38 · pendências críticas no Hoje antes do embarque ═════════════ */
-  .hoje .hj-pend{margin-top:12px}
-  .hoje .hj-pk{font-size:10.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-       color:var(--terra-t); margin-bottom:6px}
+  /* ══ v11.38 · pendências no Hoje antes do embarque (v11.53: só o link) ══ */
   .hoje .hj-pi{display:flex; align-items:center; gap:8px; min-height:44px; box-sizing:border-box;
        padding:8px 10px; margin-bottom:6px; border-radius:var(--r-s); background:var(--saffron-soft);
        border-left:3px solid var(--saffron); color:var(--ink); font-size:13.5px; font-weight:600;
        line-height:1.35; text-decoration:none}
-  .hoje .hj-pr{flex:0 0 auto; font-size:9.5px; font-weight:800; letter-spacing:.08em; padding:2px 6px;
-       border-radius:var(--r-s); background:var(--saffron); color:#3A2A08}
-  .hoje .hj-pend-ok{font-size:13px; font-weight:700; color:var(--slate)}
-  /* o cartão da contagem regressiva é claro no tema claro e escuro no escuro */
   @media (prefers-color-scheme: dark){
-    .hoje .hj-pk{color:#F0C878}
     .hoje .hj-pi{background:rgba(255,255,255,.08); color:#fff; border-left-color:#F0C878}
-    .hoje .hj-pr{background:#F0C878}
-    .hoje .hj-pend-ok{color:#BFE3C8}
+  }
+  /* ══ v11.53 · a semana do embarque no Hoje ════════════════════════════════
+     Mesma trilha de 46px da lista "Depois": o prazo à esquerda, o item no
+     meio, a bolinha de marcar à direita. A linha inteira é o botão. */
+  .hj-wk .hj-ck{grid-template-columns:46px 1fr 24px; align-items:center; width:100%; box-sizing:border-box;
+       -webkit-appearance:none; appearance:none; background:none; border:0; border-bottom:1px solid var(--line);
+       border-radius:0; margin:0; text-align:left; font:inherit; font-size:13.5px; line-height:1.35;
+       min-height:48px; cursor:pointer}
+  .hj-wk .hj-ck:last-child{border-bottom:none}
+  .hj-ck>b small{display:block; font-family:var(--ff-ui); font-size:9.5px; font-weight:800;
+       letter-spacing:.06em; text-transform:uppercase; color:var(--mute)}
+  .hj-ck>b.hj-venc,.hj-ck>b.hj-venc small{color:var(--terra-t)}
+  .hj-ckt{font-weight:600; color:var(--ink)}
+  .hj-ckb{width:22px; height:22px; box-sizing:border-box; border:2px solid var(--mute); border-radius:50%; justify-self:end}
+  .hj-ck:active .hj-ckb{background:var(--ok); border-color:var(--ok)}
+  .hj-wkm>summary{list-style:none; cursor:pointer; min-height:44px; display:flex; align-items:center;
+       font-size:12.5px; font-weight:700; color:var(--accent-t)}
+  .hj-wkm>summary::-webkit-details-marker{display:none}
+  .hj-wkm:not([open])>summary::after{content:"\00a0\25BE"}
+  .hj-wkm[open]>summary::after{content:"\00a0\25B4"}
+  .hoje .hj-corpo .hj-ckall{margin:10px 0 0}
+  @media (prefers-color-scheme: dark){
+    .hj-wk .hj-ck{border-bottom-color:#233140}
+    .hj-ckt{color:#E7EDF3}
+    .hj-ckb{border-color:#7C8C9C}
+    .hj-wkm>summary{color:#9EC5E8}
   }
   label.ck.ckalvo{box-shadow:0 0 0 3px var(--saffron); border-radius:var(--r-m)}
 
@@ -1956,7 +1972,7 @@ Un cordial saludo,
   <div class="alertbox" data-d="2026-10-31" data-bilhete="tk-flamenco tk-barceloneta" data-search="flamenco barceloneta reservas antecipadas feriado sábado"><span class="ah">Duas reservas que não podem esperar<span class="aw">31/10 e 01/11</span></span><b>Flamenco em 01/11:</b> é feriado nacional, os tablaos lotam, e é a única noite de flamenco da viagem. <b>Almoço na Barceloneta em 31/10:</b> sábado na orla, sem reserva a fila é longa.</div></div>
   <h2 class="section-label">✓ Checklist — o que falta fazer</h2>
   <h2 class="section-label">🎟 Ingressos e reservas</h2>
-  <label class="ck" for="ckin-tik-belem">
+  <label class="ck" for="ckin-tik-belem" data-ate="2026-10-21" data-tk="tk-torre-belem" data-hj="site oficial · subida com entrada por horário">
       <input type="checkbox" class="ck-input" id="ckin-tik-belem" data-i="tik-belem">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -1972,7 +1988,7 @@ Un cordial saludo,
         <span class="ck-sub">05/11 · fora do roteiro desde 11/10, por decisão nossa — o dia passa por fora às 10:00. Se mudarmos de ideia: comprar o ingresso (€17) e entrar; o Castelo abre 09:00 no inverno.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-tik-7">
+  <label class="ck" for="ckin-tik-7" data-ate="2026-10-21" data-tk="tk-bernabeu" data-hj="28/10 às 13:30 · realmadrid.com">
       <input type="checkbox" class="ck-input" id="ckin-tik-7" data-i="tik-7">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -1980,7 +1996,7 @@ Un cordial saludo,
         <span class="ck-sub">28/10 · alvo 13:30 · realmadrid.com. <b>Calendário conferido em 03/10: não há jogo em 28 nem 29/10</b>, então vestiário e banco entram na visita e a compra está liberada. Reconferido em 18/10: o Real Madrid joga 25/10 fora e 01/11 fora — 28 e 29/10 livres. Comprar já.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-tik-8">
+  <label class="ck" for="ckin-tik-8" data-ate="2026-10-21" data-tk="tk-flamenco" data-hj="Las Setas · 01/11 às 21:00 · Básica €28, os dois">
       <input type="checkbox" class="ck-input" id="ckin-tik-8" data-i="tik-8">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -1988,7 +2004,7 @@ Un cordial saludo,
         <span class="ck-sub">Obrigatório · noite de 01/11 · Tablao Flamenco Las Setas, 21:00 (Básica €28) — plano B: Casa del Flamenco ou Los Gallos</span>
       </span>
     </label>
-  <label class="ck" for="ckin-tik-9">
+  <label class="ck" for="ckin-tik-9" data-ate="2026-10-21" data-tk="tk-fado" data-hj="05/11 · só espetáculo, sem jantar">
       <input type="checkbox" class="ck-input" id="ckin-tik-9" data-i="tik-9">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2008,12 +2024,12 @@ Un cordial saludo,
       <input type="checkbox" class="ck-input" id="ckin-dec-8" data-i="dec-8">
       <span class="box">✓</span>
       <span class="ck-body">
-        <span class="ck-title"><span class="pri dec">DECIDIR</span>⑤ Mont Bar — menu ou barra?</span>
+        <span class="ck-title"><span class="pri md">OPCIONAL</span>⑤ Mont Bar — menu ou barra?</span>
         <span class="ck-sub">Levantado em out/26: <b>⭐⭐ duas estrelas desde nov/2025</b> (era uma). Menu Classic <b>€185/pessoa</b> +€105 de maridagem; menu Mont <b>€215</b> +€125. O Classic sem vinho dá <b>€370 no casal</b> — contra o teto de €100/pessoa/dia, é quase dois dias. Pelo critério de vocês, o menu sai.<br>🍷 <b>Mas a casa é gastrobar:</b> carta de snacks a €8–9 na barra, ~€60–80 os dois. <b>A decisão virou menu ou barra</b>, não ir ou não ir.</span>
       </span>
     </label>
   <h2 class="section-label">🧳 Logística</h2>
-  <label class="ck" for="ckin-log-21">
+  <label class="ck" for="ckin-log-21" data-ate="2026-10-21" data-tk="tk-barceloneta" data-hj="31/10 às 14:30 · sábado na orla">
       <input type="checkbox" class="ck-input" id="ckin-log-21" data-i="log-21">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2021,7 +2037,7 @@ Un cordial saludo,
         <span class="ck-sub">31/10 · 14:30 — sábado na orla, horário local e disputado. Escolher principal + segunda opção a 5 min. Casa de arroz/frutos do mar no Passeig Joan de Borbó ou na praia.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-0">
+  <label class="ck" for="ckin-log-0" data-ate="2026-10-24" data-hj="cartão de banco tradicional no nome do Augusto — caução da Budget">
       <input type="checkbox" class="ck-input" id="ckin-log-0" data-i="log-0">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2029,7 +2045,7 @@ Un cordial saludo,
         <span class="ck-sub">Budget exige cartão de crédito de banco TRADICIONAL no nome do Augusto (não pré-pago/digital) para bloquear a caução. Levar também a PID por segurança.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-1">
+  <label class="ck" for="ckin-log-1" data-ate="2026-10-21" data-hj="e-mail de rotina: reserva ativa e guarda-volumes">
       <input type="checkbox" class="ck-input" id="ckin-log-1" data-i="log-1">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2037,7 +2053,7 @@ Un cordial saludo,
         <span class="ck-sub">Já reabriu em 2025. Confirmar por e-mail: reserva ativa, recepção, guarda-volumes, café, quarto vista canal.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-2">
+  <label class="ck" for="ckin-log-2" data-ate="2026-10-21" data-hj="cama de casal + guarda-volumes · texto pronto em Reservas">
       <input type="checkbox" class="ck-input" id="ckin-log-2" data-i="log-2">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2053,15 +2069,8 @@ Un cordial saludo,
         <span class="ck-sub">Após retirar o veículo em Sevilla</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-5">
-      <input type="checkbox" class="ck-input" id="ckin-log-5" data-i="log-5">
-      <span class="box">✓</span>
-      <span class="ck-body">
-        <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Contratar/confirmar seguro viagem</span>
-        <span class="ck-sub">Cobertura médica, bagagem, cancelamento — obrigatório p/ Schengen. Levar apólice offline.</span>
-      </span>
-    </label>
-  <label class="ck" for="ckin-log-6">
+
+  <label class="ck" for="ckin-log-6" data-ate="2026-10-21" data-tk="tk-botin" data-hj="Botín 07/11 · jantares de 30–31/10">
       <input type="checkbox" class="ck-input" id="ckin-log-6" data-i="log-6">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2085,7 +2094,7 @@ Un cordial saludo,
         <span class="ck-sub">08/11, antes do despacho — Madrid é a última saída da UE e resolve as duas: DIVA (quiosque) para as compras da Espanha, carimbo manual na aduana para as de Portugal. NÃO em Lisboa.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-9">
+  <label class="ck" for="ckin-log-9" data-ate="2026-10-24" data-hj="lactase na mochila">
       <input type="checkbox" class="ck-input" id="ckin-log-9" data-i="log-9">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2101,7 +2110,7 @@ Un cordial saludo,
         <span class="ck-sub">A gratuidade do Palácio Real exige documento original que comprove nacionalidade ibero-americana, e o Malaba exige documento físico na porta. Sem passaporte, não há isenção nem entrada. <b>Mas a mochila não entra em nenhum dos dois:</b> o Prado manda para o guarda-volumes qualquer volume a partir de 40 cm, e o Palácio só aceita bolsa pequena. Bolso ou pochete, o dia inteiro.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-29">
+  <label class="ck" for="ckin-log-29" data-ate="2026-10-23" data-hj="C32 do Albaicín, S10 do Bernabéu, funicular">
       <input type="checkbox" class="ck-input" id="ckin-log-29" data-i="log-29">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2117,7 +2126,7 @@ Un cordial saludo,
         <span class="ck-sub">Última janela antes de Sevilla — 31/10 às 19:00, na Plaça Catalunya: Primark (no 23) ou El Corte Inglés (no 14). A loja do Born saiu do plano: obrigava a atravessar o bairro carregando mala. Cabe na franquia despachada já comprada e vazia dos três trechos europeus. Conferir horário de sábado em outubro.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-24">
+  <label class="ck" for="ckin-log-24" data-ate="2026-10-23" data-hj="Montjuïc · subida ao Salts de 29/10">
       <input type="checkbox" class="ck-input" id="ckin-log-24" data-i="log-24">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2125,7 +2134,7 @@ Un cordial saludo,
         <span class="ck-sub">Ficou fechado cinco meses por obras em 2025/26 e para ~1 mês por ano para manutenção. É o meio de subida ao Salts. Plano B: L1/L3 até Espanya + ônibus 150.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-25">
+  <label class="ck" for="ckin-log-25" data-ate="2026-10-23" data-hj="T-familiar, Navegante e metrô de Madrid">
       <input type="checkbox" class="ck-input" id="ckin-log-25" data-i="log-25">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2137,11 +2146,11 @@ Un cordial saludo,
       <input type="checkbox" class="ck-input" id="ckin-tik-10" data-i="tik-10">
       <span class="box">✓</span>
       <span class="ck-body">
-        <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Ingresso do Barcelona × Alavés</span>
-        <span class="ck-sub">31/10 · 21:00 · Camp Nou. O site oficial estava a partir de <b>€304</b>: procurar na revenda oficial do clube e nas plataformas autorizadas, que costumam ficar bem abaixo e cair perto da data. Só canal autorizado. <b>Comprar fecha o dia 31</b> — o jantar da Castanyada sai do lugar e o roteiro do dia é remontado.</span>
+        <span class="ck-title"><span class="pri md">OPCIONAL</span>Ingresso do Barcelona × Alavés</span>
+        <span class="ck-sub">31/10 · 21:00 · Camp Nou. O site oficial estava a partir de <b>€304</b>: procurar na revenda oficial do clube e nas plataformas autorizadas, que costumam ficar bem abaixo e cair perto da data. Só canal autorizado. <b>Comprar fecha o dia 31</b> — o jantar da Castanyada sai do lugar e o roteiro do dia é remontado. Desde 12/10 o roteiro é sem jogo: só se mudarem de ideia.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-26">
+  <label class="ck" for="ckin-log-26" data-ate="2026-10-21" data-tk="tk-batllo" data-hj="29/10 às 15:30 · esgota no fim de semana">
       <input type="checkbox" class="ck-input" id="ckin-log-26" data-i="log-26">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2157,7 +2166,7 @@ Un cordial saludo,
         <span class="ck-sub">Santa Cruz → Santa Justa com malas, no domingo de feriado à noite. Táxi na rua às 7h da manhã ali não é garantido — deixar combinado na véspera.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-23">
+  <label class="ck" for="ckin-log-23" data-ate="2026-10-23" data-hj="aberto até ~18:30 em outubro?">
       <input type="checkbox" class="ck-input" id="ckin-log-23" data-i="log-23">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2165,7 +2174,7 @@ Un cordial saludo,
         <span class="ck-sub">Bar-terraço da Piscina de Montjuïc. Entrada livre, paga-se só o consumo. Fora da temporada de piscina funciona reduzido — precisa estar aberto até ~18:30 para o pôr do sol das 17:51. Se não estiver, a tarde volta a ser Passeig de Gràcia com calma.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-22">
+  <label class="ck" for="ckin-log-22" data-ate="2026-10-23" data-hj="Turó de la Rovira · ainda fecha 17:30?">
       <input type="checkbox" class="ck-input" id="ckin-log-22" data-i="log-22">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2173,7 +2182,7 @@ Un cordial saludo,
         <span class="ck-sub">Turó de la Rovira fecha 17:30 no inverno (acesso regulado pela prefeitura). Reconferir perto da viagem: se recuar, a parada perde a luz boa e pode ser cortada em favor de Gràcia.</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-10">
+  <label class="ck" for="ckin-log-10" data-ate="2026-10-22" data-hj="tendência de Madrid e Barcelona">
       <input type="checkbox" class="ck-input" id="ckin-log-10" data-i="log-10">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2181,7 +2190,7 @@ Un cordial saludo,
         <span class="ck-sub">~10 dias antes (tendência) · 72h antes de cada cidade (reordenar externos) · noite anterior (ordem final, chuva hora a hora).</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-11">
+  <label class="ck" for="ckin-log-11" data-ate="2026-10-23" data-hj="configurar e testar nos dois celulares">
       <input type="checkbox" class="ck-input" id="ckin-log-11" data-i="log-11">
       <span class="box">✓</span>
       <span class="ck-body">
@@ -2189,15 +2198,31 @@ Un cordial saludo,
         <span class="ck-sub">Roaming brasileiro tem lacunas — configurar antes de embarcar</span>
       </span>
     </label>
-  <label class="ck" for="ckin-log-12">
+  <label class="ck" for="ckin-log-12" data-ate="2026-10-24" data-hj="voos, hotéis, ingressos e o seguro — sem internet">
       <input type="checkbox" class="ck-input" id="ckin-log-12" data-i="log-12">
       <span class="box">✓</span>
       <span class="ck-body">
         <span class="ck-title">Salvar todos os comprovantes offline</span>
-        <span class="ck-sub">Reservas, voos, AVE, ingressos, este roteiro</span>
+        <span class="ck-sub">Reservas, voos, AVE, ingressos, este roteiro e o certificado do seguro de cada um</span>
       </span>
     </label>
-  <div class="ckcount" id="ckcount">0 de 29 pendências concluídas</div>
+  <label class="ck" for="ckin-sem-1" data-ate="2026-10-22" data-hj="versão final, modo avião, fechar e reabrir">
+      <input type="checkbox" class="ck-input" id="ckin-sem-1" data-i="sem-1">
+      <span class="box">✓</span>
+      <span class="ck-body">
+        <span class="ck-title"><span class="pri hi">PRIORIDADE</span>Eurotrip 26 nos dois iPhones, testado offline</span>
+        <span class="ck-sub">Antes de atualizar, exportar o checklist (botão abaixo) como cópia. Depois, em cada iPhone: abrir a versão final, ligar o modo avião, fechar e reabrir — checklist, cofre e ingressos têm de estar lá.</span>
+      </span>
+    </label>
+  <label class="ck" for="ckin-sem-2" data-ate="2026-10-24" data-hj="IB0150 · abre ~24h antes · cartões de embarque na Carteira">
+      <input type="checkbox" class="ck-input" id="ckin-sem-2" data-i="sem-2">
+      <span class="box">✓</span>
+      <span class="ck-body">
+        <span class="ck-title"><span class="pri md">IMPORTANTE</span>Check-in online do voo para Madrid</span>
+        <span class="ck-sub">Iberia IB0150 · localizador 7QKT3S. Costuma abrir 24h antes da decolagem — 24/10 por volta das 18:25. Salvar os dois cartões de embarque na Carteira do iPhone.</span>
+      </span>
+    </label>
+  <div class="ckcount" id="ckcount">0 de 30 pendências concluídas</div>
   <div class="ckio"><button id="ckexp" type="button">⬇️ Exportar estado (copia JSON)</button><button id="ckimp" type="button">⬆️ Importar estado</button></div>
   <h2 class="section-label">🔎 Revalidar antes de viajar</h2>
   <div class="apurado kv" data-search="revalidar verificado em fonte oficial perecivel obras linha de onibus horario de inverno conferir vespera"><div class="apt">25 itens conferidos · ordenados pelo risco</div><div class="aprow"><span class="apk">🔴 Acampada na Puerta del Sol: ~500 tendas desde o fim de setembro, sem data para sair nem desalojo anunciado — em 15/10 votou continuar</span><span class="apv"><a href="#day-d2610">26/10</a> · out/26 · imprensa espanhola</span></div><div class="aprow"><span class="apk">🔴 Funicular de Montjuïc de volta após as obras do coletor; para ~1 mês por ano para manutenção</span><span class="apv"><a href="#day-d2910">29/10</a> · ago/26 · site oficial</span></div><div class="aprow"><span class="apk">🔴 Park Güell: inverno começa em 30/10 — 09:30–17:30, última entrada 16:30, tolerância de 30 min</span><span class="apv"><a href="#day-d3010">30/10</a> · ago/26 · site oficial</span></div><div class="aprow"><span class="apk">🔴 Turó de la Rovira fecha às 17:30 no inverno; pôr do sol às 17:50 — não dá para ver o poente de lá</span><span class="apv"><a href="#day-d3010">30/10</a> · ago/26 · site oficial</span></div><div class="aprow"><span class="apk">🔴 Salts opera fora da temporada de piscina, em horário reduzido — confirmar outubro</span><span class="apv"><a href="#day-d2910">29/10</a> · ago/26 · indicação de terceiros</span></div><div class="aprow"><span class="apk">🔴 Estação Santiago Bernabéu fechada e L10 cortada entre Nuevos Ministerios e Cuzco até o fim de 2026; ônibus S10 gratuito no lugar</span><span class="apv"><a href="#day-d2810">28/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🔴 C30 e C32 reordenadas pelas obras da calle Santiago; cabeceira na Pavaneras</span><span class="apv"><a href="#day-d0211">02/11</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🔴 C31, C32 e C34 sem serviço no Albaicín enquanto a Carrera del Darro estiver cortada</span><span class="apv"><a href="#day-d0211">02/11</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🔴 Castelo de São Jorge: inverno a partir de 1/11 — 09:00–18:00, última entrada 17:30</span><span class="apv"><a href="#day-d0511">05/11</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🔴 Palácio Real: grátis para ibero-americanos seg–qui 16:00–18:00 no inverno, só na bilheteria</span><span class="apv"><a href="#day-d2710">27/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 Linha 150 da EMT: Sol-Sevilla ↔ Lima/Santiago Bernabéu pela Castellana, ~20 min</span><span class="apv"><a href="#day-d2810">28/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 Linha 001 gratuita: Atocha → Prado → Cibeles → Gran Vía → Moncloa; frequência de 7 a 20 min</span><span class="apv"><a href="#day-d2610">26/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 15E parte da Praça da Figueira e serve Belém; sujeito a desvios e supressões</span><span class="apv"><a href="#day-d0611">06/11</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 Metrô de Barcelona funciona ininterrupto na madrugada de sábado para domingo</span><span class="apv"><a href="#day-d3110">31/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 Linha EA do aeroporto opera em feriados, com quadro próprio</span><span class="apv"><a href="#day-d0111">01/11</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 Reina Sofía: grátis seg e qua–sáb 19:00–21:00; último acesso 20:30, salas esvaziadas 20:45</span><span class="apv"><a href="#day-d2810">28/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 Malaba Club, Cardenal Cisneros 32, Chamberí: ter 22:00–05:00, entrada livre, documento físico</span><span class="apv"><a href="#day-d2710">27/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟠 Elevadores públicos Fanqueiros → Chão do Loureiro, gratuitos, recomendados pelo próprio Castelo</span><span class="apv"><a href="#day-d0511">05/11</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟡 T-familiar: 8 viagens compartilháveis a partir de €11,05; não vale nas estações Aeroport da L9</span><span class="apv"><a href="#day-d2910">29/10</a> · ago/26 · site oficial</span></div><div class="aprow"><span class="apk">🟡 La Rambla em obras até 2027</span><span class="apv"><a href="#day-d3110">31/10</a> · ago/26 · site oficial</span></div><div class="aprow"><span class="apk">🟡 Visita interna do Palau de la Generalitat: 2º e 4º fim de semana do mês — 31/10 é o 5º sábado</span><span class="apv"><a href="#day-d3110">31/10</a> · ago/26 · site oficial</span></div><div class="aprow"><span class="apk">🟡 Quiet Hour oficial das 09:00 às 10:00 desde 02/02/2026; torres sem mochila</span><span class="apv"><a href="#day-d3010">30/10</a> · set/26 · site oficial</span></div><div class="aprow"><span class="apk">🟡 Interior do Templo de Debod: a janela já está aberta — a regra oficial é <b>dia 15 do mês anterior</b> (27/10 liberou em 15/09); o sistema costuma mostrar 30 dias</span><span class="apv"><a href="#day-d2710">27/10</a> · set/26 · sistema de reservas</span></div><div class="aprow"><span class="apk">🟡 02/11 é feriado na Andaluzia (Todos os Santos trasladado do domingo): tabernas de Granada podem folgar</span><span class="apv"><a href="#day-d0211">02/11</a> · set/26 · calendário laboral</span></div><div class="aprow"><span class="apk">🟡 Gratuidade dominical da Catedral de Sevilla exclui feriados — não vale em 01/11</span><span class="apv"><a href="#day-d0311">03/11</a> · set/26 · site oficial</span></div><div class="apnote"><b>Número de linha, horário de inverno e obra em andamento são os dados que mais envelhecem neste app.</b> Esta lista existe para que a revalidação da semana anterior à viagem seja uma conferência, e não um esforço de memória. <b>🔴 9 itens de risco alto</b> — se um deles tiver mudado, um dia inteiro muda junto. A data é o mês da última verificação; a origem diz se veio de fonte oficial ou de indicação de terceiros, para que um post nunca sobrescreva silenciosamente uma regra oficial.</div></div>
@@ -2206,7 +2231,13 @@ Un cordial saludo,
     <div class="apt">Revalidar na semana anterior</div>
     <div class="apnote">🚧 <b>Há obras ativas nas três redes.</b> Madrid: a estação Santiago Bernabéu está fechada e a L10 cortada entre Nuevos Ministerios e Cuzco até o fim de 2026 (ônibus S10 gratuito no lugar). Barcelona: La Rambla em obras até 2027; funicular de Montjuïc com parada anual de manutenção. Granada: C30 com itinerário alterado em agosto de 2026 e C32 com desvios pela Carrera del Darro. Lisboa: 15E com supressões frequentes. <b>Revalidar todas essas rotas na semana anterior à viagem</b> — número de linha é a informação que mais envelhece neste app.</div>
   </div>
-  <details class="extra mfeito"><summary>✅ Já garantido — 26 itens</summary><div class="extrabody"><div class="ck done static">
+  <details class="extra mfeito"><summary>✅ Já garantido — 27 itens</summary><div class="extrabody"><div class="ck done static">
+      <span class="box">✓</span>
+      <span class="ck-body">
+        <span class="ck-title">🛡️ Seguro viagem — Visa Infinite, os dois</span>
+        <span class="ck-sub">Fechado em out/26 pelo cartão Visa Infinite, para o Augusto e a Priscilla, de 25/10 a 08/11 — cobertura médica, como o Schengen pede. O certificado de cada um vai junto dos comprovantes offline.</span>
+      </span>
+    </div><div class="ck done static">
       <span class="box">✓</span>
       <span class="ck-body">
         <span class="ck-title">🏛️ Templo de Debod — interior</span>
@@ -2512,13 +2543,13 @@ Un cordial saludo,
 <div class="foot">
   Documento de apoio · confirme horários de monumentos, voos e trens na véspera.<br>
   O manual completo está em <b>Mais → Emergência</b>.<br>
-  <span id="appver">v11.52</span> · <span id="vinfo">verificando versões…</span>
+  <span id="appver">v11.53</span> · <span id="vinfo">verificando versões…</span>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v11.52";
+var APP_VERSION="v11.53";
 /* v11.36 · os seis estados de um ingresso (auditoria, 6.3). Um dicionário
    só, lido por Reservas, roteiro, apurado, alertas, folha e Hoje. */
 var ESTADOS={
@@ -3272,7 +3303,9 @@ var ESTADOS={
     try{
       var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";
       var off=-new Date().getTimezoneOffset();     // minutos a leste de UTC
-      return (off<=0 || /America|Fortaleza|Sao_Paulo|Recife/.test(tz));
+      /* v11.53 · era off<=0: Lisboa no inverno é UTC+0 e acendia o aviso de
+         04 a 07/11. A península inteira fica em 0 ou acima; o Brasil, abaixo. */
+      return (off<0 || /America|Fortaleza|Sao_Paulo|Recife/.test(tz));
     }catch(e){ return false; }
   }
   function hojeStr(){
@@ -3360,10 +3393,19 @@ var ESTADOS={
   /* v11.43 · as pendências críticas do checklist (PRIORIDADE e DECIDIR, ainda
      não marcadas): o Hoje as mostra antes do embarque, o Mais as mostra no
      topo de "Antes de embarcar", e o selo da aba as soma aos alertas */
+  /* v11.53 · um item está resolvido quando foi marcado OU quando a cédula
+     dele em Reservas (data-tk) já está comprada/reservada — Reservas segue
+     sendo a fonte do ingresso; o checklist só deixa de cobrar */
+  function ckResolvido(l){
+    var i=l.querySelector(".ck-input"); if(i && i.checked) return true;
+    var tk=(l.getAttribute("data-tk")||"").split(/\s+/).filter(Boolean);
+    return tk.length>0 && tk.every(function(k){ var c=document.getElementById(k);
+      return c && ESTADOS.RESOLVIDO[c.getAttribute("data-estado")]; });
+  }
   function criticasCk(){
     return [].slice.call(document.querySelectorAll("#mais label.ck")).filter(function(l){
       var i=l.querySelector(".ck-input"), p=l.querySelector(".ck-title .pri");
-      return i && !i.checked && p && (p.classList.contains("hi") || p.classList.contains("dec")); });
+      return i && !ckResolvido(l) && p && (p.classList.contains("hi") || p.classList.contains("dec")); });
   }
   function pintaCriticas(crit){
     var box=document.getElementById("mcrit"); if(!box) return;
@@ -3619,20 +3661,6 @@ var ESTADOS={
       return out;
     }
 
-    /* v11.38 · as pendências críticas do checklist (PRIORIDADE e DECIDIR,
-       ainda não marcadas), lidas do próprio checklist — nada é copiado */
-    function pendCriticas(){
-      var crit=[].slice.call(document.querySelectorAll("#mais label.ck")).filter(function(l){
-        var i=l.querySelector(".ck-input"), p=l.querySelector(".ck-title .pri");
-        return i && !i.checked && p && (p.classList.contains("hi") || p.classList.contains("dec")); });
-      if(!crit.length) return '<div class="hj-pend hj-pend-ok">✓ Nenhuma pendência crítica em aberto</div>';
-      return '<div class="hj-pend"><div class="hj-pk">Pendências críticas · '+crit.length+'</div>'
-        + crit.map(function(l){
-            var t=l.querySelector(".ck-title").cloneNode(true), p=t.querySelector(".pri"), rot=p?p.textContent.trim():"";
-            if(p) p.remove();
-            return '<a class="hj-pi" href="#'+l.getAttribute("for")+'"><span class="hj-pr">'+esc(rot)+'</span>'+esc(t.textContent.replace(/\s+/g," ").trim())+'</a>';
-          }).join("")+'</div>';
-    }
     var html="";
     if(id){
       var r=resumo(id), agora=agoraMin(), kick=(agora>=1440?"Madrugada":"Hoje"), alvo=id;
@@ -3669,7 +3697,7 @@ var ESTADOS={
             não identidade. A contagem regressiva (ramo `.pre`) não abre
             corpo nenhum — lá não há decisão, só espera. */
          + '<div class="hj-corpo">'
-         + ((hoje>="2026-10-25" && hoje<="2026-11-08" && fusoSuspeito())
+         + ((hoje>="2026-10-26" && hoje<="2026-11-08" && fusoSuspeito())
              ? '<div class="hj-fuso">⚠️ O relógio do aparelho ainda parece estar no fuso do Brasil. Os horários deste painel seguem o relógio do aparelho — conferir antes de confiar.</div>' : '');
       /* v11.49 · o nome curto: o que vem antes do travessão. "Palácio Real
          — visita curta e gratuita" é "Palácio Real" no herói; o resto do
@@ -3770,21 +3798,80 @@ var ESTADOS={
          arrastaria vocês de volta para o Hoje a cada minuto. */
       if(primeira && location.hash.length<2){ var th=document.getElementById("tabsel-hoje"); if(th) th.checked=true; }
     } else if(hoje < DIAS["day-d2510"]){
-      var f=diffDias(DIAS["day-d2510"]);
-      var ativos=document.querySelectorAll(".alertbox:not(.past)").length;
-      var pend=document.querySelectorAll(".ck-input:not(:checked)").length;
-      box.classList.add("pre");
-      /* v10.5 · na véspera do embarque isto dizia "Faltam 1 dias", e é
-         justamente o dia em que a contagem mais vai ser olhada. */
-      html='<div class="hj-k">Contagem regressiva</div>'
-         + '<div class="hj-t">'+(f===1?'Falta 1 dia':'Faltam '+f+' dias')+'</div>'
-         + '<div class="hj-n">Embarque <b>25/10 · 18:25</b> — Fortaleza → Madrid.<br>'
-         + ativos+(ativos===1?' alerta ativo':' alertas ativos')+' · '
-         + pend+(pend===1?' item':' itens')+' em aberto no checklist.</div>'
-         + pendCriticas()
-         + '<a class="hj-go" href="#day-d2510">Ver o dia do embarque →</a>';
+      /* v11.53 · antes da viagem, o MESMO painel do dia de viagem: "Hoje" e a
+         data de verdade, AGORA = os preparativos, PRÓXIMO = o embarque (lido
+         do cartão de 25/10), e o que fazer nesta semana, lido do checklist.
+         A "Contagem regressiva" azul, sem corpo, saiu. */
+      var f=diffDias(DIAS["day-d2510"]), semana=f<=7, dth=toDate(hoje), d25=toDate(DIAS["day-d2510"]);
+      box.classList.remove("pre");
+      var r25=resumo("day-d2510"), c25=document.getElementById("day-d2510");
+      var bl=c25?[].slice.call(c25.querySelectorAll(".tline")):[], voo=null;
+      bl.forEach(function(b){ if(!voo && b.getAttribute("data-tipo")==="compromisso") voo=b; });
+      var chega=bl.length?bl[0].getAttribute("data-ini"):"", decola=voo?voo.getAttribute("data-ini"):"";
+      var onde="", bil="";
+      if(voo){
+        var st=voo.querySelector(".startat");
+        if(st){ var sc=st.cloneNode(true), lb=sc.querySelector("b"); if(lb && /Começar/.test(lb.textContent)) lb.remove();
+                onde=sc.textContent.replace(/\s+/g," ").trim(); }
+        [].forEach.call(voo.querySelectorAll(".tfield"), function(fd){
+          var k=fd.querySelector(".tfk"), v=fd.querySelector(".tfv");
+          if(!bil && k && v && k.textContent.trim()==="bilhete") bil=v.textContent.replace(/\s+/g," ").trim(); });
+      }
+      var data=function(d){ return DOW[d.getDay()]+' '+pad(d.getDate())+' '+MES[d.getMonth()]; };
+      html='<div class="hj-k"><span class="hj-kt">Hoje</span><span class="hj-kd">'+data(dth)+'</span></div>'
+         + '<div class="hj-t">Fortaleza · '+(semana?'semana do embarque':'antes da viagem')+'</div>'
+         + '<div class="hj-corpo">'
+         + '<div class="hj-agora"><span class="hj-lbl">AGORA</span>'
+         + '<div class="hj-hero">'+(semana?'Preparativos finais':'Antes da viagem')+'</div>'
+         + '<div class="hj-camsub">'+(f===1?'amanhã é o embarque':'faltam '+f+' dias para o embarque')+'</div></div>'
+         + '<div class="hj-ficha"><div class="hj-prox"><b class="hj-fixo">'+pad(d25.getDate())+'/'+pad(d25.getMonth()+1)+'</b><div>'
+         + '<span class="hj-lbl">PRÓXIMO</span>'
+         + '<span class="hj-fn">'+esc(r25&&r25.city?r25.city:'Embarque')+'</span>'
+         + '<i class="hj-fs">'+esc(r25?r25.ttl:'')+(decola?' · decola '+decola:'')+'</i>'
+         + (chega?'<i class="hj-fa">Chegar ao aeroporto às '+chega+'.</i>':'')
+         + (onde?'<i class="hj-fl">📍 '+esc(onde)+'</i>':'')
+         + (bil?'<i>🎫 '+esc(bil)+'</i>':'')
+         + '</div></div>'
+         + '<div class="hj-como"><span class="hj-lbl">FALTAM</span><span class="hj-cik">'
+         + (f===1?'1 dia':f+' dias')+' · '+data(d25)+'</span></div></div>';
+      /* o que fazer: os itens do checklist com prazo (data-ate), ainda não
+         resolvidos, por prazo e depois por prioridade; quatro à vista */
+      /* a etiqueta é .pri (PRIORIDADE, DECIDIR, IMPORTANTE, OPCIONAL) ou, na
+         Torre, .imp — IMPORTANTE pesa igual nas duas */
+      var peso=function(l){ var p=l.querySelector(".ck-title .pri, .ck-title .imp");
+        return !p?3:p.classList.contains("imp")?2:p.classList.contains("hi")?0:p.classList.contains("dec")?1:2; };
+      var pend=[].slice.call(document.querySelectorAll("#mais label.ck[data-ate]"))
+        .filter(function(l){ return !ckResolvido(l); })
+        .map(function(l,ix){ return {l:l, ix:ix}; })
+        .sort(function(a,b){ var x=a.l.getAttribute("data-ate"), y=b.l.getAttribute("data-ate");
+          return x!==y ? (x<y?-1:1) : (peso(a.l)-peso(b.l) || a.ix-b.ix); })
+        .map(function(o){ return o.l; });
+      var linha=function(l){
+        var ate=l.getAttribute("data-ate"), venc=ate<hoje, t=l.querySelector(".ck-title").cloneNode(true),
+            p=t.querySelector(".pri, .imp"); if(p) p.remove();
+        var nome=t.textContent.replace(/\s+/g," ").trim(), dica=l.getAttribute("data-hj")||"", inp=l.querySelector(".ck-input");
+        return '<button type="button" class="hj-sq hj-ck" data-ck="'+inp.id+'" aria-label="Marcar como feito: '+esc(nome)+'">'
+             + '<b'+(venc?' class="hj-venc"':'')+'><small>'+(venc?'venceu':'até')+'</small>'+ate.slice(8,10)+'/'+ate.slice(5,7)+'</b>'
+             + '<span class="hj-ckt">'+esc(nome)+(dica?'<i>'+esc(dica)+'</i>':'')+'</span>'
+             + '<span class="hj-ckb" aria-hidden="true"></span></button>';
+      };
+      html+='<div class="hj-seqk">'+(semana?'Esta semana':'Antes do embarque')+' · '+(pend.length===1?'1 por fazer':pend.length+' por fazer')+'</div>';
+      if(!pend.length) html+='<div class="hj-n">✓ Tudo resolvido até o embarque.</div>';
+      else {
+        html+='<div class="hj-wk">'+pend.slice(0,4).map(linha).join("")+'</div>';
+        if(pend.length>4) html+='<details class="hj-wkm"><summary>Mais '+(pend.length-4)+' até o embarque</summary>'
+                              + '<div class="hj-wk">'+pend.slice(4).map(linha).join("")+'</div></details>';
+      }
+      var ckT=document.querySelectorAll(".ck-input").length, ckF=document.querySelectorAll(".ck-input:checked").length;
+      html+='<a class="hj-pi hj-ckall" href="#ckcount">☑️ Checklist completo · '+ckF+' de '+ckT+' feitos</a>'
+          + '<a class="hj-go" href="#day-d2510">Ver o dia do embarque →</a>'
+          + '</div>';   /* fecha o .hj-corpo */
     } else { return; }   // depois da viagem: some
+    /* v11.53 · o relógio repinta o painel a cada minuto; guardar quem estava
+       aberto (COMO IR, "mais desta semana") e reabrir depois */
+    var abertos={}; [].forEach.call(box.querySelectorAll("details[open]"), function(dd){ abertos[dd.className]=1; });
     box.innerHTML=html; box.hidden=false; var off=document.getElementById("hjoff"); if(off) off.remove();
+    [].forEach.call(box.querySelectorAll("details"), function(dd){ if(abertos[dd.className]) dd.open=true; });
     var go=box.querySelector(".hj-go");
     if(go) go.addEventListener("click",function(){
       var t=document.getElementById(go.getAttribute("href").slice(1));
@@ -3804,6 +3891,13 @@ var ESTADOS={
   });
   document.addEventListener("change", function(ev){
     if(ev.target && ev.target.classList && ev.target.classList.contains("ck-input")) montaHoje();
+  });
+  /* v11.53 · a linha da semana no Hoje é a mesma caixa do checklist: marca
+     a chave de sempre, grava do mesmo jeito, e o painel se refaz */
+  document.addEventListener("click", function(ev){
+    var b=ev.target.closest && ev.target.closest(".hj-ck"); if(!b) return;
+    var inp=document.getElementById(b.getAttribute("data-ck")); if(!inp) return;
+    inp.checked=!inp.checked; inp.dispatchEvent(new Event("change",{bubbles:true}));
   });
   /* v10.10 · F01 · o relógio do painel. Repinta só quando o minuto vira —
      e só mexe em #hjnow: aba, rolagem e filtros ficam onde o usuário os
