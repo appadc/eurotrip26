@@ -1410,6 +1410,19 @@
   .hoje .hj-corpo .hj-prox .hj-lbl{font-size:10px; letter-spacing:.08em;
        padding:1px 6px; margin-right:6px; vertical-align:1px}
   .hj-cond{color:var(--ocre-t); font-weight:700}
+  /* v11.49 · AGORA, PRÓXIMO, DEPOIS. A ficha do próximo é uma caixa: o
+     destino e o caminho até ele leem-se juntos, separados do resto do dia. */
+  .hj-camsub{margin-top:4px; font-size:13px; font-weight:600; color:var(--slate)}
+  .hoje .hj-corpo .hj-ficha{margin-top:14px; border:1px solid var(--line);
+       border-left:3px solid var(--saffron); border-radius:var(--r-s); padding:2px 11px 8px}
+  .hoje .hj-corpo .hj-ficha .hj-prox{border-bottom:none; margin:0}
+  .hoje .hj-corpo .hj-ficha .hj-como{margin-top:2px; padding-top:4px; border-top:1px solid var(--line)}
+  .hj-fn{display:block; margin-top:5px; font-size:17px; font-weight:700; line-height:1.25; color:var(--ink)}
+  .hoje .hj-corpo .hj-prox i.hj-fa{font-size:13.5px; color:var(--ink); margin-top:6px;
+       padding-left:8px; border-left:3px solid var(--accent-t)}
+  .hoje .hj-corpo .hj-prox i.hj-fs{font-size:12.5px; margin-top:1px}
+  .hoje .hj-corpo .hj-ficha .hj-como .hj-lbl{white-space:nowrap}
+  .hoje .hj-corpo .hj-prox i.hj-fl{font-size:12.5px; margin-top:5px}
   .hoje .hj-corpo .hj-n{font-size:13px; color:var(--ink); line-height:1.5}
   .hoje .hj-corpo .hj-n b{color:var(--accent-t); font-family:var(--ff-ed)}
   .hoje .hj-corpo .hj-hard{margin-top:11px}
@@ -1422,6 +1435,11 @@
     .hoje .hj-corpo .hj-prox,.hj-sq{color:#E7EDF3; border-bottom-color:#233140}
     .hoje .hj-corpo .hj-n{color:#E7EDF3}
     .hj-cik,.hj-cib{color:#A9BCCE}
+    .hj-fn{color:#fff}
+    .hj-camsub{color:#A9BCCE}
+    .hoje .hj-corpo .hj-ficha{border-color:#2A3A4A; border-left-color:#E7A226; background:#1B2A38}
+    .hoje .hj-corpo .hj-ficha .hj-como{border-top-color:#2A3A4A}
+    .hoje .hj-corpo .hj-prox i.hj-fa{color:#E7EDF3; border-left-color:#7FB3E0}
     .hoje .hj-corpo .hj-sair{background:#3A2A08; color:#F0C878; border-left-color:#E7A226}
     /* v11.8 · o aviso de fuso nunca tinha sido visto no escuro: nasceu na
        onda 1, a chamada dele só existe desde a v11.0, e no cartão azul ele
@@ -2486,13 +2504,13 @@ Un cordial saludo,
 <div class="foot">
   Documento de apoio · confirme horários de monumentos, voos e trens na véspera.<br>
   O manual completo está em <b>Mais → Emergência</b>.<br>
-  <span id="appver">v11.48</span> · <span id="vinfo">verificando versões…</span>
+  <span id="appver">v11.49</span> · <span id="vinfo">verificando versões…</span>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v11.48";
+var APP_VERSION="v11.49";
 /* v11.36 · os seis estados de um ingresso (auditoria, 6.3). Um dicionário
    só, lido por Reservas, roteiro, apurado, alertas, folha e Hoje. */
 var ESTADOS={
@@ -3641,13 +3659,21 @@ var ESTADOS={
          + '<div class="hj-corpo">'
          + ((hoje>="2026-10-25" && hoje<="2026-11-08" && fusoSuspeito())
              ? '<div class="hj-fuso">⚠️ O relógio do aparelho ainda parece estar no fuso do Brasil. Os horários deste painel seguem o relógio do aparelho — conferir antes de confiar.</div>' : '');
-      /* v11.6 · ② o bloco de agora era 13px, igual a tudo. Vira o herói. */
-      if(atual && !caminho){
-        html+='<div class="hj-agora"><span class="hj-lbl">AGORA</span>'
-            + '<div class="hj-hero"><b>'+atual.t+'</b> '+atual.ttl+'</div></div>';
-      } else if(atual && caminho){
-        html+='<div class="hj-agora hj-cam"><span class="hj-lbl">A CAMINHO</span>'
-            + '<div class="hj-hero">'+atual.ttl+' → <b>'+lista[ia+1].ttl+'</b></div></div>';
+      /* v11.49 · o nome curto: o que vem antes do travessão. "Palácio Real
+         — visita curta e gratuita" é "Palácio Real" no herói; o resto do
+         título desce para a ficha do próximo, onde cabe. */
+      function curto(t){ return String(t||"").split(/\s+—\s+/)[0]; }
+      function resto_(t){ var p=String(t||"").split(/\s+—\s+/); return p.length>1 ? p.slice(1).join(" — ") : ""; }
+      function hm(m){ m=((m%1440)+1440)%1440; return pad(Math.floor(m/60))+":"+pad(m%60); }
+      /* v11.6 · ② o bloco de agora era 13px, igual a tudo. Vira o herói.
+         v11.49 · e é UM lugar só. "A CAMINHO" punha os dois no herói
+         ("Palácio → Debod") e o Debod aparecia de novo logo abaixo: agora o
+         herói diz onde vocês estão, e a linha embaixo diz que terminou. */
+      if(atual){
+        html+=(caminho?'<div class="hj-agora hj-cam">':'<div class="hj-agora">')+'<span class="hj-lbl">AGORA</span>'
+            + '<div class="hj-hero"><b>'+esc(atual.t)+'</b> '+esc(curto(atual.ttl))+'</div>'
+            + (caminho ? '<div class="hj-camsub">terminou às '+hm(fimDe(lista, ia))+' — hora de seguir para o próximo</div>' : '')
+            + '</div>';
       }
       /* v11.6 · ③ o prazo é do bloco de AGORA, não do próximo: "sair da mesa
          até 12:10" é do almoço. Morava dentro do PRÓXIMO e era o texto menor
@@ -3674,17 +3700,32 @@ var ESTADOS={
         return '<a class="hj-bil" href="#'+k+'">🎟 '+(e==="comprar"?"Ingresso ainda não comprado":"Reserva ainda não feita")
              + ' — ver em Reservas →</a>';
       }
+      /* v11.49 · a ficha do próximo: o mesmo bloco do Roteiro, resumido —
+         nome, o resto do título, a ação, onde começa e o prazo. O COMO IR
+         mora dentro dela: é o caminho até ela. */
+      function fichaDe(x){
+        var el=x.el, sub=resto_(x.ttl);
+        var tdo=el.querySelector(".tdo"), st=el.querySelector(".startat"), onde="";
+        if(st){ var c=st.cloneNode(true), lb=c.querySelector("b"); if(lb && /Começar/.test(lb.textContent)) lb.remove();
+                onde=c.textContent.replace(/\s+/g," ").trim(); }
+        return '<div class="hj-ficha"><div class="hj-prox">'+horaDe(x)+'<div>'
+             + '<span class="hj-lbl">PRÓXIMO</span>'
+             + '<span class="hj-fn">'+esc(curto(x.ttl))+'</span>'
+             + (sub?'<i class="hj-fs">'+esc(sub)+'</i>':'')
+             + (tdo?'<i class="hj-fa">'+esc(tdo.textContent.replace(/\s+/g," ").trim())+'</i>':'')
+             + (onde?'<i class="hj-fl">📍 '+esc(onde)+'</i>':'')
+             + subDe(el)+'</div></div>'
+             + comoIr(el)+'</div>';
+      }
       if(nx.length){
         var p0=nx[0];
-        html+='<div class="hj-seqk">Na sequência</div>';
-        html+='<div class="hj-prox">'+horaDe(p0)+'<div>'
-            + '<span class="hj-lbl">PRÓXIMO</span>'+p0.ttl+subDe(p0.el)+'</div></div>';
-        html+=comoIr(p0.el);
+        html+=fichaDe(p0);
         html+=bilheteDe(p0.el);
         /* nx já exclui os condicionais; eles voltam aqui, ordenados junto */
         var resto=nx.slice(1).concat(condicionais(alvo, agora))
                     .sort(function(a,b){ return a.min-b.min; }).slice(0,4);
         if(resto.length){
+          html+='<div class="hj-seqk">Depois</div>';
           html+='<div class="hj-n">'+resto.map(function(x){
                    return '<div class="hj-sq">'+horaDe(x)+'<div>'+x.ttl
                         + (x.cond?'<i class="hj-cond">'+x.cond+'</i>':subDe(x.el))
