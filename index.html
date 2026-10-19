@@ -990,6 +990,11 @@
   .hoje{background:var(--azulejo); color:#fff; border-radius:var(--r-m); padding:13px 15px; margin:2px 0 6px; box-shadow:var(--shadow)}
   .hoje .hj-k{letter-spacing:.18em; text-transform:uppercase; color:var(--saffron); font-weight:700}
   .hoje .hj-t{font-size:16.5px; font-weight:600; margin:2px 0 7px; letter-spacing:-.25px; line-height:1.2}
+  /* v11.51 · "Hoje" como título da página, a data ao lado */
+  .hoje .hj-k:has(.hj-kt){display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px}
+  .hoje .hj-k .hj-kt{font-family:var(--ff-ed); font-size:30px; font-weight:700; line-height:1.05;
+       letter-spacing:-.4px; text-transform:none; color:#fff}
+  .hoje .hj-k .hj-kd{font-size:12.5px; letter-spacing:.16em}
   .hoje .hj-n{font-size:12.8px; color:#C6D7E6; line-height:1.6}
   .hoje .hj-n b{color:#fff; font-family:var(--ff-ed); font-weight:700}
   .hoje .hj-go{display:inline-block; margin-top:9px; background:var(--saffron); font-size:12.5px; font-weight:700; border-radius:var(--r-s); padding:7px 12px; text-decoration:none}
@@ -2507,13 +2512,13 @@ Un cordial saludo,
 <div class="foot">
   Documento de apoio · confirme horários de monumentos, voos e trens na véspera.<br>
   O manual completo está em <b>Mais → Emergência</b>.<br>
-  <span id="appver">v11.50</span> · <span id="vinfo">verificando versões…</span>
+  <span id="appver">v11.51</span> · <span id="vinfo">verificando versões…</span>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v11.50";
+var APP_VERSION="v11.51";
 /* v11.36 · os seis estados de um ingresso (auditoria, 6.3). Um dicionário
    só, lido por Reservas, roteiro, apurado, alertas, folha e Hoje. */
 var ESTADOS={
@@ -3651,7 +3656,9 @@ var ESTADOS={
           caminho=(fa!==null && agora>=fa && ia+1<lista.length); }
       }
       var dt=toDate(kick==="Amanhã"?DIAS[alvo]:hoje);
-      html='<div class="hj-k">'+kick+' · '+DOW[dt.getDay()]+' '+pad(dt.getDate())+' '+MES[dt.getMonth()]+(typeof APP_VERSION!=="undefined"?' · '+APP_VERSION:'')+'</div>'
+      /* v11.51 · o título da página é a palavra do dia; a versão mora na
+         pílula "Pronto offline", não aqui */
+      html='<div class="hj-k"><span class="hj-kt">'+kick+'</span><span class="hj-kd">'+DOW[dt.getDay()]+' '+pad(dt.getDate())+' '+MES[dt.getMonth()]+'</span></div>'
          /* v11.0 · ⑩ a função existia desde a V8 e o nome dela aparecia UMA vez
             no arquivo: a própria definição. O aviso nunca disparou — nem no 04/11,
             que é o dia em que o relógio recua uma hora de Sevilha para Lisboa. */
@@ -3745,7 +3752,7 @@ var ESTADOS={
         /* v11.50 · só quando ele não está na tela: na lista "Depois" ele já
            aparece, com o "em Xh" na própria linha */
         if(pc && pc!==p0 && resto.indexOf(pc)<0){
-          html+='<div class="hj-comp"><span class="hj-lbl">PRÓXIMO COMPROMISSO</span>'
+          html+='<div class="hj-comp"><span class="hj-lbl">PRÓXIMA HORA MARCADA</span>'
               + '<div><b class="hj-fixo">'+pc.t+'</b> '+pc.ttl
               + (falta(pc.min)?' <i>'+falta(pc.min)+'</i>':'')+'</div></div>';
         }
