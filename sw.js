@@ -9,7 +9,7 @@
    sincroniza os aparelhos.
    ============================================================= */
 
-const VERSION = 'v11.49';
+const VERSION = 'v11.50';
 const CACHE   = 'eurotrip26-' + VERSION;
 
 const ASSETS = [
