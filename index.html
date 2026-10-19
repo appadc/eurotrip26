@@ -755,6 +755,36 @@
   .hj-wkm:not([open])>summary::after{content:"\00a0\25BE"}
   .hj-wkm[open]>summary::after{content:"\00a0\25B4"}
   .hoje .hj-corpo .hj-ckall{margin:10px 0 0}
+  /* v11.54 · a contagem no canto · v11.55 · plaqueta com moldura, centrada
+     na altura do AGORA, alinhada à borda direita da ficha de baixo */
+  .hoje .hj-corpo .hj-topo{display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .hoje .hj-corpo .hj-topo>.hj-agora{flex:1 1 auto; min-width:0}
+  .hj-cd{flex:0 0 auto; box-sizing:border-box; min-width:78px; display:flex; flex-direction:column; align-items:center;
+       padding:9px 12px; border:1.5px solid var(--line); border-radius:var(--r-s); background:var(--paper);
+       text-align:center; color:var(--accent-t)}
+  /* o algarismo: a serifa (ET Serif) só tem algarismos de texto — o "1" e o
+     "0" na altura da minúscula, o "6" subindo —, então a folga de cima mudava
+     com o número (11 px no 6, 14,7 px no 10, contra 7,3 px embaixo). A sem
+     serifa tem os dez algarismos da mesma altura; as folgas, medidas em
+     pixel, ficam iguais */
+  .hj-cd b{display:block; font-family:var(--ff-ui); font-size:40px; font-weight:800; line-height:1; letter-spacing:-1px;
+       font-variant-numeric:tabular-nums; margin:0px 0 0px}
+  /* o letter-spacing sobra depois da última letra: o mesmo recuo à esquerda
+     devolve o centro */
+  .hj-cd small{display:block; font-size:10px; font-weight:800; line-height:1; letter-spacing:.12em;
+       padding-left:.12em; text-transform:uppercase; color:var(--mute)}
+  /* o selo do dia: maiúsculas sem serifa, moldura dupla */
+  .hj-cd.hj-cd-hoje{padding:10px 13px; border:2px solid var(--saffron); background:var(--saffron-soft);
+       box-shadow:inset 0 0 0 2px var(--saffron-soft), inset 0 0 0 3px var(--saffron)}
+  .hj-cd.hj-cd-hoje b{margin:0; font-family:var(--ff-ui); font-size:15px; font-weight:800; line-height:1.1;
+       letter-spacing:.12em; padding-left:.12em; color:var(--ocre-t); white-space:nowrap}
+  @media (prefers-color-scheme: dark){
+    .hj-cd{background:#1B2A38; border-color:#2A3A4A; color:#9EC5E8}
+    .hj-cd small{color:#A9BCCE}
+    .hj-cd.hj-cd-hoje{background:#3A2A08; border-color:#E7A226;
+       box-shadow:inset 0 0 0 2px #3A2A08, inset 0 0 0 3px #E7A226}
+    .hj-cd.hj-cd-hoje b{color:#F0C878}
+  }
   @media (prefers-color-scheme: dark){
     .hj-wk .hj-ck{border-bottom-color:#233140}
     .hj-ckt{color:#E7EDF3}
@@ -2543,13 +2573,13 @@ Un cordial saludo,
 <div class="foot">
   Documento de apoio · confirme horários de monumentos, voos e trens na véspera.<br>
   O manual completo está em <b>Mais → Emergência</b>.<br>
-  <span id="appver">v11.53</span> · <span id="vinfo">verificando versões…</span>
+  <span id="appver">v11.55</span> · <span id="vinfo">verificando versões…</span>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
 
 <script>
-var APP_VERSION="v11.53";
+var APP_VERSION="v11.55";
 /* v11.36 · os seis estados de um ingresso (auditoria, 6.3). Um dicionário
    só, lido por Reservas, roteiro, apurado, alertas, folha e Hoje. */
 var ESTADOS={
@@ -3709,11 +3739,17 @@ var ESTADOS={
          v11.49 · e é UM lugar só. "A CAMINHO" punha os dois no herói
          ("Palácio → Debod") e o Debod aparecia de novo logo abaixo: agora o
          herói diz onde vocês estão, e a linha embaixo diz que terminou. */
+      /* v11.54 · no dia do embarque, o canto da contagem diz "é hoje!" */
+      var ehHoje=(hoje===DIAS["day-d2510"] && kick!=="Amanhã");
+      var cdHoje='<div class="hj-cd hj-cd-hoje"><b>É HOJE!</b></div>';
       if(atual){
-        html+=(caminho?'<div class="hj-agora hj-cam">':'<div class="hj-agora">')+'<span class="hj-lbl">AGORA</span>'
+        html+=(ehHoje?'<div class="hj-topo">':'')
+            + (caminho?'<div class="hj-agora hj-cam">':'<div class="hj-agora">')+'<span class="hj-lbl">AGORA</span>'
             + '<div class="hj-hero"><b>'+esc(atual.t)+'</b> '+esc(curto(atual.ttl))+'</div>'
             + (caminho ? '<div class="hj-camsub">terminou às '+hm(fimDe(lista, ia))+' — hora de seguir para o próximo</div>' : '')
-            + '</div>';
+            + '</div>'+(ehHoje?cdHoje+'</div>':'');
+      } else if(ehHoje){
+        html+='<div class="hj-topo"><div></div>'+cdHoje+'</div>';
       }
       /* v11.6 · ③ o prazo é do bloco de AGORA, não do próximo: "sair da mesa
          até 12:10" é do almoço. Morava dentro do PRÓXIMO e era o texto menor
@@ -3821,9 +3857,11 @@ var ESTADOS={
       html='<div class="hj-k"><span class="hj-kt">Hoje</span><span class="hj-kd">'+data(dth)+'</span></div>'
          + '<div class="hj-t">Fortaleza · '+(semana?'semana do embarque':'antes da viagem')+'</div>'
          + '<div class="hj-corpo">'
-         + '<div class="hj-agora"><span class="hj-lbl">AGORA</span>'
-         + '<div class="hj-hero">'+(semana?'Preparativos finais':'Antes da viagem')+'</div>'
-         + '<div class="hj-camsub">'+(f===1?'amanhã é o embarque':'faltam '+f+' dias para o embarque')+'</div></div>'
+         /* v11.54 · a contagem mora no canto, uma vez só, com o número grande */
+         + '<div class="hj-topo"><div class="hj-agora"><span class="hj-lbl">AGORA</span>'
+         + '<div class="hj-hero">'+(semana?'Preparativos finais':'Antes da viagem')+'</div></div>'
+         + '<div class="hj-cd" aria-label="'+(f===1?'falta 1 dia':'faltam '+f+' dias')+'"><small>'+(f===1?'falta':'faltam')+'</small>'
+         + '<b>'+f+'</b><small>'+(f===1?'dia':'dias')+'</small></div></div>'
          + '<div class="hj-ficha"><div class="hj-prox"><b class="hj-fixo">'+pad(d25.getDate())+'/'+pad(d25.getMonth()+1)+'</b><div>'
          + '<span class="hj-lbl">PRÓXIMO</span>'
          + '<span class="hj-fn">'+esc(r25&&r25.city?r25.city:'Embarque')+'</span>'
@@ -3831,9 +3869,7 @@ var ESTADOS={
          + (chega?'<i class="hj-fa">Chegar ao aeroporto às '+chega+'.</i>':'')
          + (onde?'<i class="hj-fl">📍 '+esc(onde)+'</i>':'')
          + (bil?'<i>🎫 '+esc(bil)+'</i>':'')
-         + '</div></div>'
-         + '<div class="hj-como"><span class="hj-lbl">FALTAM</span><span class="hj-cik">'
-         + (f===1?'1 dia':f+' dias')+' · '+data(d25)+'</span></div></div>';
+         + '</div></div></div>';
       /* o que fazer: os itens do checklist com prazo (data-ate), ainda não
          resolvidos, por prazo e depois por prioridade; quatro à vista */
       /* a etiqueta é .pri (PRIORIDADE, DECIDIR, IMPORTANTE, OPCIONAL) ou, na
